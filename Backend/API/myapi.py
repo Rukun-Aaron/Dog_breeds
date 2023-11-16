@@ -1,8 +1,10 @@
 from fastapi import FastAPI, File, UploadFile
+from fastapi.responses import RedirectResponse
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
 from tensorflow.keras.applications.vgg16 import preprocess_input
 import numpy as np
+import io
 
 # Load your pre-trained model
 model = load_model('Model/dog_breed_model.h5')  # Replace with your model file path
@@ -12,11 +14,20 @@ class_labels = ['Afghan','Border Collie','Corgi', 'Coyote','Doberman', 'German S
 
 app = FastAPI()
 
+@app.get("/")
+def redirect_to_docs():
+    # Redirect to the /docs endpoint
+    return RedirectResponse(url="/docs", status_code=302)
+
+@app.get("/version")
+async def version():
+    return {'version': '1.0.0'}
 @app.post("/classify")
 async def classify_image(file: UploadFile = File(...)):
     # Load and preprocess the image
-    contents = await file.read()
-    img = image.load_img(contents, target_size=(224, 224))
+    contents = await file.read('rb')
+    
+    img = image.load_img(io.BytesIO(contents), target_size=(224, 224))
     img_array = image.img_to_array(img)
     img_array = np.expand_dims(img_array, axis=0)
     img_array = preprocess_input(img_array)
@@ -34,7 +45,3 @@ async def classify_image(file: UploadFile = File(...)):
     top_prediction = {'label': decoded_predictions[0][0], 'score': float(decoded_predictions[0][1])}
     return {'predictions': [top_prediction]}
 
-
-@app.get("/version")
-async def version():
-    return {'version': '1.0.0'}
