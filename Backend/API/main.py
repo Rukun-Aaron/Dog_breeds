@@ -13,13 +13,6 @@ import os
 import shutil
 import mmh3
 
-# uvicorn myapi:app --reload
-# Load your pre-trained model
-model = load_model('Model/dog_breed_inception_model(3).h5')  # Replace with your model file path
-
-# Define the class labels used during training
-class_labels = ['Afghan','Border Collie','Corgi', 'Coyote','Doberman', 'German Sheperd', 'Labradoodle','Maltese', 'Pomeranian','Pug','Rottweiler', 'Saint Bernard','Shiba Inu','Shih-Tzu', 'Siberian Husky']
-img_path = 'images/'
 app = FastAPI()
 origins = [
     "http://localhost",
@@ -29,11 +22,19 @@ origins = [
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+# uvicorn myapi:app --reload
+# Load your pre-trained model
+model = load_model('Model/dog_breed_inception_model(3).h5')  # Replace with your model file path
+
+# Define the class labels used during training
+class_labels = ['Afghan','Border Collie','Corgi', 'Coyote','Doberman', 'German Sheperd', 'Labradoodle','Maltese', 'Pomeranian','Pug','Rottweiler', 'Saint Bernard','Shiba Inu','Shih-Tzu', 'Siberian Husky']
+img_path = 'images/'
+
 def load_and_preprocess_image(img_path_input):
     img = image.load_img(img_path_input, target_size=(299, 299))
     img_array = image.img_to_array(img)
