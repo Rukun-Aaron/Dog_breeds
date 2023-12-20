@@ -1,15 +1,10 @@
-document.getElementById('getVersionButton').addEventListener('click', getApiVersion);
-
-async function getApiVersion() {
-
-    const response = await fetch('http://localhost:8000/version');
-    const data = await response.text();
-    console.log(response);
-    displayVersion(data);
-
+// script.js
+async function getVersion() {
+    
+    const response = await fetch('http://127.0.0.1:6789/version');
+    const version = await response.text();
+    const versionContainer = document.getElementById("version");
+    versionContainer.textContent = version;
 }
 
-function displayVersion(data) {
-    const versionContainer = document.getElementById('versionContainer');
-    versionContainer.textContent = `API Version: ${data}`;
-}
+getVersion();

@@ -4,6 +4,8 @@ from werkzeug.utils import secure_filename
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
 from tensorflow.keras.applications.vgg16 import preprocess_input
+from fastapi.responses import JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
 
 import numpy as np
 import io
@@ -19,7 +21,19 @@ model = load_model('Model/dog_breed_inception_model(3).h5')  # Replace with your
 class_labels = ['Afghan','Border Collie','Corgi', 'Coyote','Doberman', 'German Sheperd', 'Labradoodle','Maltese', 'Pomeranian','Pug','Rottweiler', 'Saint Bernard','Shiba Inu','Shih-Tzu', 'Siberian Husky']
 img_path = 'images/'
 app = FastAPI()
+origins = [
+    "http://localhost",
+    "http://localhost:8000"
+    "http://localhost:8080",
+]
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 def load_and_preprocess_image(img_path_input):
     img = image.load_img(img_path_input, target_size=(299, 299))
     img_array = image.img_to_array(img)
@@ -53,7 +67,8 @@ def redirect_to_docs():
 
 @app.get("/version")
 def read_version():
-    return {"version": "1.0"}
+    
+    return {"message": "Hello World"}
 # @app.get("/version")
 # async def version():
 #     return {'version': '1.0.0'}
