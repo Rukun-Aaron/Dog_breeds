@@ -69,7 +69,7 @@ def redirect_to_docs():
 @app.get("/version")
 def read_version():
     
-    return {"message": "Hello World"}
+    return {"Version": "1.0"}
 # @app.get("/version")
 # async def version():
 #     return {'version': '1.0.0'}
