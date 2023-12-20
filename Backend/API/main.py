@@ -4,6 +4,7 @@ from werkzeug.utils import secure_filename
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
 from tensorflow.keras.applications.vgg16 import preprocess_input
+
 import numpy as np
 import io
 import os
@@ -51,8 +52,11 @@ def redirect_to_docs():
     return RedirectResponse(url="/docs", status_code=302)
 
 @app.get("/version")
-async def version():
-    return {'version': '1.0.0'}
+def read_version():
+    return {"version": "1.0"}
+# @app.get("/version")
+# async def version():
+#     return {'version': '1.0.0'}
 @app.post("/classify")
 async def classify_image(file: UploadFile = File(...)):
     # Load and preprocess the image
@@ -70,6 +74,7 @@ async def classify_image(file: UploadFile = File(...)):
     if not os.path.isfile(new_path):
                 os.rename(file_path, new_path)
     prediction = get_prediction(file_path, new_path, model)
+    print(prediction)
     return prediction
     # contents = await file.read('rb')
     

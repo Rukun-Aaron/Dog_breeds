@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Version App</title>
+</head>
+<body>
+    <h1>Version App</h1>
+    <button onclick="getVersion()">Get Version</button>
+    <p id="versionResult"></p>
+
+    <script>
+        async function getVersion() {
+            try {
+                const response = await fetch('http://127.0.0.1:8000/version');
+                const data = await response.json();
+                document.getElementById('versionResult').innerText = `Version: ${data.version}`;
+            } catch (error) {
+                console.error('Error fetching version:', error);
+                document.getElementById('versionResult').innerText = 'Error fetching version.';
+            }
+        }
+    </script>
+</body>
+</html>
