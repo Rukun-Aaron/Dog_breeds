@@ -27,7 +27,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-# uvicorn myapi:app --reload
+# uvicorn main:app --reload
 # Load your pre-trained model
 model = load_model('Model/dog_breed_inception_model(3).h5')  # Replace with your model file path
 
