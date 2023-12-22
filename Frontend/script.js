@@ -2,12 +2,21 @@
 async function uploadImage() {
     const fileInput = document.getElementById('imageInput');
     const predictionContainer = document.getElementById('prediction');
+    const uploadedImage = document.getElementById('uploadedImage');
 
     const file = fileInput.files[0];
     if (!file) {
         alert('Please select an image file.');
         return;
     }
+
+    // Display the uploaded image
+    const reader = new FileReader();
+    reader.onload = function (e) {
+        uploadedImage.src = e.target.result;
+        uploadedImage.style.display = 'block'; // Show the image element
+    };
+    reader.readAsDataURL(file);
 
     const formData = new FormData();
     formData.append('file', file);
@@ -19,21 +28,19 @@ async function uploadImage() {
         });
 
         const jsonData = await response.json();
+        const predictions = jsonData.predictions;
 
-const predictions = jsonData.predictions;
+        if (predictions && predictions.length > 0) {
+            const firstPrediction = predictions[0];
+            
+            const label = firstPrediction.label;
+            const score = firstPrediction.score;
 
-if (predictions && predictions.length > 0) {
-    const firstPrediction = predictions[0];
-    
-    const label = firstPrediction.label;
-    const score = firstPrediction.score;
-
-    // Update the HTML element with the prediction
-    const predictionContainer = document.getElementById('prediction');
-    predictionContainer.innerText = `Prediction: ${label} (Score: ${score})`;
-} else {
-    console.error('No predictions found');
-}
+            // Update the HTML element with the prediction
+            predictionContainer.innerText = `Prediction: ${label} (Score: ${score})`;
+        } else {
+            console.error('No predictions found');
+        }
     } catch (error) {
         console.error('Error uploading image:', error);
         predictionContainer.innerText = 'Error uploading image.';
