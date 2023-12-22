@@ -29,10 +29,13 @@ app.add_middleware(
 )
 # uvicorn main:app --reload
 # Load your pre-trained model
-model = load_model('Model/dog_breed_inception_model(3).h5')  # Replace with your model file path
+model = load_model('Model/dog_breed_inception_model_20(4).h5')  # Replace with your model file path
 
 # Define the class labels used during training
-class_labels = ['Afghan','Border Collie','Corgi', 'Coyote','Doberman', 'German Sheperd', 'Labradoodle','Maltese', 'Pomeranian','Pug','Rottweiler', 'Saint Bernard','Shiba Inu','Shih-Tzu', 'Siberian Husky']
+class_labels  = ['Afghan','Basset','Beagle','Border Collie','Corgi', 'Coyote','Doberman', 'German Sheperd', 'Labradoodle', 'Maltese', 'Newfoundland','Pit Bull','Pomeranian','Poodle','Pug','Rottweiler', 'Saint Bernard','Shiba Inu','Shih-Tzu', 'Siberian Husky']
+
+
+
 img_path = 'images/'
 
 def load_and_preprocess_image(img_path_input):
