@@ -12,19 +12,26 @@ import mmh3
 
 # uvicorn myapi:app --reload
 # Load your pre-trained model
-model = load_model('Model/dog_breed_model.h5')  # Replace with your model file path
+model = load_model('Model/dog_breed_inception_model(3).h5')  # Replace with your model file path
 
 # Define the class labels used during training
 class_labels = ['Afghan','Border Collie','Corgi', 'Coyote','Doberman', 'German Sheperd', 'Labradoodle','Maltese', 'Pomeranian','Pug','Rottweiler', 'Saint Bernard','Shiba Inu','Shih-Tzu', 'Siberian Husky']
 img_path = 'images/'
 app = FastAPI()
 
-def get_prediction(file_path, new_path, model):
-    img = image.load_img(new_path, target_size=(224, 224))
+def load_and_preprocess_image(img_path_input):
+    img = image.load_img(img_path_input, target_size=(299, 299))
     img_array = image.img_to_array(img)
     img_array = np.expand_dims(img_array, axis=0)
-    img_array = preprocess_input(img_array)
+    img_array /= 255.0  # Normalize the image
+    return img_array
 
+def get_prediction(file_path, new_path, model):
+    # img = image.load_img(new_path, target_size=(224, 224))
+    # img_array = image.img_to_array(img)
+    # img_array = np.expand_dims(img_array, axis=0)
+    # img_array = preprocess_input(img_array)
+    img_array = load_and_preprocess_image(new_path)
     # Make predictions with the loaded model
     predictions = model.predict(img_array)
 
