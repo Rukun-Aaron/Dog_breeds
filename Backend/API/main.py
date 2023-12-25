@@ -10,6 +10,7 @@ import os
 import shutil
 import mmh3
 import atexit
+from utilities import get_prediction, cleanup_images
 # uvicorn main:app --reload
 app = FastAPI()
 origins = [
@@ -27,54 +28,16 @@ app.add_middleware(
 )
 
 # Load your pre-trained model
-model = load_model('Model/dog_breed_inception_model_20(4).h5')  # Replace with your model file path
+# model = load_model('Model/dog_breed_inception_model_20(4).h5')  # Replace with your model file path
 
 # Define the class labels used during training
-class_labels = ['Afghan', 'Basset', 'Beagle', 'Border Collie', 'Corgi', 'Coyote', 'Doberman', 'German Sheperd',
-                'Labradoodle', 'Maltese', 'Newfoundland', 'Pit Bull', 'Pomeranian', 'Poodle', 'Pug', 'Rottweiler',
-                'Saint Bernard', 'Shiba Inu', 'Shih-Tzu', 'Siberian Husky']
 
-img_path = 'images/'
-
-
-def load_and_preprocess_image(img_path_input):
-    img = image.load_img(img_path_input, target_size=(299, 299))
-    img_array = image.img_to_array(img)
-    img_array = np.expand_dims(img_array, axis=0)
-    img_array /= 255.0  # Normalize the image
-    return img_array
-
-
-def get_prediction(file_path, new_path, model):
-    img_array = load_and_preprocess_image(new_path)
-    predictions = model.predict(img_array)
-
-    # Decode predictions manually
-    decoded_predictions = [(class_labels[i], predictions[0][i]) for i in range(len(class_labels))]
-
-    # Sort predictions by score in descending order
-    decoded_predictions.sort(key=lambda x: x[1], reverse=True)
-
-    # Return the top prediction
-    top_prediction = {'label': decoded_predictions[0][0], 'score': float(decoded_predictions[0][1])}
-    return {'predictions': [top_prediction]}
-
-
-def cleanup_images():
-    # Delete all images from the images folder
-    for filename in os.listdir(img_path):
-        file_path = os.path.join(img_path, filename)
-        try:
-            if os.path.isfile(file_path):
-                os.unlink(file_path)
-        except Exception as e:
-            print(f"Error deleting {filename}: {e}")
 
 
 # Register cleanup function to be called on shutdown
 atexit.register(cleanup_images)
 
-
+img_path = 'images/'
 @app.get("/")
 def redirect_to_docs():
     return RedirectResponse(url="/docs", status_code=302)
@@ -100,6 +63,6 @@ async def classify_image(file: UploadFile = File(...)):
     if not os.path.isfile(new_path):
         os.rename(file_path, new_path)
 
-    prediction = get_prediction(file_path, new_path, model)
+    prediction = get_prediction(file_path, new_path)
     print(prediction)
     return prediction
