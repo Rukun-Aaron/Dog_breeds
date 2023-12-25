@@ -28,14 +28,14 @@ async function uploadImage() {
         });
 
         const jsonData = await response.json();
-        const predictions = jsonData.predictions;
+        const predictions = jsonData;
+        // console.log(jsonData);
+        if (predictions) {
 
-        if (predictions && predictions.length > 0) {
-            const firstPrediction = predictions[0];
             
-            const label = firstPrediction.label;
-            const score = firstPrediction.score;
-
+            const label = predictions.label;
+            const score = predictions.score;
+            // console.log(predictions);
             // Update the HTML element with the prediction
             predictionContainer.innerText = `Prediction: ${label} (Score: ${score})`;
         } else {

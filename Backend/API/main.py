@@ -65,4 +65,4 @@ async def classify_image(file: UploadFile = File(...)):
 
     prediction = get_prediction(file_path, new_path)
     print(prediction)
-    return prediction
+    return JSONResponse(prediction)
