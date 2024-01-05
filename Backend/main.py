@@ -12,6 +12,8 @@ import mmh3
 import atexit
 from utilities import get_prediction, cleanup_images
 # uvicorn main:app --reload
+# uvicorn asgi:app --reload --port 6789
+
 app = FastAPI()
 origins = [
     "http://localhost",
