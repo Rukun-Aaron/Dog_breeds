@@ -3,8 +3,8 @@ from tensorflow.keras.preprocessing import image
 import numpy as np
 import os
 
-model = load_model('Model/dog_breed_inception_model_20(4).h5')  # Replace with your model file path
-
+# model = load_model('Model/dog_breed_inception_model_20(4).h5')  # Replace with your model file path
+model = load_model('Model/dog_breed_inception_model(3).h5')
 
 class_labels = ['Afghan', 'Basset', 'Beagle', 'Border Collie', 'Corgi', 'Coyote', 'Doberman', 'German Sheperd',
                 'Labradoodle', 'Maltese', 'Newfoundland', 'Pit Bull', 'Pomeranian', 'Poodle', 'Pug', 'Rottweiler',
