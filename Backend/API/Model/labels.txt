@@ -1,14 +1,19 @@
-Afghan
+Afghan 
+Basset
+Beagle 
 Border Collie
-Corgi
-Coyote
+Corgi 
+Coyote 
 Doberman
 German Sheperd
-Labradoodle
-Maltese
+Labradoodle 
+Maltese 
+Newfoundland
+Pit Bull
 Pomeranian
+Poodle 
 Pug
-Rottweiler 
+Rottweiler
 Saint Bernard
 Shiba Inu
 Shih-Tzu 
