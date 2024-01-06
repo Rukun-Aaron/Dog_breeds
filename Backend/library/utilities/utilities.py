@@ -3,6 +3,7 @@ from tensorflow.keras.preprocessing import image
 import numpy as np
 import os
 
+from ..config import Settings
 model = load_model('Model/dog_breed_inception_model_20(4).h5')  # Replace with your model file path
 # model = load_model('Model/dog_breed_inception_model(3).h5')
 
@@ -33,6 +34,14 @@ def get_prediction(file_path, new_path):
     top_prediction = {'label': decoded_predictions[0][0], 'score': float(decoded_predictions[0][1])}
     return top_prediction
 
+def get_prediction2(file_path, new_path):
+    img_array = load_and_preprocess_image(new_path)
+    predictions = model.predict(img_array)
+
+    decoded_predictions = [(class_labels[i], predictions[0][i]) for i in range(len(class_labels))]
+    top_prediction = {'label': decoded_predictions[0][0], 'score': float(decoded_predictions[0][1])}
+    return top_prediction
+    
 def cleanup_images():
     # Delete all images from the images folder
     for filename in os.listdir(img_path):
@@ -44,3 +53,8 @@ def cleanup_images():
             print(f"Error deleting {filename}: {e}")
 
 
+def is_file_allowed(filename):
+    if not "." in filename:
+        return False
+    ext = filename.rsplit(".", 1)[1]
+    return ext.upper() in Settings.ALLOWED_IMAGE_EXTENSIONS
