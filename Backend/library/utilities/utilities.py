@@ -38,8 +38,12 @@ def get_prediction2(file_path, new_path):
     img_array = load_and_preprocess_image(new_path)
     predictions = model.predict(img_array)
 
-    decoded_predictions = [(class_labels[i], predictions[0][i]) for i in range(len(class_labels))]
-    top_prediction = {'label': decoded_predictions[0][0], 'score': float(decoded_predictions[0][1])}
+    combined_list = list(zip(predictions[0], class_labels))
+    sorted_list = sorted(combined_list, key=lambda x: x[1], reverse=True)
+    return [[f'{prob:.20f}',label] for prob,label in sorted_list]
+
+    # decoded_predictions = [(class_labels[i], predictions[0][i]) for i in range(len(class_labels))]
+    # top_prediction = {'label': decoded_predictions[0][0], 'score': float(decoded_predictions[0][1])}
     return top_prediction
     
 def cleanup_images():
