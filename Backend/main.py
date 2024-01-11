@@ -73,8 +73,9 @@ async def classify_image(file: UploadFile = File(...)):
     return JSONResponse(prediction)
 
 
-@utils_api.post('/classify2', responses={200:{"description": "Success"}, 400:{"description": "Bad Request"}, 405:{"description": "Method Not Allowed"}, 500:{"description": "Internal Server Error"}}, tags=["Utilities"])
-def classify_image2(files: list[UploadFile] | None = Query(None, description="Model to use for predictions")):
+@app.post('/classify2', responses={200:{"description": "Success"}, 400:{"description": "Bad Request"}, 405:{"description": "Method Not Allowed"}, 500:{"description": "Internal Server Error"}}, tags=["Utilities"])
+def classify_image2(files: list[UploadFile]):
+    
     try:
         returnList= []
         for file in files:
@@ -99,8 +100,8 @@ def classify_image2(files: list[UploadFile] | None = Query(None, description="Mo
             prediction = get_prediction2(file_path, new_path)
 
             returnList.append({"name": file.filename, "prediction": prediction, "hash": hash_value})
-
+        print(returnList)
         return JSONResponse(content=returnList)
 
     except Exception as e:
-        return ORJSONResponse(content={"error": "Internal Server Error"}, status_code=500)
+            return ORJSONResponse(content={"error": "Internal Server Error"}, status_code=500)
