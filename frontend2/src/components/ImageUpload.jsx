@@ -1,15 +1,26 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
+
 const ImageUpload = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [prediction, setPrediction] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [image, setImage] = useState(null);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     setSelectedFile(file);
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImage(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
   };
+  
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -45,6 +56,7 @@ const ImageUpload = () => {
         <label htmlFor="file">Select image:</label>
         <input type="file" id="file" name="file" onChange={handleFileChange} />
         <button type="submit" disabled={loading}>
+        {image && <img src={image} alt="Uploaded"  />}
           {loading ? 'Classifying...' : 'Classify'}
         </button>
       </form>
