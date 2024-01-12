@@ -15,6 +15,9 @@ const ImageUploadNew = () => {
   const onFileChange = (event) => {
     const file = event.target.files[0];
     setSelectedFile(file);
+
+    setImages((prevImages) => [...prevImages, file]);
+
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
@@ -53,6 +56,8 @@ const ImageUploadNew = () => {
         setImage(reader.result);
       };
       reader.readAsDataURL(file);
+      
+      setImages((prevImages) => [...prevImages, file]);
     }
   };
 
@@ -95,7 +100,7 @@ const ImageUploadNew = () => {
           onDrop={handleDrop}
         >
           <div className="md:flex flex-col hidden">
-          <FontAwesomeIcon className="text-primary" icon={faCloudArrowUp} size={'4x'} />
+          <FontAwesomeIcon className="text-primary" icon={faCloudArrowUp} size={images.length > 0 ? '3x' : '5x'} />
             <h2 className={`dark:text-neutral-100 text-lg font-varela ${images.length === 0 && 'mt-8'} text-center`}>
               Select a file or drag and drop here
             </h2>
@@ -103,7 +108,23 @@ const ImageUploadNew = () => {
               JPG, PNG, file size no more than 10MB
             </p>
           </div>
-          {image && <img src={image} alt="Uploaded" className="max-w-full max-h-48 object-contain" />}
+        </div>
+        <div className={`mt-4 w-full flex flex-col gap-4 ${isDraggingOver ? 'bg-green-200 dark:bg-green-800' : 'bg-transparent'}`}>
+          {images.map((uploadedImage, index) => (
+            <div
+              key={index}
+              className="flex w-full items-center p-4 gap-4 rounded-xl transition-all cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-800 animate-ease-in-out animate-jump animate-once animate-duration-700"
+            >
+              <div className="w-32 h-16 flex items-center justify-center">
+                <img
+                  src={URL.createObjectURL(uploadedImage)}
+                  alt={`Selected ${index + 1}`}
+                  className="max-w-32 max-h-16 rounded-md"
+                />
+              </div>
+              {/* image details */}
+            </div>
+          ))}
         </div>
       </div>
     </div>
