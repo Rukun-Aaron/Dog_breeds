@@ -7,7 +7,7 @@ import shutil
 import mmh3
 from werkzeug.utils import secure_filename
 
-from models.ml_model import get_prediction
+from models.ml_model import get_prediction, get_predictions_VIT
 
 router = APIRouter()
 img_path = 'imgs/'
@@ -38,6 +38,6 @@ async def classify_image(file: UploadFile = File(...)):
     if not os.path.isfile(new_path):
         os.rename(file_path, new_path)
 
-    prediction = get_prediction(file_path, new_path)
+    prediction = get_predictions_VIT(file_path, new_path)
     print(prediction)
     return JSONResponse(prediction)
