@@ -10,7 +10,7 @@ from utils.image_processing import cleanup_images
 
 # Create the FastAPI app instance
 app = FastAPI()
-
+# uvicorn main:app --reload
 # Include API routers
 app.include_router(dog_breed_router.router)
 app.add_middleware(

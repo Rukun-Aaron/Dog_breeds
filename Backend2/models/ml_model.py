@@ -27,7 +27,7 @@ def get_prediction(file_path, new_path):
 
 def get_predictions_VIT(file_path, new_path):
 
-    model_path = 'models\\fine_tuned_vit_model_35(2)'
+    model_path = 'models\\fine_tuned_vit_model_35'
     VIT_model = ViTForImageClassification.from_pretrained(model_path)
     VIT_model.eval()
 
