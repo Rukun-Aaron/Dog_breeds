@@ -6,10 +6,10 @@ import torch
 import torch.nn.functional as F
 model = load_model('models\\dog_breed_inception_model_20(4).h5')  # Replace with your model file path
 
-class_labels = ['Afghan', 'Basset', 'Beagle', 'Border Collie', 'Boxer', 'Bulldog', 'Corgi', 'Coyote', 'Doberman',
-                   'French Bulldog', 'German Sheperd', 'Labradoodle', 'Labrador Retriever', 'Maltese', 'Newfoundland',
-                   'Pit Bull', 'Pomeranian', 'Poodle', 'Pug', 'Rottweiler', 'Saint Bernard', 'Shiba Inu', 'Shih-Tzu',
-                   'Siberian Husky', 'Yorkie']
+class_labels = ['Afghan', 'Basset', 'Beagle', 'Bearded Collie', 'Bermaise', 'Border Collie', 'Boxer', 'Bulldog', 'Chihuahua', 'Corgi', 'Coyote', 'Doberman', 
+                   'French Bulldog', 'German Sheperd', 'Golden Retriever', 'Great Dane', 'Great Perenees', 'Greyhound', 'Irish Spaniel', 'Komondor', 'Labradoodle', 
+                   'Labrador Retriever', 'Malinois', 'Maltese', 'Newfoundland', 'Pit Bull', 'Pomeranian', 'Poodle', 'Pug', 'Rottweiler', 'Saint Bernard', 'Shiba Inu', 
+                   'Shih-Tzu', 'Siberian Husky', 'Yorkie']
 
 def get_prediction(file_path, new_path):
     img_array = load_and_preprocess_image(new_path)
@@ -27,7 +27,7 @@ def get_prediction(file_path, new_path):
 
 def get_predictions_VIT(file_path, new_path):
 
-    model_path = 'models\\fine_tuned_vit_model'
+    model_path = 'models\\fine_tuned_vit_model_35(2)'
     VIT_model = ViTForImageClassification.from_pretrained(model_path)
     VIT_model.eval()
 

@@ -1,20 +1,25 @@
-Afghan 
-Basset
+Afghan
+Basset 
 Beagle 
 Border Collie
-Corgi 
-Coyote 
+Boxer
+Bulldog 
+Corgi
+Coyote
 Doberman
-German Sheperd
-Labradoodle 
-Maltese 
+French Bulldog 
+German Shepherd
+Labradoodle
+Labrador Retriever
+Maltese
 Newfoundland
 Pit Bull
 Pomeranian
-Poodle 
-Pug
-Rottweiler
+Poodle
+Pug 
+Rottweiler 
 Saint Bernard
-Shiba Inu
-Shih-Tzu 
-Siberian Husky
+Shiba Inu 
+Shih-Tzu
+Siberian Husky 
+Yorkie
