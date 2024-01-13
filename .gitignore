@@ -1,4 +1,5 @@
 archive/
+fine_tuned_vit_model/
 *.h5
 *.jpeg
 *.jpg
