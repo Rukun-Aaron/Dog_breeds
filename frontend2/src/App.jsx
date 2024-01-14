@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import ImageUpload from './components/ImageUpload';
+import Navbar from './components/NavBar';
 import ImageUploadNew from './components/ImageUploadNew';
 function App() {
   return (
