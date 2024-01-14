@@ -1,5 +1,7 @@
 archive/
 fine_tuned_vit_model_35
+fine_tuned_vit_model_40
+fine_tuned_vit_model_40(2)
 *.h5
 *.jpeg
 *.jpg
