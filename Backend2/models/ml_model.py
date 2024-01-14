@@ -6,10 +6,11 @@ import torch
 import torch.nn.functional as F
 model = load_model('models\\dog_breed_inception_model_20(4).h5')  # Replace with your model file path
 
-class_labels = ['Afghan', 'Basset', 'Beagle', 'Bearded Collie', 'Bermaise', 'Border Collie', 'Boxer', 'Bulldog', 'Chihuahua', 'Corgi', 'Coyote', 'Doberman', 
-                   'French Bulldog', 'German Sheperd', 'Golden Retriever', 'Great Dane', 'Great Perenees', 'Greyhound', 'Irish Spaniel', 'Komondor', 'Labradoodle', 
-                   'Labrador Retriever', 'Malinois', 'Maltese', 'Newfoundland', 'Pit Bull', 'Pomeranian', 'Poodle', 'Pug', 'Rottweiler', 'Saint Bernard', 'Shiba Inu', 
-                   'Shih-Tzu', 'Siberian Husky', 'Yorkie']
+class_labels = ['Afghan', 'Basset', 'Beagle', 'Bearded Collie', 'Bermaise', 'Bloodhound', 'Border Collie', 'Boston Terrier', 
+                   'Boxer', 'Bulldog', 'Chihuahua', 'Chow', 'Corgi', 'Coyote', 'Doberman', 'French Bulldog', 'German Sheperd', 
+                   'Golden Retriever', 'Great Dane', 'Great Perenees', 'Greyhound', 'Irish Spaniel', 'Japanese Spaniel', 'Komondor',
+                   'Labradoodle', 'Labrador Retriever', 'Malinois', 'Maltese', 'Newfoundland', 'Pekinese', 'Pit Bull', 'Pomeranian',
+                   'Poodle', 'Pug', 'Rottweiler', 'Saint Bernard', 'Shiba Inu', 'Shih-Tzu', 'Siberian Husky', 'Yorkie']
 
 def get_prediction(file_path, new_path):
     img_array = load_and_preprocess_image(new_path)
