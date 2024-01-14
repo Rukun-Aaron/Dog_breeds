@@ -29,8 +29,7 @@ const ImageUploadNew = () => {
   
         if (response.ok) {
           const result = await response.json();
-          console.log('Result from server:', result);
-          setPredictions(result.predictions || []);
+          setPredictions([result]);
         } else {
           console.error('Error in POST request:', response.statusText);
         }
@@ -72,7 +71,8 @@ const ImageUploadNew = () => {
   
         if (response.ok) {
           const result = await response.json();
-          setPredictions(result.predictions || []); // Initialize or set to an empty array
+          setPredictions([result]);
+
         } else {
           console.error('Error in POST request:', response.statusText);
         }
@@ -196,13 +196,17 @@ const ImageUploadNew = () => {
 {showModal && (
   <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
     <div className="bg-white p-4 rounded-md">
-      <h2 className="text-lg font-bold mb-4">Predictions</h2>
+      <h2 className="text-lg font-bold mb-4">Prediction</h2>
       {predictions.length > 0 ? (
-        predictions.map((prediction, index) => (
-          <div key={index} className="text-gray-700">
-            {prediction.label}: {prediction.score.toFixed(2)}
-          </div>
-        ))
+        // Access the single prediction directly
+        <div className="text-gray-700">
+          <p>
+            Predicted breed: {predictions[0].label}
+          </p>
+          <p>
+            {predictions[0].score && `Confidence score: ${predictions[0].score * 100}%`}
+          </p>
+        </div>
       ) : (
         <p>No predictions available.</p>
       )}
