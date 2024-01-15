@@ -11,25 +11,26 @@ const ImageUploadNew = () => {
   const [predictions, setPredictions] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [selectedPredictionIndex, setSelectedPredictionIndex] = useState(null);
 
   const onFileChange = async (event) => {
     const file = event.target.files[0];
     setSelectedFile(file);
     if (file) {
       setLoading(true);
-  
+
       const formData = new FormData();
       formData.append('file', file);
-  
+
       try {
         const response = await fetch('http://127.0.0.1:8000/classify', {
           method: 'POST',
           body: formData,
         });
-  
+
         if (response.ok) {
           const result = await response.json();
-          setPredictions([result]);
+          setPredictions((prevPredictions) => [...prevPredictions, result]);
         } else {
           console.error('Error in POST request:', response.statusText);
         }
@@ -38,16 +39,16 @@ const ImageUploadNew = () => {
       } finally {
         setLoading(false);
       }
-  
+
       const reader = new FileReader();
       reader.onloadend = () => {
         setImage(reader.result);
       };
       reader.readAsDataURL(file);
-  
+
       setImages((prevImages) => [...prevImages, file]);
     }
-  };  
+  };
   
   const handleDrop = async (e) => {
     e.preventDefault();
@@ -113,9 +114,10 @@ const ImageUploadNew = () => {
     }
   };
   
-  const handleModalClick = () => {
+  const handleModalClick = (index) => {
     setShowModal(true);
-  };  
+    setSelectedPredictionIndex(index);
+  }; 
 
   return (
     <div className="w-full h-full flex justify-center overflow-x-hidden pt-4 pb-4">
@@ -173,49 +175,52 @@ const ImageUploadNew = () => {
               <div
                 key={index}
                 className="flex w-full items-center p-4 gap-4 rounded-xl transition-all cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-800 animate-ease-in-out animate-jump animate-once animate-duration-700"
-                onClick={handleModalClick}
+                onClick={() => handleModalClick(index)}
               >
                 <div className="w-32 h-16 flex items-center justify-center">
-                  <img
-                    src={URL.createObjectURL(uploadedImage)}
-                    alt={`Selected ${index + 1}`}
-                    className="max-w-32 max-h-16 rounded-md"
-                  />
-                </div>
-                <div className="dark:text-neutral-100 truncate mr-auto">
-                  {uploadedImage.name}
-                </div>
-                <div className="text-gray-500">
-                  {formatFileSize(uploadedImage.size)}
-                </div>
+                <img
+                  src={URL.createObjectURL(uploadedImage)}
+                  alt={`Selected ${index + 1}`}
+                  className="max-w-32 max-h-16 rounded-md"
+                />
+              </div>
+              <div className="dark:text-neutral-100 truncate mr-auto">
+                {uploadedImage.name}
+              </div>
+              <div className="text-gray-500">
+                {formatFileSize(uploadedImage.size)}
+              </div>
               </div>
             ))}
           </div>
         )}
-
-{showModal && (
-  <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
-    <div className="bg-white p-4 rounded-md">
-      <h2 className="text-lg font-bold mb-4">Prediction</h2>
-      {predictions.length > 0 ? (
-        // Access the single prediction directly
-        <div className="text-gray-700">
-          <p>
-            Predicted breed: {predictions[0].label}
-          </p>
-          <p>
-            {predictions[0].score && `Confidence score: ${predictions[0].score * 100}%`}
-          </p>
-        </div>
-      ) : (
-        <p>No predictions available.</p>
-      )}
-      <button className="mt-4 p-2 bg-primary rounded-md" onClick={() => setShowModal(false)}>
-        Close
-      </button>
-    </div>
-  </div>
-)}
+        {showModal && (
+          <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
+            <div className="bg-white p-4 rounded-md">
+              <h2 className="text-lg font-bold mb-4">Prediction</h2>
+              {selectedPredictionIndex !== null && (
+                <div className="text-gray-700">
+                  <p>
+                    Predicted breed: {predictions[selectedPredictionIndex].label}
+                  </p>
+                  <p>
+                    {predictions[selectedPredictionIndex].score &&
+                      `Confidence score: ${predictions[selectedPredictionIndex].score * 100}%`}
+                  </p>
+                </div>
+              )}
+              <button
+                className="mt-4 p-2 bg-primary rounded-md"
+                onClick={() => {
+                  setShowModal(false);
+                  setSelectedPredictionIndex(null);
+                }}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
