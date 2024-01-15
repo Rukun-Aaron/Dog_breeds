@@ -4,6 +4,8 @@ fine_tuned_vit_model_35
 fine_tuned_vit_model_45
 fine_tuned_vit_model_40
 fine_tuned_vit_model_40(2)
+fine_tuned_vit_model_45
+frontend2\node_modules\.cache
 *.h5
 *.jpeg
 *.jpg
