@@ -167,31 +167,31 @@ const ImageUploadNew = () => {
           </div>
         </div>
         {images.length > 0 && (
-  <div className="mt-4 w-full flex flex-col gap-4">
-    <h2 className="text-lg dark:text-neutral-100">Files Added</h2>
-    {images.map((uploadedImage, index) => (
-      <div
-        key={index}
-        className="flex w-full items-center p-4 gap-4 rounded-xl transition-all cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-800 animate-ease-in-out animate-jump animate-once animate-duration-700"
-        onClick={handleModalClick}
-      >
-        <div className="w-32 h-16 flex items-center justify-center">
-          <img
-            src={URL.createObjectURL(uploadedImage)}
-            alt={`Selected ${index + 1}`}
-            className="max-w-32 max-h-16 rounded-md"
-          />
-        </div>
-        <div className="dark:text-neutral-100 truncate mr-auto">
-          {uploadedImage.name}
-        </div>
-        <div className="text-gray-500">
-          {formatFileSize(uploadedImage.size)}
-        </div>
-      </div>
-    ))}
-  </div>
-)}
+          <div className="mt-4 w-full flex flex-col gap-4">
+            <h2 className="text-lg dark:text-neutral-100">Files Added</h2>
+            {images.map((uploadedImage, index) => (
+              <div
+                key={index}
+                className="flex w-full items-center p-4 gap-4 rounded-xl transition-all cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-800 animate-ease-in-out animate-jump animate-once animate-duration-700"
+                onClick={handleModalClick}
+              >
+                <div className="w-32 h-16 flex items-center justify-center">
+                  <img
+                    src={URL.createObjectURL(uploadedImage)}
+                    alt={`Selected ${index + 1}`}
+                    className="max-w-32 max-h-16 rounded-md"
+                  />
+                </div>
+                <div className="dark:text-neutral-100 truncate mr-auto">
+                  {uploadedImage.name}
+                </div>
+                <div className="text-gray-500">
+                  {formatFileSize(uploadedImage.size)}
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
 
 {showModal && (
   <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
