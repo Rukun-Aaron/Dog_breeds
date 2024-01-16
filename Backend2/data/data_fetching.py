@@ -44,8 +44,9 @@ def main():
         print(f"Error: {error}")
 
     finally:
-        if connection:
+        if cursor:
             cursor.close()
+        if connection:
             connection.close()
 
 if __name__ == "__main__":
