@@ -467,7 +467,30 @@
       "name": "Pembroke Welsh Corgi"
     }
   ],
-  [],
+  [{
+    "image_link": "",
+    "good_with_children": 1,
+    "good_with_other_dogs": 1,
+    "shedding": 4,
+    "coat_length": 2,
+    "good_with_strangers": 1,
+    "playfulness": 1,
+    "protectiveness": 5,
+    "trainability": 1,
+    "energy": 4,
+    "barking": 4,
+    "min_life_expectancy": 10.0,
+    "max_life_expectancy": 14.0,
+    "max_height_male": 26.0,
+    "max_height_female": 21.0,
+    "max_weight_male": 44.0,
+    "max_weight_female": 40.0,
+    "min_height_male": 23.0,
+    "min_height_female": 18.0,
+    "min_weight_male": 15.0,
+    "min_weight_female": 24.0,
+    "name": "Coyote"
+  }],
   [
     {
       "image_link": "https://api-ninjas.com/images/dogs/doberman_pinscher.jpg",
@@ -776,7 +799,32 @@
       "name": "Komondor"
     }
   ],
-  [],
+  [{
+    "image_link": "https://api-ninjas.com/images/dogs/labradoodle.jpg",
+    "good_with_children": 4,
+    "good_with_other_dogs": 5,
+    "shedding": 3,
+    "grooming": 3,
+    "drooling": 1,
+    "coat_length": 2,
+    "good_with_strangers": 5,
+    "playfulness": 5,
+    "protectiveness": 1,
+    "trainability": 3,
+    "energy": 5,
+    "barking": 2,
+    "min_life_expectancy": 12.0,
+    "max_life_expectancy": 14.0,
+    "max_height_male": 24.0,
+    "max_height_female": 23.0,
+    "max_weight_male": 65.0,
+    "max_weight_female": 65.0,
+    "min_height_male": 22.0,
+    "min_height_female": 21.0,
+    "min_weight_male": 50.0,
+    "min_weight_female": 50.0,
+    "name": "Labradoodle"
+  }],
   [
     {
       "image_link": "https://api-ninjas.com/images/dogs/labrador_retriever.jpg",

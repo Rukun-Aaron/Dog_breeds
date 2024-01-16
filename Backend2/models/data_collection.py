@@ -29,7 +29,3 @@ print(dog_info_list)
 # print("Dog information has been written to dog_info.json")
 
 
-
-# No dog breeds : Coyote
-# No dog breeds : Labradoodle
-# No dog breeds : Pit Bull DONE!!
