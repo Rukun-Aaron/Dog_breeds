@@ -19,7 +19,7 @@ def get_breed_info(breed):
         cursor = connection.cursor()
         
         select_query = f"""
-            SELECT * FROM dog_breeds WHERE name = '{breed}';
+        SELECT * FROM dog_breeds WHERE name ILIKE '%{breed}%';
         """
         cursor.execute(select_query)
         

@@ -8,6 +8,7 @@ import mmh3
 from werkzeug.utils import secure_filename
 
 from models.ml_model import get_prediction,get_predictions_VIT
+from utils.data_retrieval import get_breed_info
 
 router = APIRouter()
 img_path = 'imgs/'
@@ -41,3 +42,8 @@ async def classify_image(file: UploadFile = File(...)):
     prediction = get_predictions_VIT(file_path, new_path)
     print(prediction)
     return JSONResponse(prediction)
+
+@router.post("/get_dog_info")
+async def get_dog_info(breed: str):
+    breed_info = get_breed_info(breed)
+    return breed_info
