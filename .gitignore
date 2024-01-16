@@ -10,3 +10,4 @@ frontend2/node_modules/.cache
 *.jpeg
 *.jpg
 *.pyc
+*.env
