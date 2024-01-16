@@ -53,7 +53,9 @@
       "min_weight_male": 27.0,
       "min_weight_female": 27.0,
       "name": "Basset Fauve de Bretagne"
-    },
+    }
+  ],
+  [
     {
       "image_link": "https://api-ninjas.com/images/dogs/basset_hound.jpg",
       "good_with_children": 5,
@@ -79,7 +81,9 @@
       "min_weight_male": 40.0,
       "min_weight_female": 40.0,
       "name": "Basset Hound"
-    },
+    }
+  ],
+  [
     {
       "image_link": "https://api-ninjas.com/images/dogs/grand_basset_griffon_vend\u00e9en.jpg",
       "good_with_children": 3,
@@ -105,7 +109,9 @@
       "min_weight_male": 40.0,
       "min_weight_female": 40.0,
       "name": "Grand Basset Griffon Vend\u00e9en"
-    },
+    }
+  ],
+  [
     {
       "image_link": "https://api-ninjas.com/images/dogs/petit_basset_griffon_vend\u00e9en.jpg",
       "good_with_children": 5,
@@ -439,7 +445,9 @@
       "min_weight_male": 30.0,
       "min_weight_female": 25.0,
       "name": "Cardigan Welsh Corgi"
-    },
+    }
+  ],
+  [
     {
       "image_link": "https://api-ninjas.com/images/dogs/pembroke_welsh_corgi.jpg",
       "good_with_children": 3,
@@ -467,30 +475,34 @@
       "name": "Pembroke Welsh Corgi"
     }
   ],
-  [{
-    "image_link": "",
-    "good_with_children": 1,
-    "good_with_other_dogs": 1,
-    "shedding": 4,
-    "coat_length": 2,
-    "good_with_strangers": 1,
-    "playfulness": 1,
-    "protectiveness": 5,
-    "trainability": 1,
-    "energy": 4,
-    "barking": 4,
-    "min_life_expectancy": 10.0,
-    "max_life_expectancy": 14.0,
-    "max_height_male": 26.0,
-    "max_height_female": 21.0,
-    "max_weight_male": 44.0,
-    "max_weight_female": 40.0,
-    "min_height_male": 23.0,
-    "min_height_female": 18.0,
-    "min_weight_male": 15.0,
-    "min_weight_female": 24.0,
-    "name": "Coyote"
-  }],
+  [
+    {
+      "image_link": "",
+      "good_with_children": 1,
+      "good_with_other_dogs": 1,
+      "shedding": 4,
+      "grooming": 1,
+      "drooling": 1,
+      "coat_length": 2,
+      "good_with_strangers": 1,
+      "playfulness": 1,
+      "protectiveness": 5,
+      "trainability": 1,
+      "energy": 4,
+      "barking": 4,
+      "min_life_expectancy": 10.0,
+      "max_life_expectancy": 14.0,
+      "max_height_male": 26.0,
+      "max_height_female": 21.0,
+      "max_weight_male": 44.0,
+      "max_weight_female": 40.0,
+      "min_height_male": 23.0,
+      "min_height_female": 18.0,
+      "min_weight_male": 15.0,
+      "min_weight_female": 24.0,
+      "name": "Coyote"
+    }
+  ],
   [
     {
       "image_link": "https://api-ninjas.com/images/dogs/doberman_pinscher.jpg",
@@ -548,34 +560,32 @@
     }
   ],
   [
-    [
-      {
-        "image_link": "https://api-ninjas.com/images/dogs/german_shepherd_dog.jpg",
-        "good_with_children": 5,
-        "good_with_other_dogs": 3,
-        "shedding": 4,
-        "grooming": 2,
-        "drooling": 2,
-        "coat_length": 1,
-        "good_with_strangers": 3,
-        "playfulness": 4,
-        "protectiveness": 5,
-        "trainability": 5,
-        "energy": 5,
-        "barking": 3,
-        "min_life_expectancy": 7.0,
-        "max_life_expectancy": 10.0,
-        "max_height_male": 26.0,
-        "max_height_female": 26.0,
-        "max_weight_male": 90.0,
-        "max_weight_female": 70.0,
-        "min_height_male": 24.0,
-        "min_height_female": 24.0,
-        "min_weight_male": 65.0,
-        "min_weight_female": 50.0,
-        "name": "German Shepherd Dog"
-      }
-    ]
+    {
+      "image_link": "https://api-ninjas.com/images/dogs/german_shepherd_dog.jpg",
+      "good_with_children": 5,
+      "good_with_other_dogs": 3,
+      "shedding": 4,
+      "grooming": 2,
+      "drooling": 2,
+      "coat_length": 1,
+      "good_with_strangers": 3,
+      "playfulness": 4,
+      "protectiveness": 5,
+      "trainability": 5,
+      "energy": 5,
+      "barking": 3,
+      "min_life_expectancy": 7.0,
+      "max_life_expectancy": 10.0,
+      "max_height_male": 26.0,
+      "max_height_female": 26.0,
+      "max_weight_male": 90.0,
+      "max_weight_female": 70.0,
+      "min_height_male": 24.0,
+      "min_height_female": 24.0,
+      "min_weight_male": 65.0,
+      "min_weight_female": 50.0,
+      "name": "German Shepherd Dog"
+    }
   ],
   [
     {
@@ -687,7 +697,9 @@
       "min_weight_male": 65.0,
       "min_weight_female": 60.0,
       "name": "Greyhound"
-    },
+    }
+  ],
+  [
     {
       "image_link": "https://api-ninjas.com/images/dogs/italian_greyhound.jpg",
       "good_with_children": 3,
@@ -799,32 +811,34 @@
       "name": "Komondor"
     }
   ],
-  [{
-    "image_link": "https://api-ninjas.com/images/dogs/labradoodle.jpg",
-    "good_with_children": 4,
-    "good_with_other_dogs": 5,
-    "shedding": 3,
-    "grooming": 3,
-    "drooling": 1,
-    "coat_length": 2,
-    "good_with_strangers": 5,
-    "playfulness": 5,
-    "protectiveness": 1,
-    "trainability": 3,
-    "energy": 5,
-    "barking": 2,
-    "min_life_expectancy": 12.0,
-    "max_life_expectancy": 14.0,
-    "max_height_male": 24.0,
-    "max_height_female": 23.0,
-    "max_weight_male": 65.0,
-    "max_weight_female": 65.0,
-    "min_height_male": 22.0,
-    "min_height_female": 21.0,
-    "min_weight_male": 50.0,
-    "min_weight_female": 50.0,
-    "name": "Labradoodle"
-  }],
+  [
+    {
+      "image_link": "https://api-ninjas.com/images/dogs/labradoodle.jpg",
+      "good_with_children": 4,
+      "good_with_other_dogs": 5,
+      "shedding": 3,
+      "grooming": 3,
+      "drooling": 1,
+      "coat_length": 2,
+      "good_with_strangers": 5,
+      "playfulness": 5,
+      "protectiveness": 1,
+      "trainability": 3,
+      "energy": 5,
+      "barking": 2,
+      "min_life_expectancy": 12.0,
+      "max_life_expectancy": 14.0,
+      "max_height_male": 24.0,
+      "max_height_female": 23.0,
+      "max_weight_male": 65.0,
+      "max_weight_female": 65.0,
+      "min_height_male": 22.0,
+      "min_height_female": 21.0,
+      "min_weight_male": 50.0,
+      "min_weight_female": 50.0,
+      "name": "Labradoodle"
+    }
+  ],
   [
     {
       "image_link": "https://api-ninjas.com/images/dogs/labrador_retriever.jpg",
@@ -965,32 +979,34 @@
       "name": "Pekingese"
     }
   ],
-  [{
-    "image_link": "",
-    "good_with_children": 5,
-    "good_with_other_dogs": 1,
-    "shedding": 4,
-    "grooming": 3,
-    "drooling": 1,
-    "coat_length": 1,
-    "good_with_strangers": 5,
-    "playfulness": 5,
-    "protectiveness": 4,
-    "trainability": 4,
-    "energy": 4,
-    "barking": 3,
-    "min_life_expectancy": 12.0,
-    "max_life_expectancy": 16.0,
-    "max_height_male": 21.0,
-    "max_height_female": 20.0,
-    "max_weight_male": 60.0,
-    "max_weight_female": 50.0,
-    "min_height_male": 18.0,
-    "min_height_female": 17.0,
-    "min_weight_male": 35.0,
-    "min_weight_female": 30.0,
-    "name": "Pit Bull"
-  }],
+  [
+    {
+      "image_link": "",
+      "good_with_children": 5,
+      "good_with_other_dogs": 1,
+      "shedding": 4,
+      "grooming": 3,
+      "drooling": 1,
+      "coat_length": 1,
+      "good_with_strangers": 5,
+      "playfulness": 5,
+      "protectiveness": 4,
+      "trainability": 4,
+      "energy": 4,
+      "barking": 3,
+      "min_life_expectancy": 12.0,
+      "max_life_expectancy": 16.0,
+      "max_height_male": 21.0,
+      "max_height_female": 20.0,
+      "max_weight_male": 60.0,
+      "max_weight_female": 50.0,
+      "min_height_male": 18.0,
+      "min_height_female": 17.0,
+      "min_weight_male": 35.0,
+      "min_weight_female": 30.0,
+      "name": "Pit Bull"
+    }
+  ],
   [
     {
       "image_link": "https://api-ninjas.com/images/dogs/pomeranian.jpg",
@@ -1045,7 +1061,9 @@
       "min_weight_male": 10.0,
       "min_weight_female": 10.0,
       "name": "Poodle (Miniature)"
-    },
+    }
+  ],
+  [
     {
       "image_link": "https://api-ninjas.com/images/dogs/poodle_(standard).jpg",
       "good_with_children": 5,
@@ -1071,7 +1089,9 @@
       "min_weight_male": 60.0,
       "min_weight_female": 40.0,
       "name": "Poodle (Standard)"
-    },
+    }
+  ],
+  [
     {
       "image_link": "https://api-ninjas.com/images/dogs/poodle_(toy).jpg",
       "good_with_children": 5,
@@ -1296,4 +1316,3 @@
     }
   ]
 ]
-
