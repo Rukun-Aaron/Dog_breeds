@@ -11,7 +11,7 @@ db_config = {
 def retrieve_afghan_hound_info(cursor):
     # SQL command to retrieve information about Afghan Hound
     select_query = """
-        SELECT * FROM dog_breeds WHERE name = 'Afghan Hound';
+        SELECT * FROM dog_breeds WHERE name = 'Basset Hound';
     """
     cursor.execute(select_query)
 
