@@ -1,13 +1,17 @@
 import json
 import psycopg2
 from psycopg2 import sql
+from dotenv import load_dotenv
+import os
 
-# Replace these with your actual database connection details
+load_dotenv()
+
 db_config = {
-    'host': 'localhost',  # Change if your database is hosted elsewhere
-    'database': 'dog_info',
-    'user': 'rukun',
-    'password': 'veitChi@5',
+    'host': os.getenv('DB_HOST'),
+    'port': os.getenv('DB_PORT'),
+    'database': os.getenv('DB_NAME'),
+    'user': os.getenv('DB_USER'),
+    'password': os.getenv('DB_PASSWORD'),
 }
 
 # Path to your dog_info.json file

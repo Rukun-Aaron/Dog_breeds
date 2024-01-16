@@ -1,17 +1,22 @@
 import psycopg2
+import os
+from dotenv import load_dotenv
 
-# Replace these with your actual database connection details
+
+load_dotenv()
+
 db_config = {
-    'host': 'localhost',  # Change if your database is hosted elsewhere
-    'database': 'dog_info',
-    'user': 'rukun',
-    'password': 'veitChi@5',
+    'host': os.getenv('DB_HOST'),
+    'port': os.getenv('DB_PORT'),
+    'database': os.getenv('DB_NAME'),
+    'user': os.getenv('DB_USER'),
+    'password': os.getenv('DB_PASSWORD'),
 }
 
 def retrieve_afghan_hound_info(cursor):
     # SQL command to retrieve information about Afghan Hound
     select_query = """
-        SELECT * FROM dog_breeds WHERE name = 'Basset Hound';
+        SELECT * FROM dog_breeds WHERE name = 'Afghan Hound';
     """
     cursor.execute(select_query)
 
