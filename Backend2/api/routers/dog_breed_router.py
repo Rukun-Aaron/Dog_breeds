@@ -13,7 +13,7 @@ from utils.data_retrieval import get_breed_info
 router = APIRouter()
 img_path = 'imgs/'
 
-@router.get("/")
+@router.get("/", tags=["Info"])
 def redirect_to_docs():
     return RedirectResponse(url="/docs", status_code=302)
 
@@ -24,7 +24,7 @@ async def get_version():
     return {"version": '1.1'}  # Assuming version is stored in model_config
 
 
-@router.post("/classify")
+@router.post("/classify", tags=["Dogs"])
 async def classify_image(file: UploadFile = File(...)):
     file_path = os.path.join(img_path, secure_filename(file.filename))
     with open(file_path, "wb") as buffer:
@@ -43,7 +43,7 @@ async def classify_image(file: UploadFile = File(...)):
     print(prediction)
     return JSONResponse(prediction)
 
-@router.post("/get_dog_info")
+@router.post("/get_dog_info", tags=["Dogs"])
 async def get_dog_info(breed: str):
     breed_info = get_breed_info(breed)
     return breed_info
