@@ -23,7 +23,8 @@ db_config = {
 }
 
 def get_breed_info(breed):
-    
+
+    return_breed_info = list()
     try:     
         connection = psycopg2.connect(**db_config)
         cursor = connection.cursor()
@@ -33,13 +34,17 @@ def get_breed_info(breed):
         """
         cursor.execute(select_query)
         
-        data = cursor.fetchone()
-        breed_info = dict(zip(labels, data))
+        data = cursor.fetchall()
+        
+        for row in data:
+            
+            breed_info = dict(zip(labels, row))
+            return_breed_info.append(breed_info)
 
         if breed_info is None:
             return (f"No dog_breeds named {breed} found in the database.")
         else:
-            return breed_info
+            return return_breed_info
         
     except (Exception, psycopg2.Error) as error:
         return (f"Error: {error}")
