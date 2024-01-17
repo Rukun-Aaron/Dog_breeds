@@ -6,7 +6,7 @@ import {
 } from '../services/apiService';
 const ImageUploadNew = () => {
   const [image, setImage] = useState(null);
-  const [loading, setLoading] =useState(false);
+  const [loading, setLoading] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const inputFile = useRef(null);
   const [images, setImages] = useState([]);
@@ -24,10 +24,10 @@ const ImageUploadNew = () => {
   useEffect(() => {
     console.log('Updated beed info:', breedInfo);
   }, [breedInfo]);
-  
+
   const onFileChange = async (event) => {
     const file = event.target.files[0];
-    
+
     setImages((prevImages) => [...prevImages, file]);
     setSelectedFile(file);
     if (file) {
@@ -36,18 +36,29 @@ const ImageUploadNew = () => {
       const formData = new FormData();
       formData.append('file', file);
 
-      try {
+    try {
         const classifyResponse = await getPredictions(formData);
-
         if (classifyResponse.ok) {
           const result = await classifyResponse.json();
           setPredictions((prevPredictions) => [...prevPredictions, result]);
-        } else {
+          const breedInfoResponse = await getBreedInfo(result.label);
+
+          if (breedInfoResponse.ok) {
+            const result = await breedInfoResponse.json();
+            setBreedInfo((prevBreedInfo) => [...prevBreedInfo, result]);
+          }
+          else {
+            console.error('Error in /get_dog_info request:', breedInfoResponse.statusText);
+          }
+        } 
+        else {
           console.error('Error in /classify request:', classifyResponse.statusText);
         }
-      } catch (error) {
+      } 
+      catch (error) {
         console.error('Error in fetch:', error);
-      } finally {
+      } 
+      finally {
         setIsLoading(false);
       }
 
@@ -68,28 +79,35 @@ const ImageUploadNew = () => {
       const file = droppedFiles[0];
       setImages((prevImages) => [...prevImages, file]);
       setSelectedFile(file);
-  
+
       setLoading(true);
-  
+
       const formData = new FormData();
       formData.append('file', file);
 
       try {
-        const response = await fetch('http://127.0.0.1:8000/classify', {
-          method: 'POST',
-          body: formData,
-        });
-  
-        if (response.ok) {
-          const result = await response.json();
-          setPredictions([result]);
+        const classifyResponse = await getPredictions(formData);
+        if (classifyResponse.ok) {
+          const result = await classifyResponse.json();
+          setPredictions((prevPredictions) => [...prevPredictions, result]);
+          const breedInfoResponse = await getBreedInfo(result.label);
 
-        } else {
-          console.error('Error in /classify request:', response.statusText);
+          if (breedInfoResponse.ok) {
+            const result = await breedInfoResponse.json();
+            setBreedInfo((prevBreedInfo) => [...prevBreedInfo, result]);
+          }
+          else {
+            console.error('Error in /get_dog_info request:', breedInfoResponse.statusText);
+          }
+        } 
+        else {
+          console.error('Error in /classify request:', classifyResponse.statusText);
         }
-      } catch (error) {
+      } 
+      catch (error) {
         console.error('Error in fetch:', error);
-      } finally {
+      } 
+      finally {
         setIsLoading(false);
       }
 
@@ -98,7 +116,7 @@ const ImageUploadNew = () => {
         setImage(reader.result);
       };
       reader.readAsDataURL(file);
-  
+
       setImages((prevImages) => [...prevImages, file]);
     }
   };
@@ -193,18 +211,18 @@ const ImageUploadNew = () => {
                   </div>
                 )}
                 <div className="w-32 h-16 flex items-center justify-center">
-                <img
-                  src={URL.createObjectURL(uploadedImage)}
-                  alt={`Selected ${index + 1}`}
-                  className="max-w-32 max-h-16 rounded-md"
-                />
-              </div>
-              <div className="dark:text-neutral-100 truncate mr-auto">
-                {uploadedImage.name}
-              </div>
-              <div className="text-gray-500">
-                {formatFileSize(uploadedImage.size)}
-              </div>
+                  <img
+                    src={URL.createObjectURL(uploadedImage)}
+                    alt={`Selected ${index + 1}`}
+                    className="max-w-32 max-h-16 rounded-md"
+                  />
+                </div>
+                <div className="dark:text-neutral-100 truncate mr-auto">
+                  {uploadedImage.name}
+                </div>
+                <div className="text-gray-500">
+                  {formatFileSize(uploadedImage.size)}
+                </div>
               </div>
             ))}
           </div>
