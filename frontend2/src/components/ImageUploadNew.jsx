@@ -6,6 +6,7 @@ import {
 } from '../services/apiService';
 const ImageUploadNew = () => {
   const [image, setImage] = useState(null);
+  const [loading, setLoading] =useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const inputFile = useRef(null);
   const [images, setImages] = useState([]);
@@ -84,7 +85,7 @@ const ImageUploadNew = () => {
           setPredictions([result]);
 
         } else {
-          console.error('Error in /classify request:', classifyResponse.statusText);
+          console.error('Error in /classify request:', response.statusText);
         }
       } catch (error) {
         console.error('Error in fetch:', error);
