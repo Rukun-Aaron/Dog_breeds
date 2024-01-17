@@ -6,7 +6,6 @@ import {
 } from '../services/apiService';
 const ImageUploadNew = () => {
   const [image, setImage] = useState(null);
-  const [loading, setLoading] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const inputFile = useRef(null);
   const [images, setImages] = useState([]);
@@ -41,6 +40,7 @@ const ImageUploadNew = () => {
         if (classifyResponse.ok) {
           const result = await classifyResponse.json();
           setPredictions((prevPredictions) => [...prevPredictions, result]);
+          
           const breedInfoResponse = await getBreedInfo(result.label);
 
           if (breedInfoResponse.ok) {
@@ -80,7 +80,7 @@ const ImageUploadNew = () => {
       setImages((prevImages) => [...prevImages, file]);
       setSelectedFile(file);
 
-      setLoading(true);
+      setIsLoading(true);
 
       const formData = new FormData();
       formData.append('file', file);
@@ -116,8 +116,6 @@ const ImageUploadNew = () => {
         setImage(reader.result);
       };
       reader.readAsDataURL(file);
-
-      setImages((prevImages) => [...prevImages, file]);
     }
   };
 
@@ -220,6 +218,11 @@ const ImageUploadNew = () => {
                 <div className="dark:text-neutral-100 truncate mr-auto">
                   {uploadedImage.name}
                 </div>
+                {predictions.length > 0 && predictions[index] && (
+                  <div className="text-primary rounded-2xl border border-primary pl-1 pr-1">
+                      {predictions[index].label} {(predictions[index].score * 100).toFixed(2)}%
+                  </div>
+                )}
                 <div className="text-gray-500">
                   {formatFileSize(uploadedImage.size)}
                 </div>
