@@ -36,7 +36,7 @@ const ImageUploadNew = () => {
       const formData = new FormData();
       formData.append('file', file);
 
-    try {
+      try {
         const classifyResponse = await getPredictions(formData);
         if (classifyResponse.ok) {
           const result = await classifyResponse.json();
@@ -50,14 +50,14 @@ const ImageUploadNew = () => {
           else {
             console.error('Error in /get_dog_info request:', breedInfoResponse.statusText);
           }
-        } 
+        }
         else {
           console.error('Error in /classify request:', classifyResponse.statusText);
         }
-      } 
+      }
       catch (error) {
         console.error('Error in fetch:', error);
-      } 
+      }
       finally {
         setIsLoading(false);
       }
@@ -99,14 +99,14 @@ const ImageUploadNew = () => {
           else {
             console.error('Error in /get_dog_info request:', breedInfoResponse.statusText);
           }
-        } 
+        }
         else {
           console.error('Error in /classify request:', classifyResponse.statusText);
         }
-      } 
+      }
       catch (error) {
         console.error('Error in fetch:', error);
-      } 
+      }
       finally {
         setIsLoading(false);
       }
