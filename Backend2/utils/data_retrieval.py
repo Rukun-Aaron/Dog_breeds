@@ -35,7 +35,7 @@ def get_breed_info(breed):
         cursor.execute(select_query)
         
         data = cursor.fetchall()
-        
+        breed_info=None
         for row in data:
             
             breed_info = dict(zip(labels, row))

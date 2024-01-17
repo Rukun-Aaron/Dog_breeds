@@ -43,7 +43,7 @@ async def classify_image(file: UploadFile = File(...)):
     print(prediction)
     return JSONResponse(prediction)
 
-@router.post("/get_dog_info", tags=["Dogs"])
+@router.get("/get_dog_info", tags=["Dogs"])
 async def get_dog_info(breed: str):
     breed_info = get_breed_info(breed)
     return breed_info
