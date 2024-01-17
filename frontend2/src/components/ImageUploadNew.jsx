@@ -40,9 +40,12 @@ const ImageUploadNew = () => {
             if (getDogInfoResponse.ok) {
               const dogInfo = await getDogInfoResponse.json();
               // Use dogInfo as needed (e.g., update state)
+              setBreedInfo((prevInfo) => [...prevInfo, dogInfo]); 
               console.log('Dog Info:', dogInfo);
             } else {
               console.error('Error in /get_dog_info request:', getDogInfoResponse.statusText);
+              setBreedInfo((prevInfo) => [...prevInfo, `No information available for ${result.label}` ]); 
+
             }
         } else {
           console.error('Error in /classify request:', classifyResponse.statusText);
