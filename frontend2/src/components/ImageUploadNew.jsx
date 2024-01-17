@@ -247,7 +247,71 @@ const ImageUploadNew = () => {
                     Predicted breed: {predictions[selectedPredictionIndex].label}
                   </p>
                   <p>
-                    {breedInfo[selectedPredictionIndex][0].drooling}
+                    Good with Children: {breedInfo[selectedPredictionIndex][0].good_with_children}/5
+                  </p>
+                  <p>
+                    Good with Other Dogs: {breedInfo[selectedPredictionIndex][0].good_with_other_dogs}/5
+                  </p>
+                  <p>
+                    Amount of Shedding : {breedInfo[selectedPredictionIndex][0].shedding}/5
+                  </p>
+                  <p>
+                    Need for Grooming : {breedInfo[selectedPredictionIndex][0].grooming}/5
+                  </p>
+                  
+                  <p>
+                    Tendancy to Drool: {breedInfo[selectedPredictionIndex][0].drooling}/5
+                  </p>
+                  <p>
+                    Coat Length: {breedInfo[selectedPredictionIndex][0].coat_length}/5
+                  </p>
+                  <p>
+                    Good with Strangers: {breedInfo[selectedPredictionIndex][0].good_with_strangers}/5
+                  </p>
+                  <p>
+                    Playfulness: {breedInfo[selectedPredictionIndex][0].playfulness}/5
+                  </p>
+                  <p>
+                    Protectiveness: {breedInfo[selectedPredictionIndex][0].protectiveness}/5
+                  </p>
+                  <p>
+                    Trainability: {breedInfo[selectedPredictionIndex][0].trainability}/5
+                  </p>
+                  <p>
+                    Energy: {breedInfo[selectedPredictionIndex][0].energy}/5
+                  </p>
+                  <p>
+                    Tendency to Bark: {breedInfo[selectedPredictionIndex][0].barking}/5
+                  </p>
+                  <p>
+                    Minimum Life Expectancy: {breedInfo[selectedPredictionIndex][0].min_life_expectancy} Years
+                  </p>
+                  <p>
+                    Maximum Life Expectancy: {breedInfo[selectedPredictionIndex][0].max_life_expectancy} Years
+                  </p>
+                  <p>
+                    Maximum Height in Males: {breedInfo[selectedPredictionIndex][0].max_height_male} Inches
+                  </p>
+                  <p>
+                    Maximum Height in Females: {breedInfo[selectedPredictionIndex][0].max_height_female} Inches
+                  </p>
+                  <p>
+                    Maximum Weight in Males: {breedInfo[selectedPredictionIndex][0].max_weight_male} Lbs
+                  </p>
+                  <p>
+                    Maximum Weight in Females: {breedInfo[selectedPredictionIndex][0].max_weight_female} Lbs
+                  </p>
+                  <p>
+                    Minimum Height in Males: {breedInfo[selectedPredictionIndex][0].min_height_male} Inches
+                  </p>
+                  <p>
+                    Minimum Height in Females: {breedInfo[selectedPredictionIndex][0].min_height_female} Inches
+                  </p>
+                  <p>
+                    Minimum Weight in Males: {breedInfo[selectedPredictionIndex][0].min_weight_male} Lbs
+                  </p>
+                  <p>
+                    Minimum Weight in Females: {breedInfo[selectedPredictionIndex][0].min_weight_female} Lbs
                   </p>
                   <p>
                     {predictions[selectedPredictionIndex].score &&
