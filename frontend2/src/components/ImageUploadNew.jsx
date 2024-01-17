@@ -9,6 +9,7 @@ const ImageUploadNew = () => {
   const [images, setImages] = useState([]);
   const [isDraggingOver, setIsDraggingOver] = useState(false);
   const [predictions, setPredictions] = useState([]);
+  const [breedInfo, setBreedInfo] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [selectedPredictionIndex, setSelectedPredictionIndex] = useState(null);
@@ -23,6 +24,60 @@ const ImageUploadNew = () => {
       formData.append('file', file);
 
       try {
+        const classifyResponse = await fetch('http://127.0.0.1:8000/classify', {
+          method: 'POST',
+          body: formData,
+        });
+
+        if (classifyResponse.ok) {
+            const result = await classifyResponse.json();
+            setPredictions((prevPredictions) => [...prevPredictions, result]);
+            console.log(result);
+
+            const getDogInfoResponse = await fetch(`http://127.0.0.1:8000/get_dog_info?breed=${result.label}`, {
+              method: 'GET', // or 'GET' depending on your API
+            });
+            if (getDogInfoResponse.ok) {
+              const dogInfo = await getDogInfoResponse.json();
+              // Use dogInfo as needed (e.g., update state)
+              console.log('Dog Info:', dogInfo);
+            } else {
+              console.error('Error in /get_dog_info request:', getDogInfoResponse.statusText);
+            }
+        } else {
+          console.error('Error in /classify request:', classifyResponse.statusText);
+        }
+      } catch (error) {
+        console.error('Error in fetch:', error);
+      } finally {
+        setLoading(false);
+      }
+
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImage(reader.result);
+      };
+      reader.readAsDataURL(file);
+
+      setImages((prevImages) => [...prevImages, file]);
+    }
+  };
+
+  const handleDrop = async (e) => {
+    e.preventDefault();
+    setIsDraggingOver(false);
+
+    const droppedFiles = e.dataTransfer.files;
+    if (droppedFiles.length > 0) {
+      const file = droppedFiles[0];
+      setSelectedFile(file);
+
+      setLoading(true);
+
+      const formData = new FormData();
+      formData.append('file', file);
+
+      try {
         const response = await fetch('http://127.0.0.1:8000/classify', {
           method: 'POST',
           body: formData,
@@ -30,7 +85,8 @@ const ImageUploadNew = () => {
 
         if (response.ok) {
           const result = await response.json();
-          setPredictions((prevPredictions) => [...prevPredictions, result]);
+          setPredictions([result]);
+
         } else {
           console.error('Error in POST request:', response.statusText);
         }
@@ -49,50 +105,7 @@ const ImageUploadNew = () => {
       setImages((prevImages) => [...prevImages, file]);
     }
   };
-  
-  const handleDrop = async (e) => {
-    e.preventDefault();
-    setIsDraggingOver(false);
-  
-    const droppedFiles = e.dataTransfer.files;
-    if (droppedFiles.length > 0) {
-      const file = droppedFiles[0];
-      setSelectedFile(file);
-  
-      setLoading(true);
-  
-      const formData = new FormData();
-      formData.append('file', file);
-  
-      try {
-        const response = await fetch('http://127.0.0.1:8000/classify', {
-          method: 'POST',
-          body: formData,
-        });
-  
-        if (response.ok) {
-          const result = await response.json();
-          setPredictions([result]);
 
-        } else {
-          console.error('Error in POST request:', response.statusText);
-        }
-      } catch (error) {
-        console.error('Error in fetch:', error);
-      } finally {
-        setLoading(false);
-      }
-  
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImage(reader.result);
-      };
-      reader.readAsDataURL(file);
-  
-      setImages((prevImages) => [...prevImages, file]);
-    }
-  };  
-  
   const handleDragOver = (e) => {
     e.preventDefault();
     setIsDraggingOver(true);
@@ -113,11 +126,11 @@ const ImageUploadNew = () => {
       inputFile.current.click();
     }
   };
-  
+
   const handleModalClick = (index) => {
     setShowModal(true);
     setSelectedPredictionIndex(index);
-  }; 
+  };
 
   return (
     <div className="w-full h-full flex justify-center overflow-x-hidden pt-4 pb-4">
@@ -143,7 +156,7 @@ const ImageUploadNew = () => {
           className={`dark:border-neutral-100 transition-all cursor-pointer card w-full border-2 border-dashed rounded-lg border-gray-300 ${images.length > 0
             ? 'flex flex-col sm:flex-row justify-around items-center p-4'
             : 'aspect-video flex items-center justify-center p-4'
-          } ${isDraggingOver ? 'bg-green-200 dark:bg-green-800' : 'bg-transparent'}`}
+            } ${isDraggingOver ? 'bg-green-200 dark:bg-green-800' : 'bg-transparent'}`}
           onClick={handleClick}
           onDragOver={handleDragOver}
           onDragEnter={handleDragEnter}
@@ -178,18 +191,18 @@ const ImageUploadNew = () => {
                 onClick={() => handleModalClick(index)}
               >
                 <div className="w-32 h-16 flex items-center justify-center">
-                <img
-                  src={URL.createObjectURL(uploadedImage)}
-                  alt={`Selected ${index + 1}`}
-                  className="max-w-32 max-h-16 rounded-md"
-                />
-              </div>
-              <div className="dark:text-neutral-100 truncate mr-auto">
-                {uploadedImage.name}
-              </div>
-              <div className="text-gray-500">
-                {formatFileSize(uploadedImage.size)}
-              </div>
+                  <img
+                    src={URL.createObjectURL(uploadedImage)}
+                    alt={`Selected ${index + 1}`}
+                    className="max-w-32 max-h-16 rounded-md"
+                  />
+                </div>
+                <div className="dark:text-neutral-100 truncate mr-auto">
+                  {uploadedImage.name}
+                </div>
+                <div className="text-gray-500">
+                  {formatFileSize(uploadedImage.size)}
+                </div>
               </div>
             ))}
           </div>
