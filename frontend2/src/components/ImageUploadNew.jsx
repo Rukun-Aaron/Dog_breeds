@@ -16,6 +16,14 @@ const ImageUploadNew = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedPredictionIndex, setSelectedPredictionIndex] = useState(null);
 
+  useEffect(() => {
+    console.log('Updated Predictions:', predictions);
+  }, [predictions]);
+
+  useEffect(() => {
+    console.log('Updated beed info:', breedInfo);
+  }, [breedInfo]);
+  
   const onFileChange = async (event) => {
     const file = event.target.files[0];
     setSelectedFile(file);
@@ -31,14 +39,14 @@ const ImageUploadNew = () => {
         if (classifyResponse.ok) {
           const result = await classifyResponse.json();
           setPredictions((prevPredictions) => [...prevPredictions, result]);
-          // console.log(result);
+          // console.log('Predictions inside onFileChange:', predictions);
           try {
             const getDogInfoResponse = await getBreedInfo(result.label);
             if (getDogInfoResponse.ok) {
               const dogInfo = await getDogInfoResponse.json();
               // Use dogInfo as needed (e.g., update state)
               setBreedInfo((prevInfo) => [...prevInfo, dogInfo]);
-              console.log('Dog Info:', dogInfo);
+              // console.log('Dog Info:', dogInfo);
             } else {
               console.error('Error in /get_dog_info request:', getDogInfoResponse.statusText);
               setBreedInfo((prevInfo) => [...prevInfo, `No information available for ${result.label}`]);
@@ -232,6 +240,9 @@ const ImageUploadNew = () => {
                 <div className="text-gray-700">
                   <p>
                     Predicted breed: {predictions[selectedPredictionIndex].label}
+                  </p>
+                  <p>
+                    {breedInfo[selectedPredictionIndex][0].drooling}
                   </p>
                   <p>
                     {predictions[selectedPredictionIndex].score &&
