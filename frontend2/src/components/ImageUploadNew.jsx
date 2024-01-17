@@ -183,8 +183,8 @@ const ImageUploadNew = () => {
                 onClick={() => handleModalClick(index)}
               >
                 {isLoading && selectedFile === uploadedImage && (
-                  <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center rounded-xl">
-                    <div className="w-6 h-6 border-t-2 border-white border-solid rounded-full animate-spin"></div>
+                  <div className="absolute inset-0 flex items-center justify-end rounded-xl pr-40">
+                    <div className="w-6 h-6 border-t-2 border-primary border-solid rounded-full animate-spin ml-auto"></div>
                   </div>
                 )}
                 <div className="w-32 h-16 flex items-center justify-center">
