@@ -245,7 +245,7 @@ const ImageUploadNew = () => {
             <div className="bg-white p-4 rounded-md w-9/12">
               <h2 className="text-lg font-bold mb-4">Prediction</h2>
               {selectedPredictionIndex !== null && (
-                <div className=" grid grid-cols-3 py-4 gap-8 text-gray-700 ">
+                <div className="  grid grid-cols-1 gap-4 py-1 sm:grid-cols-2 md:py-4 md:grid-cols-3  md:gap-y-8  text-gray-700 ">
                   <p>
                     Predicted breed: {predictions[selectedPredictionIndex].label}
                   </p>
