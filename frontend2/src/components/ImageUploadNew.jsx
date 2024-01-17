@@ -12,7 +12,7 @@ const ImageUploadNew = () => {
   const [isDraggingOver, setIsDraggingOver] = useState(false);
   const [predictions, setPredictions] = useState([]);
   const [breedInfo, setBreedInfo] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [selectedPredictionIndex, setSelectedPredictionIndex] = useState(null);
 
@@ -26,9 +26,11 @@ const ImageUploadNew = () => {
   
   const onFileChange = async (event) => {
     const file = event.target.files[0];
+    
+    setImages((prevImages) => [...prevImages, file]);
     setSelectedFile(file);
     if (file) {
-      setLoading(true);
+      setIsLoading(true);
 
       const formData = new FormData();
       formData.append('file', file);
@@ -39,31 +41,13 @@ const ImageUploadNew = () => {
         if (classifyResponse.ok) {
           const result = await classifyResponse.json();
           setPredictions((prevPredictions) => [...prevPredictions, result]);
-          // console.log('Predictions inside onFileChange:', predictions);
-          try {
-            const getDogInfoResponse = await getBreedInfo(result.label);
-            if (getDogInfoResponse.ok) {
-              const dogInfo = await getDogInfoResponse.json();
-              // Use dogInfo as needed (e.g., update state)
-              setBreedInfo((prevInfo) => [...prevInfo, dogInfo]);
-              // console.log('Dog Info:', dogInfo);
-            } else {
-              console.error('Error in /get_dog_info request:', getDogInfoResponse.statusText);
-              setBreedInfo((prevInfo) => [...prevInfo, `No information available for ${result.label}`]);
-            }
-          }
-          catch (error) {
-            console.error('Error in fetch:', error);
-            setBreedInfo((prevInfo) => [...prevInfo, `No information available for ${result.label}`]);
-          }
-
         } else {
           console.error('Error in /classify request:', classifyResponse.statusText);
         }
       } catch (error) {
         console.error('Error in fetch:', error);
       } finally {
-        setLoading(false);
+        setIsLoading(false);
       }
 
       const reader = new FileReader();
@@ -71,8 +55,6 @@ const ImageUploadNew = () => {
         setImage(reader.result);
       };
       reader.readAsDataURL(file);
-
-      setImages((prevImages) => [...prevImages, file]);
     }
   };
 
@@ -83,42 +65,31 @@ const ImageUploadNew = () => {
     const droppedFiles = e.dataTransfer.files;
     if (droppedFiles.length > 0) {
       const file = droppedFiles[0];
+      setImages((prevImages) => [...prevImages, file]);
       setSelectedFile(file);
-
+  
       setLoading(true);
-
+  
       const formData = new FormData();
       formData.append('file', file);
 
       try {
-        const classifyResponse = await getPredictions(formData);
+        const response = await fetch('http://127.0.0.1:8000/classify', {
+          method: 'POST',
+          body: formData,
+        });
+  
+        if (response.ok) {
+          const result = await response.json();
+          setPredictions([result]);
 
-        if (classifyResponse.ok) {
-          const result = await classifyResponse.json();
-          setPredictions((prevPredictions) => [...prevPredictions, result]);
-          try {
-            const getDogInfoResponse = await getBreedInfo(result.label);
-            if (getDogInfoResponse.ok) {
-              const dogInfo = await getDogInfoResponse.json();
-              // Use dogInfo as needed (e.g., update state)
-              setBreedInfo((prevInfo) => [...prevInfo, dogInfo]);
-              console.log('Dog Info:', dogInfo);
-            } else {
-              console.error('Error in /get_dog_info request:', getDogInfoResponse.statusText);
-              setBreedInfo((prevInfo) => [...prevInfo, `No information available for ${result.label}`]);
-            }
-          }
-          catch (error) {
-            console.error('Error in fetch:', error);
-            setBreedInfo((prevInfo) => [...prevInfo, `No information available for ${result.label}`]);
-          }
         } else {
           console.error('Error in /classify request:', classifyResponse.statusText);
         }
       } catch (error) {
         console.error('Error in fetch:', error);
       } finally {
-        setLoading(false);
+        setIsLoading(false);
       }
 
       const reader = new FileReader();
@@ -126,7 +97,7 @@ const ImageUploadNew = () => {
         setImage(reader.result);
       };
       reader.readAsDataURL(file);
-
+  
       setImages((prevImages) => [...prevImages, file]);
     }
   };
@@ -212,26 +183,41 @@ const ImageUploadNew = () => {
             {images.map((uploadedImage, index) => (
               <div
                 key={index}
-                className="flex w-full items-center p-4 gap-4 rounded-xl transition-all cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-800 animate-ease-in-out animate-jump animate-once animate-duration-700"
+                className="flex w-full items-center p-4 gap-4 rounded-xl transition-all cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-800 animate-ease-in-out animate-jump animate-once animate-duration-700 relative"
                 onClick={() => handleModalClick(index)}
               >
+                {isLoading && selectedFile === uploadedImage && (
+                  <div className="absolute inset-0 flex items-center justify-end rounded-xl pr-40">
+                    <div className="w-6 h-6 border-t-2 border-primary border-solid rounded-full animate-spin ml-auto"></div>
+                  </div>
+                )}
                 <div className="w-32 h-16 flex items-center justify-center">
-                  <img
-                    src={URL.createObjectURL(uploadedImage)}
-                    alt={`Selected ${index + 1}`}
-                    className="max-w-32 max-h-16 rounded-md"
-                  />
-                </div>
-                <div className="dark:text-neutral-100 truncate mr-auto">
-                  {uploadedImage.name}
-                </div>
-                <div className="text-gray-500">
-                  {formatFileSize(uploadedImage.size)}
-                </div>
+                <img
+                  src={URL.createObjectURL(uploadedImage)}
+                  alt={`Selected ${index + 1}`}
+                  className="max-w-32 max-h-16 rounded-md"
+                />
+              </div>
+              <div className="dark:text-neutral-100 truncate mr-auto">
+                {uploadedImage.name}
+              </div>
+              <div className="text-gray-500">
+                {formatFileSize(uploadedImage.size)}
+              </div>
               </div>
             ))}
           </div>
         )}
+        {/* {isLoading && (
+          <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
+            <div className="bg-white p-4 rounded-md">
+              <h2 className="text-lg font-bold mb-4">Loading</h2>
+              <div className="w-full h-2 bg-gray-300 mb-4">
+                <div className="h-full bg-primary" style={{ width: '50%' }}></div>
+              </div>
+            </div>
+          </div>
+        )} */}
         {showModal && (
           <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
             <div className="bg-white p-4 rounded-md">
@@ -267,7 +253,6 @@ const ImageUploadNew = () => {
   );
 };
 
-// Function to format file size
 const formatFileSize = (size) => {
   const kbSize = size / 1024;
   if (kbSize < 1024) {
