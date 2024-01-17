@@ -18,6 +18,25 @@ const getPredictions = async (formData) => {
   }
 };
 
+const getBreedInfo = async(formData)=>{
+  try{
+    const response = await axios.get(`${apiUrl}get_dog_info`, formData);
+
+    if (response.status === 200) {
+      return response.data || [];
+    }
+    else {
+      console.error('Error in getBreedInfo request:', response.statusText);
+      return [];
+    }
+  }
+  catch (error) {
+    console.error('Error in getBreedInfo request:', error);
+    return [];
+  }
+  
+}
 export default {
   getPredictions,
+  getBreedInfo,
 };
