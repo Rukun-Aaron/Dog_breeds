@@ -9,15 +9,17 @@ const ImageUploadNew = () => {
   const [images, setImages] = useState([]);
   const [isDraggingOver, setIsDraggingOver] = useState(false);
   const [predictions, setPredictions] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [selectedPredictionIndex, setSelectedPredictionIndex] = useState(null);
 
   const onFileChange = async (event) => {
     const file = event.target.files[0];
+    
+    setImages((prevImages) => [...prevImages, file]);
     setSelectedFile(file);
     if (file) {
-      setLoading(true);
+      setIsLoading(true);
 
       const formData = new FormData();
       formData.append('file', file);
@@ -31,13 +33,19 @@ const ImageUploadNew = () => {
         if (response.ok) {
           const result = await response.json();
           setPredictions((prevPredictions) => [...prevPredictions, result]);
+
+          const breedName = result.label;
+          const breedInfoResponse = await fetch(`http://127.0.0.1:8000/breed/${breedName}`);
+          const breedInfo = await breedInfoResponse.json();
+          console.log('Breed Information:', breedInfo);
+          
         } else {
           console.error('Error in POST request:', response.statusText);
         }
       } catch (error) {
         console.error('Error in fetch:', error);
       } finally {
-        setLoading(false);
+        setIsLoading(false);
       }
 
       const reader = new FileReader();
@@ -45,8 +53,6 @@ const ImageUploadNew = () => {
         setImage(reader.result);
       };
       reader.readAsDataURL(file);
-
-      setImages((prevImages) => [...prevImages, file]);
     }
   };
   
@@ -57,9 +63,10 @@ const ImageUploadNew = () => {
     const droppedFiles = e.dataTransfer.files;
     if (droppedFiles.length > 0) {
       const file = droppedFiles[0];
+      setImages((prevImages) => [...prevImages, file]);
       setSelectedFile(file);
   
-      setLoading(true);
+      setIsLoading(true);
   
       const formData = new FormData();
       formData.append('file', file);
@@ -72,7 +79,7 @@ const ImageUploadNew = () => {
   
         if (response.ok) {
           const result = await response.json();
-          setPredictions([result]);
+          setPredictions((prevPredictions) => [...prevPredictions, result]);
 
         } else {
           console.error('Error in POST request:', response.statusText);
@@ -80,7 +87,7 @@ const ImageUploadNew = () => {
       } catch (error) {
         console.error('Error in fetch:', error);
       } finally {
-        setLoading(false);
+        setIsLoading(false);
       }
   
       const reader = new FileReader();
@@ -88,8 +95,6 @@ const ImageUploadNew = () => {
         setImage(reader.result);
       };
       reader.readAsDataURL(file);
-  
-      setImages((prevImages) => [...prevImages, file]);
     }
   };  
   
@@ -174,26 +179,46 @@ const ImageUploadNew = () => {
             {images.map((uploadedImage, index) => (
               <div
                 key={index}
-                className="flex w-full items-center p-4 gap-4 rounded-xl transition-all cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-800 animate-ease-in-out animate-jump animate-once animate-duration-700"
+                className="flex w-full items-center p-4 gap-4 rounded-xl transition-all cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-800 animate-ease-in-out animate-jump animate-once animate-duration-700 relative"
                 onClick={() => handleModalClick(index)}
               >
+                {isLoading && selectedFile === uploadedImage && (
+                  <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center rounded-xl">
+                    <div className="w-6 h-6 border-t-2 border-white border-solid rounded-full animate-spin"></div>
+                  </div>
+                )}
                 <div className="w-32 h-16 flex items-center justify-center">
-                <img
-                  src={URL.createObjectURL(uploadedImage)}
-                  alt={`Selected ${index + 1}`}
-                  className="max-w-32 max-h-16 rounded-md"
-                />
-              </div>
-              <div className="dark:text-neutral-100 truncate mr-auto">
-                {uploadedImage.name}
-              </div>
-              <div className="text-gray-500">
-                {formatFileSize(uploadedImage.size)}
-              </div>
+                  <img
+                    src={URL.createObjectURL(uploadedImage)}
+                    alt={`Selected ${index + 1}`}
+                    className="max-w-32 max-h-16 rounded-md"
+                  />
+                </div>
+                <div className="dark:text-neutral-100 truncate mr-auto">
+                  {uploadedImage.name}
+                </div>
+                {predictions.length > 0 && predictions[index] && (
+                  <div className="text-primary rounded-2xl border border-primary pl-1 pr-1">
+                      {predictions[index].label} {(predictions[index].score * 100).toFixed(2)}%
+                  </div>
+                )}
+                <div className="text-gray-500">
+                  {formatFileSize(uploadedImage.size)}
+                </div>
               </div>
             ))}
           </div>
         )}
+        {/* {isLoading && (
+          <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
+            <div className="bg-white p-4 rounded-md">
+              <h2 className="text-lg font-bold mb-4">Loading</h2>
+              <div className="w-full h-2 bg-gray-300 mb-4">
+                <div className="h-full bg-primary" style={{ width: '50%' }}></div>
+              </div>
+            </div>
+          </div>
+        )} */}
         {showModal && (
           <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
             <div className="bg-white p-4 rounded-md">
@@ -226,7 +251,6 @@ const ImageUploadNew = () => {
   );
 };
 
-// Function to format file size
 const formatFileSize = (size) => {
   const kbSize = size / 1024;
   if (kbSize < 1024) {

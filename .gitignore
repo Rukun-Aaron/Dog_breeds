@@ -11,3 +11,5 @@ frontend2/node_modules/.cache
 *.jpg
 *.pyc
 *.env
+Backend2/venv/
+frontend2/venv/

@@ -4,3 +4,6 @@ __pycache__/
 *.jpeg
 *.jpg
 *.pyc
+Backend2/venv/Lib/site-packages/torch/lib/torch_cpu.dll
+Backend2/venv/Lib/site-packages/tensorflow/python/_pywrap_tensorflow_internal.pyd
+Backend2/venv/Lib/site-packages/torch/lib/dnnl.lib
