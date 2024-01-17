@@ -242,10 +242,10 @@ const ImageUploadNew = () => {
         )} */}
         {showModal && (
           <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
-            <div className="bg-white p-4 rounded-md">
+            <div className="bg-white p-4 rounded-md w-9/12">
               <h2 className="text-lg font-bold mb-4">Prediction</h2>
               {selectedPredictionIndex !== null && (
-                <div className="text-gray-700">
+                <div className=" grid grid-cols-3 py-4 gap-8 text-gray-700 ">
                   <p>
                     Predicted breed: {predictions[selectedPredictionIndex].label}
                   </p>
