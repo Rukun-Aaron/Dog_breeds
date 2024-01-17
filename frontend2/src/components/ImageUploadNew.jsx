@@ -1,7 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCloudArrowUp } from '@fortawesome/free-solid-svg-icons';
-
+import{
+  getPredictions, getBreedInfo
+} from '../services/apiService';
 const ImageUploadNew = () => {
   const [image, setImage] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
@@ -24,29 +26,29 @@ const ImageUploadNew = () => {
       formData.append('file', file);
 
       try {
-        const classifyResponse = await fetch('http://127.0.0.1:8000/classify', {
-          method: 'POST',
-          body: formData,
-        });
+        const classifyResponse = await getPredictions(formData);
 
         if (classifyResponse.ok) {
             const result = await classifyResponse.json();
             setPredictions((prevPredictions) => [...prevPredictions, result]);
-            console.log(result);
-
-            const getDogInfoResponse = await fetch(`http://127.0.0.1:8000/get_dog_info?breed=${result.label}`, {
-              method: 'GET', // or 'GET' depending on your API
-            });
-            if (getDogInfoResponse.ok) {
-              const dogInfo = await getDogInfoResponse.json();
-              // Use dogInfo as needed (e.g., update state)
-              setBreedInfo((prevInfo) => [...prevInfo, dogInfo]); 
-              console.log('Dog Info:', dogInfo);
-            } else {
-              console.error('Error in /get_dog_info request:', getDogInfoResponse.statusText);
-              setBreedInfo((prevInfo) => [...prevInfo, `No information available for ${result.label}` ]); 
-
+            // console.log(result);
+            try{
+              const getDogInfoResponse = await getBreedInfo(result.label);
+              if (getDogInfoResponse.ok) {
+                const dogInfo = await getDogInfoResponse.json();
+                // Use dogInfo as needed (e.g., update state)
+                setBreedInfo((prevInfo) => [...prevInfo, dogInfo]); 
+                console.log('Dog Info:', dogInfo);
+              } else {
+                console.error('Error in /get_dog_info request:', getDogInfoResponse.statusText);
+                setBreedInfo((prevInfo) => [...prevInfo, `No information available for ${result.label}` ]); 
+              }
             }
+            catch(error){
+              console.error('Error in fetch:', error);
+              setBreedInfo((prevInfo) => [...prevInfo, `No information available for ${result.label}` ]);
+            }
+            
         } else {
           console.error('Error in /classify request:', classifyResponse.statusText);
         }
