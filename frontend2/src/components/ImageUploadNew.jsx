@@ -4,6 +4,27 @@ import { faCloudArrowUp } from '@fortawesome/free-solid-svg-icons';
 import {
   getPredictions, getBreedInfo
 } from '../services/apiService';
+import {
+  Chart as ChartJS,
+  ArcElement,
+  Tooltip,
+  Legend,
+  PointElement,
+  LineElement,
+  RadialLinearScale
+} from "chart.js";
+
+import { Radar } from 'react-chartjs-2';
+
+ChartJS.register(
+  ArcElement,
+  Tooltip,
+  Legend,
+  PointElement,
+  LineElement,
+  RadialLinearScale
+)
+
 const ImageUploadNew = () => {
   const [image, setImage] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
@@ -16,6 +37,45 @@ const ImageUploadNew = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedPredictionIndex, setSelectedPredictionIndex] = useState(null);
 
+
+  // const data = {
+  //   labels: [
+  //     'Good with Children',
+  //     'Good with Other Dogs',
+  //     'Shedding',
+  //     'Grooming',
+  //     'Drooling',
+  //     'Coat Length',
+  //     'Good with Strangers',
+  //     'Playfulness',
+  //     'Protectiveness',
+  //     'Trainability',
+  //     'Energy',
+  //     'Barking',
+  //   ],
+  //   datasets: [
+  //     {
+  //       label: 'Breed Characteristics',
+  //       data: [
+  //         breedData.good_with_children,
+  //         breedData.good_with_other_dogs,
+  //         breedData.shedding,
+  //         breedData.grooming,
+  //         breedData.drooling,
+  //         breedData.coat_length,
+  //         breedData.good_with_strangers,
+  //         breedData.playfulness,
+  //         breedData.protectiveness,
+  //         breedData.trainability,
+  //         breedData.energy,
+  //         breedData.barking,
+  //       ],
+  //       backgroundColor: 'aqua',
+  //       borderColor: 'black',
+  //     },
+  //   ],
+  // };
+  const options = {}
   useEffect(() => {
     console.log('Updated Predictions:', predictions);
   }, [predictions]);
@@ -40,7 +100,7 @@ const ImageUploadNew = () => {
         if (classifyResponse.ok) {
           const result = await classifyResponse.json();
           setPredictions((prevPredictions) => [...prevPredictions, result]);
-          
+
           const breedInfoResponse = await getBreedInfo(result.label);
 
           if (breedInfoResponse.ok) {
@@ -220,7 +280,7 @@ const ImageUploadNew = () => {
                 </div>
                 {predictions.length > 0 && predictions[index] && (
                   <div className="text-primary rounded-2xl border border-primary pl-1 pr-1">
-                      {predictions[index].label} {(predictions[index].score * 100).toFixed(2)}%
+                    {predictions[index].label} {(predictions[index].score * 100).toFixed(2)}%
                   </div>
                 )}
                 <div className="text-gray-500">
@@ -242,14 +302,62 @@ const ImageUploadNew = () => {
         )} */}
         {showModal && (
           <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
-            <div className="bg-white p-4 rounded-md w-9/12">
+            <div className="bg-white p-4 rounded-md w-9/12 ">
               <h2 className="text-lg font-bold mb-4">Prediction</h2>
               {selectedPredictionIndex !== null && (
-                <div className="  grid grid-cols-1 gap-4 py-1 sm:grid-cols-2 md:py-4 md:grid-cols-3  md:gap-y-8  text-gray-700 ">
-                  <p>
-                    Predicted breed: {predictions[selectedPredictionIndex].label}
-                  </p>
-                  <p>
+                <div className="grid grid-cols-1 gap-4 py-1 sm:grid-cols-2 md:py-4 md:grid-cols-3 md:gap-y-8 text-gray-700">
+                  <p>Predicted breed: {predictions[selectedPredictionIndex].label}</p>
+                  {predictions[selectedPredictionIndex].score && (
+                    <p>Confidence score: {predictions[selectedPredictionIndex].score * 100}%</p>
+                  )}
+                  {breedInfo[selectedPredictionIndex][0] && (
+                      <>
+                      <div className="w-full h-64">
+                        <Radar
+                          data={{
+                            labels: ['Good with Children',
+                            'Good with Other Dogs',
+                            'Shedding',
+                            'Grooming',
+                            'Drooling',
+                            'Coat Length',
+                            'Good with Strangers',
+                            'Playfulness',
+                            'Protectiveness',
+                            'Trainability',
+                            'Energy',
+                            'Barking',], // Replace with actual labels
+                            datasets: [
+                              {
+                                label: 'Breed Characteristics',
+                                data: [
+                                  breedInfo[selectedPredictionIndex][0].good_with_children,
+                                  breedInfo[selectedPredictionIndex][0].good_with_other_dogs,
+                                  breedInfo[selectedPredictionIndex][0].shedding,
+                                  breedInfo[selectedPredictionIndex][0].grooming,
+                                  breedInfo[selectedPredictionIndex][0].drooling,
+                                  breedInfo[selectedPredictionIndex][0].coat_length,
+                                  breedInfo[selectedPredictionIndex][0].good_with_strangers,
+                                  breedInfo[selectedPredictionIndex][0].playfulness,
+                                  breedInfo[selectedPredictionIndex][0].protectiveness,
+                                  breedInfo[selectedPredictionIndex][0].trainability,
+                                  breedInfo[selectedPredictionIndex][0].energy,
+                                  breedInfo[selectedPredictionIndex][0].barking,
+                                  
+                                  // Add other properties as needed
+                                ],
+                                backgroundColor: 'aqua',
+                                borderColor: 'black',
+                              },
+                            ],
+                          }}
+                          options={options}
+                        ></Radar>
+                      </div>
+                      {/* Other information display */}
+                    </>
+                  )}
+                  {/* <p>
                     Good with Children: {breedInfo[selectedPredictionIndex][0].good_with_children}/5
                   </p>
                   <p>
@@ -315,11 +423,7 @@ const ImageUploadNew = () => {
                   </p>
                   <p>
                     Minimum Weight in Females: {breedInfo[selectedPredictionIndex][0].min_weight_female} Lbs
-                  </p>
-                  <p>
-                    {predictions[selectedPredictionIndex].score &&
-                      `Confidence score: ${predictions[selectedPredictionIndex].score * 100}%`}
-                  </p>
+                  </p> */}
                 </div>
               )}
               <button
