@@ -345,7 +345,7 @@ const ImageUploadNew = () => {
                                 breedInfo[selectedPredictionIndex][0].energy,
                                 breedInfo[selectedPredictionIndex][0].barking,
                               ],
-                              backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                              backgroundColor: 'rgba(103, 97, 168, 0.3)',
                               borderColor: 'black',
                               borderWidth: 1,
 
