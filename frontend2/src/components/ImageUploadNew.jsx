@@ -302,17 +302,15 @@ const ImageUploadNew = () => {
         )} */}
         {showModal && (
           <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
-            <div className="bg-white p-4 rounded-md w-9/12 ">
+            <div className="bg-white p-4 rounded-md w-4/12 ">
               <h2 className="text-lg font-bold mb-4">Prediction</h2>
               {selectedPredictionIndex !== null && (
                 <div className="grid grid-cols-1 gap-4 py-1 sm:grid-cols-2 md:py-4 md:grid-cols-3 md:gap-y-8 text-gray-700">
                   <p>Predicted breed: {predictions[selectedPredictionIndex].label}</p>
-                  {predictions[selectedPredictionIndex].score && (
-                    <p>Confidence score: {predictions[selectedPredictionIndex].score * 100}%</p>
-                  )}
+                  
                   {breedInfo[selectedPredictionIndex][0] && (
-                      <>
-                      <div className="w-full h-64">
+                      
+                      <div className="w-full h-64 col-span-2">
                         <Radar
                           data={{
                             labels: ['Good with Children',
@@ -354,8 +352,10 @@ const ImageUploadNew = () => {
                           options={options}
                         ></Radar>
                       </div>
-                      {/* Other information display */}
-                    </>
+                     
+                  )}
+                  {predictions[selectedPredictionIndex].score && (
+                    <p>Confidence score: {predictions[selectedPredictionIndex].score * 100}%</p>
                   )}
                   {/* <p>
                     Good with Children: {breedInfo[selectedPredictionIndex][0].good_with_children}/5
