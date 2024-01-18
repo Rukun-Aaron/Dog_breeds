@@ -310,7 +310,7 @@ const ImageUploadNew = () => {
                   
                   {breedInfo[selectedPredictionIndex][0] && (
                       
-                      <div className="w-full h-64 col-span-2">
+                      <div className="w-full h-96 col-span-2 ">
                         <Radar
                           data={{
                             labels: ['Good with Children',
