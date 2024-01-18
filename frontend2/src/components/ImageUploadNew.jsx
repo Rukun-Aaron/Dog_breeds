@@ -330,7 +330,7 @@ const ImageUploadNew = () => {
                             'Barking',],
                           datasets: [
                             {
-                              label: 'Breed Characteristics',
+                              label: 'Score out of 5',
                               data: [
                                 breedInfo[selectedPredictionIndex][0].good_with_children,
                                 breedInfo[selectedPredictionIndex][0].good_with_other_dogs,
