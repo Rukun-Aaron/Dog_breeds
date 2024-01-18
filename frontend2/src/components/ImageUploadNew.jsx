@@ -308,7 +308,7 @@ const ImageUploadNew = () => {
               <div className="bg-white p-4 rounded-md w-6/12 text-center">
               <h1 className="text-3xl font-bold mb-4">What is it like owning a : {predictions[selectedPredictionIndex].label}?</h1>
               {selectedPredictionIndex !== null && (
-                <div className="grid grid-cols-1 gap-4 py-1 sm:grid-cols-2 md:py-4 md:grid-cols-3 md:gap-8 md text-gray-700">
+                <div className="grid grid-cols-1 gap-4 py-1 sm:grid-cols-2 md:py-4 md:grid-cols-3 md:gap-y-8   md text-gray-700">
 
 <img
                     src={URL.createObjectURL(images[selectedPredictionIndex])}
