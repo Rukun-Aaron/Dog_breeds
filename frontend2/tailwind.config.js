@@ -8,6 +8,7 @@ module.exports = {
     extend: {
       fontFamily: {
         'varela': ['Varela Round', 'sans-serif'],
+        'outfit':['Outfit', 'sans-serif'],
       },
     },
   },

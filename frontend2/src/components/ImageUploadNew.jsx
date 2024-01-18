@@ -304,16 +304,22 @@ const ImageUploadNew = () => {
           </div>
         )} */}
         {showModal && (
-          <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
-            <div className="bg-white p-4 rounded-md w-4/12 ">
-              <h2 className="text-lg font-bold mb-4">Prediction</h2>
+          <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center font-outfit">
+              <div className="bg-white p-4 rounded-md w-6/12 text-center">
+              <h1 className="text-3xl font-bold mb-4">What is it like owning a : {predictions[selectedPredictionIndex].label}?</h1>
               {selectedPredictionIndex !== null && (
-                <div className="grid grid-cols-1 gap-4 py-1 sm:grid-cols-2 md:py-4 md:grid-cols-3 md:gap-y-8 text-gray-700">
-                  <p>Predicted breed: {predictions[selectedPredictionIndex].label}</p>
+                <div className="grid grid-cols-1 gap-4 py-1 sm:grid-cols-2 md:py-4 md:grid-cols-3 md:gap-8 md text-gray-700">
+
+<img
+                    src={URL.createObjectURL(images[selectedPredictionIndex])}
+                    alt={`Selected ${selectedPredictionIndex + 1}`}
+                    className="w-64 h-64 rounded-md"
+                  />  
 
                   {breedInfo[selectedPredictionIndex][0] && (
 
-                    <div className="w-full h-96 col-span-2">
+                    <div className="w-full h-96 col-span-2 start-2">
+                      
                       <Radar
                         data={{
                           labels: ['Good with Children',
