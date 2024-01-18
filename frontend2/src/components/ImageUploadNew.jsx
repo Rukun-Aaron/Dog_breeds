@@ -358,19 +358,14 @@ const ImageUploadNew = () => {
                           scale: {
                             min: 0,
                             max: 5,
-                            stepSize:1
-                            // ticks: {
-                            //   beginAtZero: true,
-                            //   min: 0,
-                            //   max: 5,
-                            //   stepSize: 1.5,
-                            // },
-                            // // y:
-                            //   {
-                            //     min: -15,
-                            //     max: 15,
-                            //     stepSize: 5,
-                            //   },
+                            stepSize:1,
+                            ticks: {
+                              // beginAtZero: true,
+                              // min: 0,
+                              // max: 10,
+                              // stepSize: 2,
+                            },
+                           
                         }}
                       }
                       ></Radar>
