@@ -6,15 +6,17 @@ import {
 } from '../services/apiService';
 import {
   Chart as ChartJS,
+  CategoryScale,
   ArcElement,
   Tooltip,
   Legend,
   PointElement,
   LineElement,
-  RadialLinearScale
+  RadialLinearScale,
+  registerables 
 } from "chart.js";
 
-import { Radar } from 'react-chartjs-2';
+import { Radar, Bar ,Chart   } from 'react-chartjs-2';
 
 ChartJS.register(
   ArcElement,
@@ -22,7 +24,9 @@ ChartJS.register(
   Legend,
   PointElement,
   LineElement,
-  RadialLinearScale
+  RadialLinearScale,
+  CategoryScale,
+  ...registerables
 )
 
 const ImageUploadNew = () => {
@@ -75,7 +79,6 @@ const ImageUploadNew = () => {
   //     },
   //   ],
   // };
-  const options = {}
   useEffect(() => {
     console.log('Updated Predictions:', predictions);
   }, [predictions]);
@@ -307,13 +310,13 @@ const ImageUploadNew = () => {
               {selectedPredictionIndex !== null && (
                 <div className="grid grid-cols-1 gap-4 py-1 sm:grid-cols-2 md:py-4 md:grid-cols-3 md:gap-y-8 text-gray-700">
                   <p>Predicted breed: {predictions[selectedPredictionIndex].label}</p>
-                  
+
                   {breedInfo[selectedPredictionIndex][0] && (
-                      
-                      <div className="w-full h-96 col-span-2 ">
-                        <Radar
-                          data={{
-                            labels: ['Good with Children',
+
+                    <div className="w-full h-96 col-span-2">
+                      <Radar
+                        data={{
+                          labels: ['Good with Children',
                             'Good with Other Dogs',
                             'Shedding',
                             'Grooming',
@@ -324,35 +327,55 @@ const ImageUploadNew = () => {
                             'Protectiveness',
                             'Trainability',
                             'Energy',
-                            'Barking',], // Replace with actual labels
-                            datasets: [
-                              {
-                                label: 'Breed Characteristics',
-                                data: [
-                                  breedInfo[selectedPredictionIndex][0].good_with_children,
-                                  breedInfo[selectedPredictionIndex][0].good_with_other_dogs,
-                                  breedInfo[selectedPredictionIndex][0].shedding,
-                                  breedInfo[selectedPredictionIndex][0].grooming,
-                                  breedInfo[selectedPredictionIndex][0].drooling,
-                                  breedInfo[selectedPredictionIndex][0].coat_length,
-                                  breedInfo[selectedPredictionIndex][0].good_with_strangers,
-                                  breedInfo[selectedPredictionIndex][0].playfulness,
-                                  breedInfo[selectedPredictionIndex][0].protectiveness,
-                                  breedInfo[selectedPredictionIndex][0].trainability,
-                                  breedInfo[selectedPredictionIndex][0].energy,
-                                  breedInfo[selectedPredictionIndex][0].barking,
-                                  
-                                  // Add other properties as needed
-                                ],
-                                backgroundColor: 'aqua',
-                                borderColor: 'black',
-                              },
-                            ],
-                          }}
-                          options={options}
-                        ></Radar>
-                      </div>
-                     
+                            'Barking',],
+                          datasets: [
+                            {
+                              label: 'Breed Characteristics',
+                              data: [
+                                breedInfo[selectedPredictionIndex][0].good_with_children,
+                                breedInfo[selectedPredictionIndex][0].good_with_other_dogs,
+                                breedInfo[selectedPredictionIndex][0].shedding,
+                                breedInfo[selectedPredictionIndex][0].grooming,
+                                breedInfo[selectedPredictionIndex][0].drooling,
+                                breedInfo[selectedPredictionIndex][0].coat_length,
+                                breedInfo[selectedPredictionIndex][0].good_with_strangers,
+                                breedInfo[selectedPredictionIndex][0].playfulness,
+                                breedInfo[selectedPredictionIndex][0].protectiveness,
+                                breedInfo[selectedPredictionIndex][0].trainability,
+                                breedInfo[selectedPredictionIndex][0].energy,
+                                breedInfo[selectedPredictionIndex][0].barking,
+                              ],
+                              backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                              borderColor: 'black',
+                              borderWidth: 1,
+
+                            },
+                          ],
+
+                        }}
+                        options={{
+                          
+                          scale: {
+                            min: 0,
+                            max: 5,
+                            stepSize:1
+                            // ticks: {
+                            //   beginAtZero: true,
+                            //   min: 0,
+                            //   max: 5,
+                            //   stepSize: 1.5,
+                            // },
+                            // // y:
+                            //   {
+                            //     min: -15,
+                            //     max: 15,
+                            //     stepSize: 5,
+                            //   },
+                        }}
+                      }
+                      ></Radar>
+                    </div>
+
                   )}
                   {predictions[selectedPredictionIndex].score && (
                     <p>Confidence score: {predictions[selectedPredictionIndex].score * 100}%</p>
