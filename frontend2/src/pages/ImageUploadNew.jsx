@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCloudArrowUp, faXmark } from '@fortawesome/free-solid-svg-icons';
 import {
-  getPredictions, getBreedInfo
+  getPredictions, getBreedInfo, getAllBreedInfo
 } from '../services/apiService';
 import {
   Chart as ChartJS,
@@ -40,45 +40,8 @@ const ImageUploadNew = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [selectedPredictionIndex, setSelectedPredictionIndex] = useState(null);
+  const [breeds, setBreeds] = useState([]);
 
-
-  // const data = {
-  //   labels: [
-  //     'Good with Children',
-  //     'Good with Other Dogs',
-  //     'Shedding',
-  //     'Grooming',
-  //     'Drooling',
-  //     'Coat Length',
-  //     'Good with Strangers',
-  //     'Playfulness',
-  //     'Protectiveness',
-  //     'Trainability',
-  //     'Energy',
-  //     'Barking',
-  //   ],
-  //   datasets: [
-  //     {
-  //       label: 'Breed Characteristics',
-  //       data: [
-  //         breedData.good_with_children,
-  //         breedData.good_with_other_dogs,
-  //         breedData.shedding,
-  //         breedData.grooming,
-  //         breedData.drooling,
-  //         breedData.coat_length,
-  //         breedData.good_with_strangers,
-  //         breedData.playfulness,
-  //         breedData.protectiveness,
-  //         breedData.trainability,
-  //         breedData.energy,
-  //         breedData.barking,
-  //       ],
-  //       backgroundColor: 'aqua',
-  //       borderColor: 'black',
-  //     },
-  //   ],
-  // };
   useEffect(() => {
     console.log('Updated Predictions:', predictions);
   }, [predictions]);
@@ -87,6 +50,20 @@ const ImageUploadNew = () => {
     console.log('Updated beed info:', breedInfo);
   }, [breedInfo]);
 
+  useEffect(() => {
+    // Fetch breed data when the component mounts
+    const fetchData = async () => {
+      try {
+        const response = await getAllBreedInfo();
+        const data = await response.json();
+        setBreeds(data);
+      } catch (error) {
+        console.error('Error fetching breed data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
   const onFileChange = async (event) => {
     const file = event.target.files[0];
 
@@ -329,24 +306,11 @@ const ImageUploadNew = () => {
                       className="dropdown-content z-[1] menu p-2 *:shadow bg-base-100 rounded-box w-52 max-h-40"
                     >
                       <div className="overflow-y-auto max-h-96">
-                        <li><a>Item 1</a></li>
-                        <li><a>Item 2</a></li>
-                        <li><a>Item 1</a></li>
-                        <li><a>Item 2</a></li>
-                        <li><a>Item 1</a></li>
-                        <li><a>Item 2</a></li>
-                        <li><a>Item 1</a></li>
-                        <li><a>Item 2</a></li>
-                        <li><a>Item 1</a></li>
-                        <li><a>Item 2</a></li>
-                        <li><a>Item 1</a></li>
-                        <li><a>Item 2</a></li>
-                        <li><a>Item 1</a></li>
-                        <li><a>Item 2</a></li>
-                        <li><a>Item 1</a></li>
-                        <li><a>Item 2</a></li>
-                        <li><a>Item 1</a></li>
-                        <li><a>Item 2</a></li>
+                        {breeds.map((breed, index) => (
+                          <li key={index}>
+                            <a>{breed[0]}</a>
+                          </li>
+                        ))}
                       </div>
                     </ul>
                   </div>
