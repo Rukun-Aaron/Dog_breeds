@@ -1,6 +1,10 @@
 import React from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 function Homepage() {
+    
+  const navigate = useNavigate();
+
   return (
     <div className="w-full h-full flex flex-col items-center relative">
       {/* Section 1: Blue background with a dog image */}
@@ -12,7 +16,7 @@ function Homepage() {
               <p className="text-lg mb-6">
                 Discover the best services and products for your furry friends.
               </p>
-              <button className="bg-orange-500 text-white px-12 py-3 rounded-full">
+              <button onClick={() => navigate('/detection')} className="bg-orange-500 text-white px-12 py-3 rounded-full">
                 Start Now
               </button>
             </div>
@@ -51,7 +55,7 @@ function Homepage() {
                 <div className="w-full h-full flex items-center">
                     <ul className="list-none p-0">
                         <li className="flex items-center mb-8">
-                        <div className="rounded-full bg-gray-500 text-white w-8 h-8 flex items-center justify-center mr-6">
+                        <div className="rounded-full bg-blue-900 text-white w-8 h-8 flex items-center justify-center mr-6">
                             1
                         </div>
                         <div className="text-lg">
@@ -59,7 +63,7 @@ function Homepage() {
                         </div>
                         </li>
                         <li className="flex items-center mb-8">
-                        <div className="rounded-full bg-gray-500 text-white w-8 h-8 flex items-center justify-center mr-6">
+                        <div className="rounded-full bg-blue-900 text-white w-8 h-8 flex items-center justify-center mr-6">
                             2
                         </div>
                         <div className="text-lg">
@@ -67,7 +71,7 @@ function Homepage() {
                         </div>
                         </li>
                         <li className="flex items-center mb-8">
-                        <div className="rounded-full bg-gray-500 text-white w-8 h-8 flex items-center justify-center mr-6">
+                        <div className="rounded-full bg-blue-900 text-white w-8 h-8 flex items-center justify-center mr-6">
                             3
                         </div>
                         <div className="text-lg">
@@ -76,7 +80,7 @@ function Homepage() {
                         </li>
                     </ul>
                 </div>
-                <button className="bg-orange-500 text-white px-12 py-3 rounded-full mt-4">
+                <button onClick={() => navigate('/detection')} className="bg-orange-500 text-white px-12 py-3 rounded-full mt-4">
                 Start Now
                 </button>
             </div>
