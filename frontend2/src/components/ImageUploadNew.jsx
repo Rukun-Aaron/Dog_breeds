@@ -313,7 +313,7 @@ const ImageUploadNew = () => {
                     <img
                       src={URL.createObjectURL(images[selectedPredictionIndex])}
                       alt={`Selected ${selectedPredictionIndex + 1}`}
-                      className="sm:w-64 sm:h-64 w-96 h-96 rounded-full drop-shadow-xl"
+                      className="sm:w-64 sm:h-64 md:w-96 md:h-96 rounded-full drop-shadow-xl"
                     />
                     </div>
                     {breedInfo[selectedPredictionIndex][0] && (
