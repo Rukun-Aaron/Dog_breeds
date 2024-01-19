@@ -17,3 +17,7 @@ export const getBreedInfo = async(label)=>{
   return getDogInfoResponse;
   
 }
+
+export const getAllBreedInfo = async()=>{
+  
+}

@@ -319,7 +319,37 @@ const ImageUploadNew = () => {
                 <FontAwesomeIcon icon={faXmark} size="lg" />
               </button>
               {selectedPredictionIndex !== null && (
-                <div className="grid grid-cols-1 gap-4 py-1 sm:grid-cols-2  md:py-4 md:grid-cols-3 md:gap-y-8 md:gap-x-10 text-gray-700 justify-center content-center	">
+                <div className="grid grid-cols-1 gap-4 py-1 sm:grid-cols-2  md:py-4 md:grid-cols-3 md:gap-y-1 md:gap-x-4 text-gray-700 justify-center content-center	">
+                  <p> {predictions[selectedPredictionIndex].label} detected with {(predictions[selectedPredictionIndex].score * 100).toFixed(1)} %</p>
+                  <p>{predictions[selectedPredictionIndex].label}  Characteristics</p>
+                  <div className="dropdown dropdown-bottom flex justify-center content-center ">
+                    <div tabIndex={0} role="button" className="btn m-1">Compare to Other dogs</div>
+                    <ul
+                      tabIndex={0}
+                      className="dropdown-content z-[1] menu p-2 *:shadow bg-base-100 rounded-box w-52 max-h-40"
+                    >
+                      <div className="overflow-y-auto max-h-96">
+                        <li><a>Item 1</a></li>
+                        <li><a>Item 2</a></li>
+                        <li><a>Item 1</a></li>
+                        <li><a>Item 2</a></li>
+                        <li><a>Item 1</a></li>
+                        <li><a>Item 2</a></li>
+                        <li><a>Item 1</a></li>
+                        <li><a>Item 2</a></li>
+                        <li><a>Item 1</a></li>
+                        <li><a>Item 2</a></li>
+                        <li><a>Item 1</a></li>
+                        <li><a>Item 2</a></li>
+                        <li><a>Item 1</a></li>
+                        <li><a>Item 2</a></li>
+                        <li><a>Item 1</a></li>
+                        <li><a>Item 2</a></li>
+                        <li><a>Item 1</a></li>
+                        <li><a>Item 2</a></li>
+                      </div>
+                    </ul>
+                  </div>
                   <div className="flex items-center justify-center px-5 ">
                     <img
                       src={URL.createObjectURL(images[selectedPredictionIndex])}
@@ -329,7 +359,7 @@ const ImageUploadNew = () => {
                   </div>
                   {breedInfo[selectedPredictionIndex][0] && (
 
-                    <div className=" flex items-center justify-center w-96 h-96">
+                    <div className=" flex items-center justify-center w-full h-96">
 
                       <Radar
                         data={{
@@ -382,12 +412,17 @@ const ImageUploadNew = () => {
                               // max: 10,
                               // stepSize: 2,
                             },
+                          },
+                          plugins: {
+                            legend: {
+                              display: false,
+                            }
                           }
                         }}
                       ></Radar>
                     </div>
                   )}
-                  <div className='row-start-2'>
+                  <div className='row-start-3'>
                     {/* {predictions[selectedPredictionIndex].score && (
                         <p>Confidence score: {predictions[selectedPredictionIndex].score * 100}%</p>
                       )} */}
