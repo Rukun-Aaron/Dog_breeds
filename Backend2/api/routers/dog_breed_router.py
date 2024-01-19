@@ -47,3 +47,8 @@ async def classify_image(file: UploadFile = File(...)):
 async def get_dog_info(breed: str):
     breed_info = get_breed_info(breed)
     return breed_info
+
+@router.get("/get_all_breeds", tags=["Dogs"])
+async def get_all_breeds_endpoint():
+    breeds = get_all_breeds()
+    return breeds
