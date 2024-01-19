@@ -308,17 +308,16 @@ const ImageUploadNew = () => {
               <div className="bg-white p-4 rounded-md w-6/12 text-center">
               <h1 className="text-3xl font-bold mb-4">What is it like owning a : {predictions[selectedPredictionIndex].label}?</h1>
               {selectedPredictionIndex !== null && (
-                <div className="grid grid-cols-1 gap-4 py-1 sm:grid-cols-2 md:py-4 md:grid-cols-3 md:gap-y-8   md text-gray-700">
-
-<img
+                <div className="grid grid-cols-1 gap-4 py-1 sm:grid-cols-2 md:py-4 md:grid-cols-3 md:gap-y-8 md:gap-8  md text-gray-700">
+                  <img
                     src={URL.createObjectURL(images[selectedPredictionIndex])}
                     alt={`Selected ${selectedPredictionIndex + 1}`}
-                    className="w-64 h-64 rounded-md"
+                    className="w-80 h-80  rounded-full drop-shadow-xl "
                   />  
 
                   {breedInfo[selectedPredictionIndex][0] && (
 
-                    <div className="w-full h-96 col-span-2 start-2">
+                    <div className="w-80 h-96 col-span-2 col-start-3	 ">
                       
                       <Radar
                         data={{
@@ -376,78 +375,10 @@ const ImageUploadNew = () => {
                       }
                       ></Radar>
                     </div>
-
                   )}
-                  {predictions[selectedPredictionIndex].score && (
+                    {predictions[selectedPredictionIndex].score && (
                     <p>Confidence score: {predictions[selectedPredictionIndex].score * 100}%</p>
                   )}
-                  {/* <p>
-                    Good with Children: {breedInfo[selectedPredictionIndex][0].good_with_children}/5
-                  </p>
-                  <p>
-                    Good with Other Dogs: {breedInfo[selectedPredictionIndex][0].good_with_other_dogs}/5
-                  </p>
-                  <p>
-                    Amount of Shedding : {breedInfo[selectedPredictionIndex][0].shedding}/5
-                  </p>
-                  <p>
-                    Need for Grooming : {breedInfo[selectedPredictionIndex][0].grooming}/5
-                  </p>
-                  
-                  <p>
-                    Tendancy to Drool: {breedInfo[selectedPredictionIndex][0].drooling}/5
-                  </p>
-                  <p>
-                    Coat Length: {breedInfo[selectedPredictionIndex][0].coat_length}/5
-                  </p>
-                  <p>
-                    Good with Strangers: {breedInfo[selectedPredictionIndex][0].good_with_strangers}/5
-                  </p>
-                  <p>
-                    Playfulness: {breedInfo[selectedPredictionIndex][0].playfulness}/5
-                  </p>
-                  <p>
-                    Protectiveness: {breedInfo[selectedPredictionIndex][0].protectiveness}/5
-                  </p>
-                  <p>
-                    Trainability: {breedInfo[selectedPredictionIndex][0].trainability}/5
-                  </p>
-                  <p>
-                    Energy: {breedInfo[selectedPredictionIndex][0].energy}/5
-                  </p>
-                  <p>
-                    Tendency to Bark: {breedInfo[selectedPredictionIndex][0].barking}/5
-                  </p>
-                  <p>
-                    Minimum Life Expectancy: {breedInfo[selectedPredictionIndex][0].min_life_expectancy} Years
-                  </p>
-                  <p>
-                    Maximum Life Expectancy: {breedInfo[selectedPredictionIndex][0].max_life_expectancy} Years
-                  </p>
-                  <p>
-                    Maximum Height in Males: {breedInfo[selectedPredictionIndex][0].max_height_male} Inches
-                  </p>
-                  <p>
-                    Maximum Height in Females: {breedInfo[selectedPredictionIndex][0].max_height_female} Inches
-                  </p>
-                  <p>
-                    Maximum Weight in Males: {breedInfo[selectedPredictionIndex][0].max_weight_male} Lbs
-                  </p>
-                  <p>
-                    Maximum Weight in Females: {breedInfo[selectedPredictionIndex][0].max_weight_female} Lbs
-                  </p>
-                  <p>
-                    Minimum Height in Males: {breedInfo[selectedPredictionIndex][0].min_height_male} Inches
-                  </p>
-                  <p>
-                    Minimum Height in Females: {breedInfo[selectedPredictionIndex][0].min_height_female} Inches
-                  </p>
-                  <p>
-                    Minimum Weight in Males: {breedInfo[selectedPredictionIndex][0].min_weight_male} Lbs
-                  </p>
-                  <p>
-                    Minimum Weight in Females: {breedInfo[selectedPredictionIndex][0].min_weight_female} Lbs
-                  </p> */}
                 </div>
               )}
               <button
