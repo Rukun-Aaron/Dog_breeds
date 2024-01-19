@@ -8,7 +8,7 @@ import mmh3
 from werkzeug.utils import secure_filename
 
 from models.ml_model import get_prediction,get_predictions_VIT
-from utils.data_retrieval import get_breed_info
+from utils.data_retrieval import get_breed_info, get_all_breeds
 
 router = APIRouter()
 img_path = 'imgs/'
