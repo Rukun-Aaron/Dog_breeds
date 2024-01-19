@@ -377,9 +377,21 @@ const ImageUploadNew = () => {
                       </div>
                     )}
                     <div className='row-start-2'>
-                      {predictions[selectedPredictionIndex].score && (
+                      {/* {predictions[selectedPredictionIndex].score && (
                         <p>Confidence score: {predictions[selectedPredictionIndex].score * 100}%</p>
-                      )}</div>
+                      )} */}
+                      <p>Life expectancy: {breedInfo[selectedPredictionIndex][0].min_life_expectancy} to 
+                      {breedInfo[selectedPredictionIndex][0].max_life_expectancy} Years</p>
+                      <p>Height in Males: {breedInfo[selectedPredictionIndex][0].min_height_male} to 
+                      {breedInfo[selectedPredictionIndex][0].max_height_male} Inches</p>
+                      <p>Height in Females: {breedInfo[selectedPredictionIndex][0].min_height_female} to 
+                      {breedInfo[selectedPredictionIndex][0].max_height_female} Inches</p>
+                      <p>Weight in Males: {breedInfo[selectedPredictionIndex][0].min_weight_male} to 
+                      {breedInfo[selectedPredictionIndex][0].max_weight_male} Lbs</p>
+                      <p>Weight in Females: {breedInfo[selectedPredictionIndex][0].min_weight_female} to 
+                      {breedInfo[selectedPredictionIndex][0].max_weight_female} Lbs</p>
+                      
+                      </div>
 
                   </div>
               )}
