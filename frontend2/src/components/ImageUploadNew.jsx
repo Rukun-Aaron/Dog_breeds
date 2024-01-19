@@ -13,10 +13,10 @@ import {
   PointElement,
   LineElement,
   RadialLinearScale,
-  registerables 
+  registerables
 } from "chart.js";
 
-import { Radar, Bar ,Chart   } from 'react-chartjs-2';
+import { Radar, Bar, Chart } from 'react-chartjs-2';
 
 ChartJS.register(
   ArcElement,
@@ -305,107 +305,111 @@ const ImageUploadNew = () => {
         )} */}
         {showModal && (
           <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center font-outfit">
-              <div className="bg-white p-4 rounded-md w-6/12 text-center">
+            <div className="bg-white p-4 rounded-md w-9/12 text-center">
               <h1 className="text-3xl font-bold mb-4">What is it like owning a : {predictions[selectedPredictionIndex].label}?</h1>
               {selectedPredictionIndex !== null && (
-                <div className="grid grid-cols-1 gap-4 py-1 sm:grid-cols-2 md:py-4 md:grid-cols-3 md:gap-y-8 md:gap-8  md text-gray-700">
-                  <img
-                    src={URL.createObjectURL(images[selectedPredictionIndex])}
-                    alt={`Selected ${selectedPredictionIndex + 1}`}
-                    className="w-80 h-80  rounded-full drop-shadow-xl "
-                  />  
-
-                  {breedInfo[selectedPredictionIndex][0] && (
-
-                    <div className="w-80 h-96 col-span-2 col-start-3	 ">
-                      
-                      <Radar
-                        data={{
-                          labels: ['Good with Children',
-                            'Good with Other Dogs',
-                            'Shedding',
-                            'Grooming',
-                            'Drooling',
-                            'Coat Length',
-                            'Good with Strangers',
-                            'Playfulness',
-                            'Protectiveness',
-                            'Trainability',
-                            'Energy',
-                            'Barking',],
-                          datasets: [
-                            {
-                              label: 'Score out of 5',
-                              data: [
-                                breedInfo[selectedPredictionIndex][0].good_with_children,
-                                breedInfo[selectedPredictionIndex][0].good_with_other_dogs,
-                                breedInfo[selectedPredictionIndex][0].shedding,
-                                breedInfo[selectedPredictionIndex][0].grooming,
-                                breedInfo[selectedPredictionIndex][0].drooling,
-                                breedInfo[selectedPredictionIndex][0].coat_length,
-                                breedInfo[selectedPredictionIndex][0].good_with_strangers,
-                                breedInfo[selectedPredictionIndex][0].playfulness,
-                                breedInfo[selectedPredictionIndex][0].protectiveness,
-                                breedInfo[selectedPredictionIndex][0].trainability,
-                                breedInfo[selectedPredictionIndex][0].energy,
-                                breedInfo[selectedPredictionIndex][0].barking,
-                              ],
-                              backgroundColor: 'rgba(103, 97, 168, 0.3)',
-                              borderColor: 'black',
-                              borderWidth: 1,
-
-                            },
-                          ],
-
-                        }}
-                        options={{
-                          
-                          scale: {
-                            min: 0,
-                            max: 5,
-                            stepSize:1,
-                            ticks: {
-                              // beginAtZero: true,
-                              // min: 0,
-                              // max: 10,
-                              // stepSize: 2,
-                            },
-                           
-                        }}
-                      }
-                      ></Radar>
+                <div className="grid grid-cols-1 gap-4 py-1 sm:grid-cols-2 md:py-4 md:grid-cols-3 md:gap-y-8 md:gap-8   text-gray-700 justify-center	 content-center	">
+                  <div className="flex items-center justify-center">
+                    <img
+                      src={URL.createObjectURL(images[selectedPredictionIndex])}
+                      alt={`Selected ${selectedPredictionIndex + 1}`}
+                      className="w-80 h-80 rounded-full drop-shadow-xl"
+                    />
                     </div>
-                  )}
-                    {predictions[selectedPredictionIndex].score && (
-                    <p>Confidence score: {predictions[selectedPredictionIndex].score * 100}%</p>
-                  )}
-                </div>
+                    {breedInfo[selectedPredictionIndex][0] && (
+
+                      <div className=" flex items-center justify-center w-80 h-96">
+
+                        <Radar
+                          data={{
+                            labels: ['Good with Children',
+                              'Good with Other Dogs',
+                              'Shedding',
+                              'Grooming',
+                              'Drooling',
+                              'Coat Length',
+                              'Good with Strangers',
+                              'Playfulness',
+                              'Protectiveness',
+                              'Trainability',
+                              'Energy',
+                              'Barking',],
+                            datasets: [
+                              {
+                                label: 'Score out of 5',
+                                data: [
+                                  breedInfo[selectedPredictionIndex][0].good_with_children,
+                                  breedInfo[selectedPredictionIndex][0].good_with_other_dogs,
+                                  breedInfo[selectedPredictionIndex][0].shedding,
+                                  breedInfo[selectedPredictionIndex][0].grooming,
+                                  breedInfo[selectedPredictionIndex][0].drooling,
+                                  breedInfo[selectedPredictionIndex][0].coat_length,
+                                  breedInfo[selectedPredictionIndex][0].good_with_strangers,
+                                  breedInfo[selectedPredictionIndex][0].playfulness,
+                                  breedInfo[selectedPredictionIndex][0].protectiveness,
+                                  breedInfo[selectedPredictionIndex][0].trainability,
+                                  breedInfo[selectedPredictionIndex][0].energy,
+                                  breedInfo[selectedPredictionIndex][0].barking,
+                                ],
+                                backgroundColor: 'rgba(103, 97, 168, 0.3)',
+                                borderColor: 'black',
+                                borderWidth: 1,
+
+                              },
+                            ],
+
+                          }}
+                          options={{
+
+                            scale: {
+                              min: 0,
+                              max: 5,
+                              stepSize: 1,
+                              ticks: {
+                                // beginAtZero: true,
+                                // min: 0,
+                                // max: 10,
+                                // stepSize: 2,
+                              },
+
+                            }
+                          }
+                          }
+                        ></Radar>
+                      </div>
+                    )}
+                    <div className='row-start-2'>
+                      {predictions[selectedPredictionIndex].score && (
+                        <p>Confidence score: {predictions[selectedPredictionIndex].score * 100}%</p>
+                      )}</div>
+
+                  </div>
               )}
-              <button
-                className="mt-4 p-2 bg-primary rounded-md"
-                onClick={() => {
-                  setShowModal(false);
-                  setSelectedPredictionIndex(null);
-                }}
-              >
-                Close
-              </button>
-            </div>
+                  <button
+                    className="mt-4 p-2 bg-primary rounded-md"
+                    onClick={() => {
+                      setShowModal(false);
+                      setSelectedPredictionIndex(null);
+                    }}
+                  >
+                    Close
+                  </button>
+                </div>
           </div>
         )}
-      </div>
+          </div>
     </div>
-  );
+      );
 };
 
 const formatFileSize = (size) => {
   const kbSize = size / 1024;
-  if (kbSize < 1024) {
+      if (kbSize < 1024) {
     return `${kbSize.toFixed(2)} KB`;
   } else {
     const mbSize = kbSize / 1024;
-    return `${mbSize.toFixed(2)} MB`;
+      return `${mbSize.toFixed(2)} MB`;
   }
 };
 
-export default ImageUploadNew;
+      export default ImageUploadNew;
