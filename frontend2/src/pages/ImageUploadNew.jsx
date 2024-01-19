@@ -41,14 +41,20 @@ const ImageUploadNew = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedPredictionIndex, setSelectedPredictionIndex] = useState(null);
   const [breeds, setBreeds] = useState([]);
+  const [selectedBreed, setSelectedBreed] = useState(null);
+  const [selectedBreedInfo, setSelectedBreedInfo] = useState([]);
+  const [datasetsList, setDatasetsList] = useState([]);
 
-  useEffect(() => {
-    console.log('Updated Predictions:', predictions);
-  }, [predictions]);
 
-  useEffect(() => {
-    console.log('Updated beed info:', breedInfo);
-  }, [breedInfo]);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  // useEffect(() => {
+  //   console.log('Selected breed:', selectedBreed);
+  // }, selectedBreed);
+
+  // useEffect(() => {
+  //   console.log('Updated beed info:', breedInfo);
+  // }, [breedInfo]);
 
   useEffect(() => {
     // Fetch breed data when the component mounts
@@ -64,6 +70,57 @@ const ImageUploadNew = () => {
 
     fetchData();
   }, []);
+
+
+  const handleBreedSelect = async (breed) => {
+    // Update the selected breed state
+    setSelectedBreed(breed);
+    try {
+      const response = await getBreedInfo(breed);
+      const data = await response.json();
+      setSelectedBreedInfo(data);
+      console.log(data);
+    } catch (error) {
+      console.error('Error fetching selected breed info:', error);
+    }
+    setIsDropdownOpen(false);
+    
+  };
+
+  useEffect(() => {
+    // This code will be executed when selectedBreedInfo changes
+    console.log('Selected Breed Info:', selectedBreedInfo);
+  
+    if (selectedBreedInfo.length > 0) {
+      const newDataset = {
+        label: 'Score out of 5',
+        data: [
+          selectedBreedInfo[0].good_with_children,
+          selectedBreedInfo[0].good_with_other_dogs,
+          selectedBreedInfo[0].shedding,
+          selectedBreedInfo[0].grooming,
+          selectedBreedInfo[0].drooling,
+          selectedBreedInfo[0].coat_length,
+          selectedBreedInfo[0].good_with_strangers,
+          selectedBreedInfo[0].playfulness,
+          selectedBreedInfo[0].protectiveness,
+          selectedBreedInfo[0].trainability,
+          selectedBreedInfo[0].energy,
+          selectedBreedInfo[0].barking,
+        ],
+        backgroundColor: 'rgba(103, 97, 168, 0.3)',
+        borderColor: 'black',
+        borderWidth: 1,
+      };
+      const updatedDatasets = [...datasetsList, newDataset];
+      setDatasetsList(updatedDatasets);
+      console.log(updatedDatasets);
+    }
+  }, [selectedBreedInfo]);
+  const toggleDropdown = () => {
+    // Toggle the dropdown state
+    setIsDropdownOpen(!isDropdownOpen);
+  };
   const onFileChange = async (event) => {
     const file = event.target.files[0];
 
@@ -300,19 +357,20 @@ const ImageUploadNew = () => {
                   <p> {predictions[selectedPredictionIndex].label} detected with {(predictions[selectedPredictionIndex].score * 100).toFixed(1)} %</p>
                   <p>{predictions[selectedPredictionIndex].label}  Characteristics</p>
                   <div className="dropdown dropdown-bottom flex justify-center content-center ">
-                    <div tabIndex={0} role="button" className="btn m-1">Compare to Other dogs</div>
+                    <div tabIndex={0} role="button" className="btn m-1" onClick={toggleDropdown}>
+                      {isDropdownOpen ? 'Close' : 'Compare to Other dogs'}
+                    </div>
+                    {isDropdownOpen && (
                     <ul
-                      tabIndex={0}
-                      className="dropdown-content z-[1] menu p-2 *:shadow bg-base-100 rounded-box w-52 max-h-40"
-                    >
+                      className="dropdown-content z-[1] menu p-2 *:shadow bg-base-100 rounded-box w-52 max-h-40">
                       <div className="overflow-y-auto max-h-96">
                         {breeds.map((breed, index) => (
-                          <li key={index}>
-                            <a>{breed[0]}</a>
+                          <li key={index} onClick={() => handleBreedSelect(breed[0])} >
+                            <button className='btn btn-ghost text-center' >{breed[0]}</button>
                           </li>
                         ))}
                       </div>
-                    </ul>
+                    </ul>)}
                   </div>
                   <div className="flex items-center justify-center px-5 ">
                     <img
@@ -323,7 +381,7 @@ const ImageUploadNew = () => {
                   </div>
                   {breedInfo[selectedPredictionIndex][0] && (
 
-                    <div className=" flex items-center justify-center w-full h-96">
+                    <div className=" flex items-center justify-center h-96 min-w-80 ">
 
                       <Radar
                         data={{
@@ -339,29 +397,27 @@ const ImageUploadNew = () => {
                             'Trainability',
                             'Energy',
                             'Barking',],
-                          datasets: [
-                            {
-                              label: 'Score out of 5',
-                              data: [
-                                breedInfo[selectedPredictionIndex][0].good_with_children,
-                                breedInfo[selectedPredictionIndex][0].good_with_other_dogs,
-                                breedInfo[selectedPredictionIndex][0].shedding,
-                                breedInfo[selectedPredictionIndex][0].grooming,
-                                breedInfo[selectedPredictionIndex][0].drooling,
-                                breedInfo[selectedPredictionIndex][0].coat_length,
-                                breedInfo[selectedPredictionIndex][0].good_with_strangers,
-                                breedInfo[selectedPredictionIndex][0].playfulness,
-                                breedInfo[selectedPredictionIndex][0].protectiveness,
-                                breedInfo[selectedPredictionIndex][0].trainability,
-                                breedInfo[selectedPredictionIndex][0].energy,
-                                breedInfo[selectedPredictionIndex][0].barking,
-                              ],
-                              backgroundColor: 'rgba(103, 97, 168, 0.3)',
-                              borderColor: 'black',
-                              borderWidth: 1,
+                          datasets: datasetsList.concat([ {
+                            label: 'Score out of 5',
+                            data: [
+                              breedInfo[selectedPredictionIndex][0].good_with_children,
+                              breedInfo[selectedPredictionIndex][0].good_with_other_dogs,
+                              breedInfo[selectedPredictionIndex][0].shedding,
+                              breedInfo[selectedPredictionIndex][0].grooming,
+                              breedInfo[selectedPredictionIndex][0].drooling,
+                              breedInfo[selectedPredictionIndex][0].coat_length,
+                              breedInfo[selectedPredictionIndex][0].good_with_strangers,
+                              breedInfo[selectedPredictionIndex][0].playfulness,
+                              breedInfo[selectedPredictionIndex][0].protectiveness,
+                              breedInfo[selectedPredictionIndex][0].trainability,
+                              breedInfo[selectedPredictionIndex][0].energy,
+                              breedInfo[selectedPredictionIndex][0].barking,
+                            ],
+                            backgroundColor: 'rgba(103, 97, 168, 0.3)',
+                            borderColor: 'black',
+                            borderWidth: 1,
 
-                            },
-                          ],
+                          }])
 
                         }}
                         options={{
