@@ -146,9 +146,9 @@ const ImageUploadNew = () => {
   };
 
   return (
-    <div className="w-full h-full flex justify-center overflow-x-hidden pt-4 pb-4">
+    <div className="w-full h-full flex justify-center overflow-x-hidden pt-16 pb-4">
       <div className="max-w-4xl xl:max-w-5xl w-11/12 flex flex-col items-center h-full gap-4">
-        <h1 className="text-3xl font-bold underline p-4">Classify Your Dog!</h1>
+        <h1 className="text-3xl font-bold underline p-2">Classify Your Dog!</h1>
         <h1 className="text-xl font-varela text-center dark:text-neutral-100">
           Drag and Drop or Browse to Upload Image
         </h1>
