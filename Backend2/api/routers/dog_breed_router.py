@@ -8,7 +8,7 @@ import mmh3
 from werkzeug.utils import secure_filename
 
 from models.ml_model import get_prediction,get_predictions_VIT
-from utils.data_retrieval import get_breed_info
+from utils.data_retrieval import get_breed_info, get_all_breeds
 
 router = APIRouter()
 img_path = 'imgs/'
@@ -19,13 +19,13 @@ def redirect_to_docs():
 
 
 @router.get("/version", tags=["Info"])
-async def get_version():
+async def get_version_endpoint():
     """Returns the current version of the API."""
     return {"version": '1.1'}  # Assuming version is stored in model_config
 
 
 @router.post("/classify", tags=["Dogs"])
-async def classify_image(file: UploadFile = File(...)):
+async def classify_image_endpoint(file: UploadFile = File(...)):
     file_path = os.path.join(img_path, secure_filename(file.filename))
     with open(file_path, "wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
@@ -44,6 +44,11 @@ async def classify_image(file: UploadFile = File(...)):
     return JSONResponse(prediction)
 
 @router.get("/get_dog_info", tags=["Dogs"])
-async def get_dog_info(breed: str):
+async def get_dog_info_endpoint(breed: str):
     breed_info = get_breed_info(breed)
     return breed_info
+
+@router.get("/get_all_breeds", tags=["Dogs"])
+async def get_all_breeds_endpoint():
+    breeds = get_all_breeds()
+    return breeds
