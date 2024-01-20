@@ -354,7 +354,7 @@ const ImageUploadNew = () => {
                 <FontAwesomeIcon icon={faXmark} size="lg" />
               </button>
               {selectedPredictionIndex !== null && (
-                <div className="grid grid-cols-1 gap-4 py-1 sm:grid-cols-2  md:py-4 md:grid-cols-3 md:gap-y-1 md:gap-x-4 text-gray-700 justify-center content-center	">
+                <div className="grid grid-cols-1 gap-4 py-1 md:grid-cols-2  lg:py-4 lg:grid-cols-3 lg:gap-y-1 lg:gap-x-4 text-gray-700 justify-center content-center	">
                   <div className='flex items-center justify-center px-5'>
                     <p> {predictions[selectedPredictionIndex].label} detected with {(predictions[selectedPredictionIndex].score * 100).toFixed(1)} %</p>
 
@@ -362,7 +362,7 @@ const ImageUploadNew = () => {
                   <div className='flex items-center justify-center px-5'>
                     <p>{predictions[selectedPredictionIndex].label}  Characteristics</p>
                   </div>
-                  <div className="dropdown dropdown-bottom flex justify-center content-center ">
+                  <div className="dropdown dropdown-bottom flex justify-center content-center md:row-start-3  lg:row-start-1 lg:col-start-3">
                     <div tabIndex={0} role="button" className="btn m-1 w-48" onClick={toggleDropdown}>
                       {selectedBreed != null ? `${selectedBreed}` : 'Compare to Other dogs'}
                     </div>
@@ -451,7 +451,7 @@ const ImageUploadNew = () => {
                     </div>
                   )}
                   {selectedBreedImage && (
-                    <div className="flex items-center justify-center px-5 ">
+                    <div className="flex items-center justify-center px-5 md:row-start-5 lg:col-start-3 lg:row-start-2">
                       <img
                         src={selectedBreedInfo[0].image_link}
                         alt={`Selected ${selectedPredictionIndex + 1}`}
@@ -460,7 +460,7 @@ const ImageUploadNew = () => {
                     </div>
                   )}
 
-                  <div className='row-start-3'>
+                  <div className='row-start-3 '>
                     {/* {predictions[selectedPredictionIndex].score && (
                         <p>Confidence score: {predictions[selectedPredictionIndex].score * 100}%</p>
                       )} */}
