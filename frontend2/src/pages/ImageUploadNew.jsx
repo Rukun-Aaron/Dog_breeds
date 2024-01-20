@@ -345,7 +345,7 @@ const ImageUploadNew = () => {
         )} */}
         {showModal && (
           <div className="z-50 fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center font-outfit">
-            <div className="relative  bg-white p-4 rounded-md  sm:w-full sm:h-48 md:w-9/12 md:h-[45rem] lg:h-[42rem] xl:h-[33rem] 2xl:h-[46rem] text-center overflow-y-auto">
+            <div className="relative  bg-white p-4 rounded-md  sm:w-9/12 sm:h-48 md:w-9/12 md:h-[30rem] lg:h-[30rem] xl:h-[33rem] 2xl:h-[46rem] text-center overflow-y-auto">
               <h1 className="text-3xl font-bold mb-4">What is it like owning a {predictions[selectedPredictionIndex].label}?</h1>
               <button
                 onClick={() => handleModalClose()}
