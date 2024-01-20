@@ -39,23 +39,6 @@ function Navbar() {
           Detect
         </button>
       </div>
-      <div className="md:flex gap-2 hidden">
-        <button
-          onClick={() => navigate('/')}
-          className={`dark:text-neutral-100 font-varela btn hover:bg-transparent btn-ghost transition-all border-none relative before:content-[''] before:absolute before:left-0 before:top-0 before:w-0 before:h-full before:bg-gradient-to-br before:from-primary before:to-secondary hover:before:w-full before:-z-10 before:transition-all before:duration-300 duration-300 before:rounded-lg hover:text-white`}
-          type="button"
-        >
-          Home
-          <FontAwesomeIcon icon={faHome} className="-mt-[0.2rem]" />
-        </button>
-        <button
-          onClick={() => navigate('/detection')}
-          className={`dark:text-neutral-100 font-varela btn hover:bg-transparent btn-ghost transition-all border-none relative before:content-[''] before:absolute before:left-0 before:top-0 before:w-0 before:h-full before:bg-gradient-to-br before:from-primary before:to-secondary hover:before:w-full before:-z-10 before:transition-all before:duration-300 duration-300 before:rounded-lg hover:text-white`}
-          type="button">
-              Detect
-              <FontAwesomeIcon icon={faMagnifyingGlass} className="-mt-[0.2rem]" />
-          </button>
-      </div>
     </div>)};
 
 
