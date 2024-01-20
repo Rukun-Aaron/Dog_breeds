@@ -356,8 +356,13 @@ const ImageUploadNew = () => {
               </button>
               {selectedPredictionIndex !== null && (
                 <div className="grid grid-cols-1 gap-4 py-1 sm:grid-cols-2  md:py-4 md:grid-cols-3 md:gap-y-1 md:gap-x-4 text-gray-700 justify-center content-center	">
-                  <p> {predictions[selectedPredictionIndex].label} detected with {(predictions[selectedPredictionIndex].score * 100).toFixed(1)} %</p>
-                  <p>{predictions[selectedPredictionIndex].label}  Characteristics</p>
+                  <div className='flex items-center justify-center px-5'>
+                    <p> {predictions[selectedPredictionIndex].label} detected with {(predictions[selectedPredictionIndex].score * 100).toFixed(1)} %</p>
+
+                  </div>
+                  <div className='flex items-center justify-center px-5'>
+                    <p>{predictions[selectedPredictionIndex].label}  Characteristics</p>
+                  </div>
                   <div className="dropdown dropdown-bottom flex justify-center content-center ">
                     <div tabIndex={0} role="button" className="btn m-1 w-48" onClick={toggleDropdown}>
                       {selectedBreed != null ? `${selectedBreed}` : 'Compare to Other dogs'}
