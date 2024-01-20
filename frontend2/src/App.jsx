@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom';
 
 import Navbar from './components/NavBar';
-import ImageUploadNew from './components/ImageUploadNew';
+import ImageUploadNew from './pages/ImageUploadNew';
 import Homepage from './components/Homepage';
 
 function App() {

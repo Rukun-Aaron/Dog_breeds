@@ -82,5 +82,30 @@ def get_all_breeds():
         if cursor:
             cursor.close()
     
+def get_all_breeds():
+    cursor = None
+    connection = None
     
+    try:
+        connection = psycopg2.connect(**db_config)
+        cursor = connection.cursor()
+        
+        select_query = """
+        SELECT name FROM dog_breeds;
+        """
+        cursor.execute(select_query)
+        breeds = cursor.fetchall()  
+        
+        return breeds
+    
+    except (Exception, psycopg2.Error) as error:
+        
+        print(f"Error: {error}")
+        return []
+    
+    finally:
+        if connection:
+            connection.close()
+        if cursor:
+            cursor.close()    
 
