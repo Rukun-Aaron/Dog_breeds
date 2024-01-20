@@ -48,14 +48,6 @@ const ImageUploadNew = () => {
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  // useEffect(() => {
-  //   console.log('Selected breed:', selectedBreed);
-  // }, selectedBreed);
-
-  // useEffect(() => {
-  //   console.log('Updated beed info:', breedInfo);
-  // }, [breedInfo]);
-
   useEffect(() => {
     // Fetch breed data when the component mounts
     const fetchData = async () => {
@@ -112,7 +104,7 @@ const ImageUploadNew = () => {
         borderColor: 'black',
         borderWidth: 1,
       };
-      const updatedDatasets = [...datasetsList, newDataset];
+      const updatedDatasets = [newDataset];
       setDatasetsList(updatedDatasets);
       console.log(updatedDatasets);
     }
@@ -120,6 +112,10 @@ const ImageUploadNew = () => {
   const toggleDropdown = () => {
     // Toggle the dropdown state
     setIsDropdownOpen(!isDropdownOpen);
+    setSelectedBreed(null);
+    setSelectedBreedInfo([]);
+    setDatasetsList([]);
+    console.log(isDropdownOpen);
   };
   const onFileChange = async (event) => {
     const file = event.target.files[0];
@@ -397,7 +393,7 @@ const ImageUploadNew = () => {
                             'Trainability',
                             'Energy',
                             'Barking',],
-                          datasets: datasetsList.concat([ {
+                          datasets: [ {
                             label: 'Score out of 5',
                             data: [
                               breedInfo[selectedPredictionIndex][0].good_with_children,
@@ -417,7 +413,7 @@ const ImageUploadNew = () => {
                             borderColor: 'black',
                             borderWidth: 1,
 
-                          }])
+                          }].concat(datasetsList)
 
                         }}
                         options={{
