@@ -249,9 +249,9 @@ const ImageUploadNew = () => {
     setSelectedPredictionIndex(null);
   }
   return (
-    <div className="w-full h-full flex justify-center overflow-x-hidden pt-4 pb-4">
-      <div className="max-w-4xl xl:max-w-5xl w-11/12 flex flex-col items-center h-full gap-4">
-        <h1 className="text-3xl font-bold underline p-4">Classify Your Dog!</h1>
+    <div className="w-full h-full flex justify-center overflow-x-hidden pt-24 pb-4">
+      <div className="max-w-4xl xl:max-w-5xl w-11/12 flex flex-col items-center h-full gap-1">
+        <h1 className="text-2xl font-bold underline p-1">Classify Your Dog</h1>
         <h1 className="text-xl font-varela text-center dark:text-neutral-100">
           Drag and Drop or Browse to Upload Image
         </h1>
@@ -344,7 +344,7 @@ const ImageUploadNew = () => {
           </div>
         )} */}
         {showModal && (
-          <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center font-outfit">
+          <div className="z-[12] fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center font-outfit">
             <div className="relative z-10 bg-white p-4 rounded-md  sm:w-full sm:h-48 md:w-9/12 md:h-[45rem] lg:h-[42rem] xl:h-[33rem] 2xl:h-[46rem] text-center overflow-y-auto">
               <h1 className="text-3xl font-bold mb-4">What is it like owning a {predictions[selectedPredictionIndex].label}?</h1>
               <button
