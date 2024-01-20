@@ -85,7 +85,7 @@ const ImageUploadNew = () => {
   
     if (selectedBreedInfo.length > 0) {
       const newDataset = {
-        label: 'Score out of 5',
+        label:`${selectedBreed}: Score out of 5`,
         data: [
           selectedBreedInfo[0].good_with_children,
           selectedBreedInfo[0].good_with_other_dogs,
@@ -100,7 +100,7 @@ const ImageUploadNew = () => {
           selectedBreedInfo[0].energy,
           selectedBreedInfo[0].barking,
         ],
-        backgroundColor: 'rgba(103, 97, 168, 0.3)',
+        backgroundColor: 'rgba(255, 107, 168, 0.3)',
         borderColor: 'black',
         borderWidth: 1,
       };
@@ -240,6 +240,9 @@ const ImageUploadNew = () => {
 
   const handleModalClose = () => {
     setShowModal(false);
+    setSelectedBreed(null);
+    setSelectedBreedInfo([]);
+    setDatasetsList([]);
     setSelectedPredictionIndex(null);
   }
   return (
@@ -394,7 +397,7 @@ const ImageUploadNew = () => {
                             'Energy',
                             'Barking',],
                           datasets: [ {
-                            label: 'Score out of 5',
+                            label: `${predictions[selectedPredictionIndex].label}: Score out of 5`,
                             data: [
                               breedInfo[selectedPredictionIndex][0].good_with_children,
                               breedInfo[selectedPredictionIndex][0].good_with_other_dogs,
