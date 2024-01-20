@@ -378,7 +378,7 @@ const ImageUploadNew = () => {
                         </div>
                       </ul>)}
                   </div>
-                  <div className="flex items-center justify-center px-5 ">
+                  <div className="flex items-center justify-center px-5 md:row-start-2">
                     <img
                       src={URL.createObjectURL(images[selectedPredictionIndex])}
                       alt={`Selected ${selectedPredictionIndex + 1}`}
@@ -387,7 +387,7 @@ const ImageUploadNew = () => {
                   </div>
                   {breedInfo[selectedPredictionIndex][0] && (
 
-                    <div className=" flex items-center justify-center h-96 min-w-80 ">
+                    <div className=" flex items-center justify-center h-96 min-w-80 md:row-start-2 ">
 
                       <Radar
                         data={{
@@ -451,7 +451,7 @@ const ImageUploadNew = () => {
                     </div>
                   )}
                   {selectedBreedImage && (
-                    <div className="flex items-center justify-center px-5 md:row-start-5 lg:col-start-3 lg:row-start-2">
+                    <div className="flex items-center justify-center px-5 md:row-start-5 md:col-start-1 lg:col-start-3 lg:row-start-2">
                       <img
                         src={selectedBreedInfo[0].image_link}
                         alt={`Selected ${selectedPredictionIndex + 1}`}
@@ -478,7 +478,7 @@ const ImageUploadNew = () => {
                   </div>
                   {
                     selectedBreedInfo.length > 0 && (
-                      <div className=' row-start-3 col-start-3'>
+                      <div className='   md:col-start-2 md:row-start-5 lg:row-start-3 lg:col-start-3'>
 
                         <p>Life expectancy: {selectedBreedInfo[0].min_life_expectancy} to
                           {selectedBreedInfo[0].max_life_expectancy} Years</p>
