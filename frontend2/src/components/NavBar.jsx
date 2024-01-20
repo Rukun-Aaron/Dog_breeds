@@ -31,11 +31,11 @@ function Navbar() {
           </p>
         </div>
       </div>
-      <div className="gap-8 text-white pr-4">
-        <button onClick={() => navigate('/')}>
+      <div className="gap-2 text-white pr-4">
+        <button onClick={() => navigate('/')} className='btn btn-ghost rounded-full px-8 py-2'>
           Home
         </button>
-        <button className="bg-orange-500 px-8 py-2 rounded-full" onClick={() => navigate('/detection')}>
+        <button className="bg-orange-500 px-8 py-2 rounded-full btn btn-ghost" onClick={() => navigate('/detection')}>
           Detect
         </button>
       </div>
