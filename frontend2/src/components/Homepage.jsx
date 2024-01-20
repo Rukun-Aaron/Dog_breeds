@@ -2,7 +2,7 @@ import React from 'react';
 
 function Homepage() {
   return (
-    <div className="w-full h-full flex flex-col items-center relative">
+    <div className="w-full h-full flex flex-col items-center relative z-0">
       {/* Section 1: Blue background with a dog image */}
       <div className="w-full min-h-screen bg-white relative">
         <div className="bg-blue-300 text-white w-full h-4/5 pt-20 pb-10 relative overflow-hidden">
