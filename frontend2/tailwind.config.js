@@ -9,7 +9,8 @@ module.exports = {
       fontFamily: {
         'varela': ['Varela Round', 'sans-serif'],
         'outfit':['Outfit', 'sans-serif'],
-      },
+      }
+
     },
   },
   daisyui: {

@@ -345,7 +345,7 @@ const ImageUploadNew = () => {
         )} */}
         {showModal && (
           <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center font-outfit">
-            <div className="relative bg-white p-4 rounded-md sm:w-full md:w-9/12 lg:w-9/12 xl:w-9/12 text-center">
+            <div className="relative z-10 bg-white p-4 rounded-md sm:w-full sm:max-h-[32rem] md:w-9/12 lg:w-9/12 xl:w-9/12 text-center overflow-y-auto">
 
               <h1 className="text-3xl font-bold mb-4">What is it like owning a {predictions[selectedPredictionIndex].label}?</h1>
               <button

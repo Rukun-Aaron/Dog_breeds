@@ -13,7 +13,7 @@ function Navbar() {
     // const navigate = useNavigate();
 
     return (
-        <div className={`navbar z-10 left-1/2 -translate-x-1/2 w-11/12 max-w-4xl xl:max-w-5xl top-4 shadow dark:shadow-xl dark:bg-neutral-800 backdrop-blur-sm rounded-xl  ${isHomePage ? 'absolute' : 'fixed '}`}>
+        <div className={`navbar z-0 left-1/2 -translate-x-1/2 w-11/12 max-w-4xl xl:max-w-5xl top-4 shadow dark:shadow-xl dark:bg-neutral-800 backdrop-blur-sm rounded-xl  ${isHomePage ? 'absolute' : 'fixed '}`}>
             <div className="flex-1 flex gap-2">
                 <div className="cursor-pointer" >
                     {/* <img src="/logos/logoV2.svg" alt="logo" /> */}
