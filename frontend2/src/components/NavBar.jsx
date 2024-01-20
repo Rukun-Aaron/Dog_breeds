@@ -19,23 +19,23 @@ function Navbar() {
     <div className={`navbar z-10 left-1/2 -translate-x-1/2 w-11/12 max-w-4xl xl:max-w-5xl top-4 shadow dark:shadow-xl dark:bg-neutral-800 backdrop-blur-sm rounded-xl  ${isHomePage ? 'absolute' : 'fixed '}`}>
       <div className="flex-1 flex gap-2">
         <div className="cursor-pointer flex items-center justify-center" onClick={() => navigate('/')}>
-        <div className="pl-4 pr-3">
-          <img
-            alt="logo"
-            src="/logo2.ico"
-            className="h-10 w-10"
-          />
-        </div>
-          <p className="text-2xl text-white font-semibold">
+          <div className="pl-4 pr-3">
+            <img
+              alt="logo"
+              src="/logo2.ico"
+              className="h-12 w-12"
+            />
+          </div>
+          <p className="text-xl text-white font-semibold">
             DogIO
           </p>
         </div>
       </div>
-      <div className="gap-8 text-lg text-white font-semibold">
+      <div className="gap-8 text-white pr-4">
         <button onClick={() => navigate('/')}>
           Home
         </button>
-        <button className="pr-6" onClick={() => navigate('/detection')}>
+        <button className="bg-orange-500 px-8 py-2 rounded-full" onClick={() => navigate('/detection')}>
           Detect
         </button>
       </div>

@@ -9,7 +9,7 @@ function Homepage() {
     <div className="w-full h-full flex flex-col items-center relative">
       {/* Section 1: Blue background with a dog image */}
       <div className="w-full min-h-screen bg-white relative">
-        <div className="bg-blue-300 text-white w-full h-4/5 pt-20 pb-10 relative overflow-hidden">
+        <div className="bg-blue-400 text-white w-full h-4/5 pt-20 pb-10 relative overflow-hidden">
           <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between relative">
             <div className="md:w-3/4 mt-28">
               <h1 className="text-5xl font-bold mb-4">Identify dog breeds from photos with AI</h1>
