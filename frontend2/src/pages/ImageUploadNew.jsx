@@ -359,7 +359,7 @@ const ImageUploadNew = () => {
                     </div>
                     {isDropdownOpen && (
                     <ul
-                      className="dropdown-content z-[1] menu p-2 *:shadow bg-base-100 rounded-box w-52 max-h-40">
+                      className="dropdown-content z-[1] menu p-2 *:shadow bg-base-100 rounded-box w-52 max-h-50">
                       <div className="overflow-y-auto max-h-96">
                         {breeds.map((breed, index) => (
                           <li key={index} onClick={() => handleBreedSelect(breed[0])} >
