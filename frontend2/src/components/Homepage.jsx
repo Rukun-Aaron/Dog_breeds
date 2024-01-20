@@ -23,7 +23,7 @@ function Homepage() {
           </div>
         </div>
 
-        <div className="absolute bottom-0 right-0 w-1/2 h-3/4 md:w-2/3 z-20">
+        <div className="absolute bottom-0 right-0 w-1/2 h-3/4 md:w-2/3 z-5">
           <img
             alt="dogs"
             src="/dog3.png"
@@ -38,23 +38,29 @@ function Homepage() {
         <h2 className="text-xl mb-6 text-center">Our dog breed identification interface helps users decide on a new breed personalised to their preferences.</h2>
 
         {/* Left and Right Division */}
-        <div className="w-full flex items-center justify-center md:w-2/3">
+        <div className="w-full flex items-center justify-center md:w-2/3 gap-10">
             {/* Left side */}
-            <div className="w-1/2 p-8">
+            <div className="w-1/2 p-8 relative">
                 <img
                 alt="bernese-mountain-dog"
                 src="/bernese-mountain-dog.jpg"
                 style={{ borderRadius: '28px' }}
                 />
+                <div className="absolute bottom-0 right-0 w-1/2 h-1/2" >
+        <img
+            alt="second-dog-image"
+            src="/stats.png"
+            style={{ borderRadius: '28px', boxShadow: '0 4px 16px rgba(0, 0, 0, 0.2)' }}
+        />
+    </div>
             </div>
 
             {/* Right side */}
             <div className="w-1/2 p-8">
-            {/* Content for the right side */}
-                <h2 className="text-3xl mb-12">How to identify a dog's breed?</h2>
+                <h2 className="text-3xl mb-8">How to identify a dog's breed?</h2>
                 <div className="w-full h-full flex items-center">
                     <ul className="list-none p-0">
-                        <li className="flex items-center mb-8">
+                        <li className="flex items-center mb-6">
                         <div className="rounded-full bg-blue-900 text-white w-8 h-8 flex items-center justify-center mr-6">
                             1
                         </div>
@@ -62,7 +68,7 @@ function Homepage() {
                             Navigate to 'Start Now' 
                         </div>
                         </li>
-                        <li className="flex items-center mb-8">
+                        <li className="flex items-center mb-6">
                         <div className="rounded-full bg-blue-900 text-white w-8 h-8 flex items-center justify-center mr-6">
                             2
                         </div>
@@ -70,7 +76,7 @@ function Homepage() {
                             Upload your dog images, our AI will identify the breed 
                         </div>
                         </li>
-                        <li className="flex items-center mb-8">
+                        <li className="flex items-center mb-6">
                         <div className="rounded-full bg-blue-900 text-white w-8 h-8 flex items-center justify-center mr-6">
                             3
                         </div>
