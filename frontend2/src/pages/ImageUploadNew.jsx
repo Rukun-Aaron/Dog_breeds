@@ -281,7 +281,7 @@ const ImageUploadNew = () => {
         >
           <div className={images.length > 0 ? 'flex flex-row' : 'md:flex flex-col hidden'}>
             <FontAwesomeIcon
-              className={images.length > 0 ? 'text-primary p-4' : 'text-primary'}
+              className={images.length > 0 ? 'text-blue-400 opacity-90 p-4' : 'text-blue-400 opacity-90'}
               icon={faCloudArrowUp}
               size={images.length > 0 ? '3x' : '5x'}
             />
@@ -344,7 +344,7 @@ const ImageUploadNew = () => {
           </div>
         )} */}
         {showModal && (
-          <div className="z-20 fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center font-outfit">
+          <div className="z-200 fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center font-outfit">
             <div className="relative z-10 bg-white p-4 rounded-md  sm:w-full sm:h-48 md:w-9/12 md:h-[45rem] lg:h-[42rem] xl:h-[33rem] 2xl:h-[46rem] text-center overflow-y-auto">
               <h1 className="text-3xl font-bold mb-4">What is it like owning a {predictions[selectedPredictionIndex].label}?</h1>
               <button
