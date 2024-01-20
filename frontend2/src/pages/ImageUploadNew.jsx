@@ -43,6 +43,7 @@ const ImageUploadNew = () => {
   const [breeds, setBreeds] = useState([]);
   const [selectedBreed, setSelectedBreed] = useState(null);
   const [selectedBreedInfo, setSelectedBreedInfo] = useState([]);
+  const [selectedBreedImage, setSelectedBreedImage] = useState(null);
   const [datasetsList, setDatasetsList] = useState([]);
 
 
@@ -70,8 +71,10 @@ const ImageUploadNew = () => {
     try {
       const response = await getBreedInfo(breed);
       const data = await response.json();
+      setSelectedBreedImage(data[0].image_link);
       setSelectedBreedInfo(data);
-      console.log(data);
+      
+      // console.log(selectedBreedInfo);
     } catch (error) {
       console.error('Error fetching selected breed info:', error);
     }
@@ -93,12 +96,13 @@ const ImageUploadNew = () => {
           selectedBreedInfo[0].grooming,
           selectedBreedInfo[0].drooling,
           selectedBreedInfo[0].coat_length,
-          selectedBreedInfo[0].good_with_strangers,
+         
           selectedBreedInfo[0].playfulness,
           selectedBreedInfo[0].protectiveness,
           selectedBreedInfo[0].trainability,
           selectedBreedInfo[0].energy,
           selectedBreedInfo[0].barking,
+          selectedBreedInfo[0].good_with_strangers,
         ],
         backgroundColor: 'rgba(255, 107, 168, 0.3)',
         borderColor: 'black',
@@ -240,6 +244,7 @@ const ImageUploadNew = () => {
     setShowModal(false);
     setSelectedBreed(null);
     setSelectedBreedInfo([]);
+    setSelectedBreedImage(null);
     setDatasetsList([]);
     setSelectedPredictionIndex(null);
   }
@@ -388,12 +393,13 @@ const ImageUploadNew = () => {
                             'Grooming',
                             'Drooling',
                             'Coat Length',
-                            'Good with Strangers',
+                            
                             'Playfulness',
                             'Protectiveness',
                             'Trainability',
                             'Energy',
-                            'Barking',],
+                            'Barking',
+                            'Good with Strangers',],
                           datasets: [ {
                             label: `${predictions[selectedPredictionIndex].label}: Score out of 5`,
                             data: [
@@ -403,12 +409,13 @@ const ImageUploadNew = () => {
                               breedInfo[selectedPredictionIndex][0].grooming,
                               breedInfo[selectedPredictionIndex][0].drooling,
                               breedInfo[selectedPredictionIndex][0].coat_length,
-                              breedInfo[selectedPredictionIndex][0].good_with_strangers,
+                              
                               breedInfo[selectedPredictionIndex][0].playfulness,
                               breedInfo[selectedPredictionIndex][0].protectiveness,
                               breedInfo[selectedPredictionIndex][0].trainability,
                               breedInfo[selectedPredictionIndex][0].energy,
                               breedInfo[selectedPredictionIndex][0].barking,
+                              breedInfo[selectedPredictionIndex][0].good_with_strangers,
                             ],
                             backgroundColor: 'rgba(103, 97, 168, 0.3)',
                             borderColor: 'black',
@@ -439,6 +446,16 @@ const ImageUploadNew = () => {
                       ></Radar>
                     </div>
                   )}
+                  {selectedBreedImage &&(
+                     <div className="flex items-center justify-center px-5 ">
+                     <img
+                       src={selectedBreedInfo[0].image_link}
+                       alt={`Selected ${selectedPredictionIndex + 1}`}
+                       className="sm:w-32 sm:h-32 md:w-64 md:h-64 rounded-full drop-shadow-xl"
+                     />
+                   </div>
+                  )}
+                 
                   <div className='row-start-3'>
                     {/* {predictions[selectedPredictionIndex].score && (
                         <p>Confidence score: {predictions[selectedPredictionIndex].score * 100}%</p>
