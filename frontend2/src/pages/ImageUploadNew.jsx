@@ -73,22 +73,22 @@ const ImageUploadNew = () => {
       const data = await response.json();
       setSelectedBreedImage(data[0].image_link);
       setSelectedBreedInfo(data);
-      
+
       // console.log(selectedBreedInfo);
     } catch (error) {
       console.error('Error fetching selected breed info:', error);
     }
     setIsDropdownOpen(false);
-    
+
   };
 
   useEffect(() => {
     // This code will be executed when selectedBreedInfo changes
     console.log('Selected Breed Info:', selectedBreedInfo);
-  
+
     if (selectedBreedInfo.length > 0) {
       const newDataset = {
-        label:`${selectedBreed}: Score out of 5`,
+        label: `${selectedBreed}: Score out of 5`,
         data: [
           selectedBreedInfo[0].good_with_children,
           selectedBreedInfo[0].good_with_other_dogs,
@@ -96,7 +96,7 @@ const ImageUploadNew = () => {
           selectedBreedInfo[0].grooming,
           selectedBreedInfo[0].drooling,
           selectedBreedInfo[0].coat_length,
-         
+
           selectedBreedInfo[0].playfulness,
           selectedBreedInfo[0].protectiveness,
           selectedBreedInfo[0].trainability,
@@ -116,7 +116,7 @@ const ImageUploadNew = () => {
   const toggleDropdown = () => {
     // Toggle the dropdown state
     setIsDropdownOpen(!isDropdownOpen);
-  
+
     // console.log(isDropdownOpen);
   };
   const onFileChange = async (event) => {
@@ -363,16 +363,16 @@ const ImageUploadNew = () => {
                       {selectedBreed != null ? `${selectedBreed}` : 'Compare to Other dogs'}
                     </div>
                     {isDropdownOpen && (
-                    <ul
-                      className="dropdown-content z-[1] menu p-2 *:shadow bg-base-100 rounded-box w-52 max-h-50">
-                      <div className="overflow-y-auto max-h-96">
-                        {breeds.map((breed, index) => (
-                          <li key={index} onClick={() => handleBreedSelect(breed[0])} >
-                            <button className='btn btn-ghost text-center content-center' >{breed[0]}</button>
-                          </li>
-                        ))}
-                      </div>
-                    </ul>)}
+                      <ul
+                        className="dropdown-content z-[1] menu p-2 *:shadow bg-base-100 rounded-box w-52 max-h-50">
+                        <div className="overflow-y-auto max-h-96">
+                          {breeds.map((breed, index) => (
+                            <li key={index} onClick={() => handleBreedSelect(breed[0])} >
+                              <button className='btn btn-ghost text-center content-center' >{breed[0]}</button>
+                            </li>
+                          ))}
+                        </div>
+                      </ul>)}
                   </div>
                   <div className="flex items-center justify-center px-5 ">
                     <img
@@ -393,14 +393,14 @@ const ImageUploadNew = () => {
                             'Grooming',
                             'Drooling',
                             'Coat Length',
-                            
+
                             'Playfulness',
                             'Protectiveness',
                             'Trainability',
                             'Energy',
                             'Barking',
                             'Good with Strangers',],
-                          datasets: [ {
+                          datasets: [{
                             label: `${predictions[selectedPredictionIndex].label}: Score out of 5`,
                             data: [
                               breedInfo[selectedPredictionIndex][0].good_with_children,
@@ -409,7 +409,7 @@ const ImageUploadNew = () => {
                               breedInfo[selectedPredictionIndex][0].grooming,
                               breedInfo[selectedPredictionIndex][0].drooling,
                               breedInfo[selectedPredictionIndex][0].coat_length,
-                              
+
                               breedInfo[selectedPredictionIndex][0].playfulness,
                               breedInfo[selectedPredictionIndex][0].protectiveness,
                               breedInfo[selectedPredictionIndex][0].trainability,
@@ -446,16 +446,16 @@ const ImageUploadNew = () => {
                       ></Radar>
                     </div>
                   )}
-                  {selectedBreedImage &&(
-                     <div className="flex items-center justify-center px-5 ">
-                     <img
-                       src={selectedBreedInfo[0].image_link}
-                       alt={`Selected ${selectedPredictionIndex + 1}`}
-                       className="sm:w-32 sm:h-32 md:w-64 md:h-64 rounded-full drop-shadow-xl"
-                     />
-                   </div>
+                  {selectedBreedImage && (
+                    <div className="flex items-center justify-center px-5 ">
+                      <img
+                        src={selectedBreedInfo[0].image_link}
+                        alt={`Selected ${selectedPredictionIndex + 1}`}
+                        className="sm:w-32 sm:h-32 md:w-64 md:h-64 rounded-full drop-shadow-xl"
+                      />
+                    </div>
                   )}
-                 
+
                   <div className='row-start-3'>
                     {/* {predictions[selectedPredictionIndex].score && (
                         <p>Confidence score: {predictions[selectedPredictionIndex].score * 100}%</p>
@@ -472,6 +472,24 @@ const ImageUploadNew = () => {
                       {breedInfo[selectedPredictionIndex][0].max_weight_female} Lbs</p>
 
                   </div>
+                  {
+                    selectedBreedInfo.length > 0 && (
+                      <div className=' row-start-3 col-start-3'>
+
+                        <p>Life expectancy: {selectedBreedInfo[0].min_life_expectancy} to
+                          {selectedBreedInfo[0].max_life_expectancy} Years</p>
+                        <p>Height in Males: {selectedBreedInfo[0].min_height_male} to
+                          {selectedBreedInfo[0].max_height_male} Inches</p>
+                        <p>Height in Females: {selectedBreedInfo[0].min_height_female} to
+                          {selectedBreedInfo[0].max_height_female} Inches</p>
+                        <p>Weight in Males: {selectedBreedInfo[0].min_weight_male} to
+                          {selectedBreedInfo[0].max_weight_male} Lbs</p>
+                        <p>Weight in Females: {selectedBreedInfo[0].min_weight_female} to
+                          {selectedBreedInfo[0].max_weight_female} Lbs</p>
+
+                      </div>
+                    )}
+
 
                 </div>
               )}
