@@ -112,10 +112,8 @@ const ImageUploadNew = () => {
   const toggleDropdown = () => {
     // Toggle the dropdown state
     setIsDropdownOpen(!isDropdownOpen);
-    setSelectedBreed(null);
-    setSelectedBreedInfo([]);
-    setDatasetsList([]);
-    console.log(isDropdownOpen);
+  
+    // console.log(isDropdownOpen);
   };
   const onFileChange = async (event) => {
     const file = event.target.files[0];
@@ -356,8 +354,8 @@ const ImageUploadNew = () => {
                   <p> {predictions[selectedPredictionIndex].label} detected with {(predictions[selectedPredictionIndex].score * 100).toFixed(1)} %</p>
                   <p>{predictions[selectedPredictionIndex].label}  Characteristics</p>
                   <div className="dropdown dropdown-bottom flex justify-center content-center ">
-                    <div tabIndex={0} role="button" className="btn m-1" onClick={toggleDropdown}>
-                      {isDropdownOpen ? 'Close' : 'Compare to Other dogs'}
+                    <div tabIndex={0} role="button" className="btn m-1 w-48" onClick={toggleDropdown}>
+                      {selectedBreed != null ? `${selectedBreed}` : 'Compare to Other dogs'}
                     </div>
                     {isDropdownOpen && (
                     <ul
@@ -365,7 +363,7 @@ const ImageUploadNew = () => {
                       <div className="overflow-y-auto max-h-96">
                         {breeds.map((breed, index) => (
                           <li key={index} onClick={() => handleBreedSelect(breed[0])} >
-                            <button className='btn btn-ghost text-center' >{breed[0]}</button>
+                            <button className='btn btn-ghost text-center content-center' >{breed[0]}</button>
                           </li>
                         ))}
                       </div>
