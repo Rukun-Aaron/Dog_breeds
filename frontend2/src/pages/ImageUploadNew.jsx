@@ -433,12 +433,12 @@ const ImageUploadNew = () => {
                       </div>
                     )}
                   </div>
-                  <div className="dropdown dropdown-bottom flex flex-col justify-center items-center md:row-start-3 lg:row-start-1 lg:col-start-3">
-                    <div tabIndex={0} role="button" className="btn m-1 w-48" onClick={toggleDropdown}>
+                  <div className="dropdown dropdown-end flex flex-col justify-center items-center md:row-start-3 lg:row-start-1 lg:col-start-3 ">
+                    <div tabIndex={0} role="button" className="btn m-1 w-48 " onClick={toggleDropdown}>
                       {selectedBreed != null ? `${selectedBreed}` : 'Compare to Other dogs'}
                     </div>
                     {isDropdownOpen && (
-                      <ul className="dropdown-content z-[2] menu p-2 *:shadow bg-base-100 rounded-box sm:max-h-48 w-52 max-h-50 mt-1">
+                      <ul className="dropdown-content z-[2] menu p-2 *:shadow bg-base-100 rounded-box sm:max-h-64 w-52 max-h-50">
                         {/* Adjusted the margin-top (mt-2) to reduce vertical space */}
                         <div className="overflow-y-auto max-h-96">
                           {breeds.map((breed, index) => (
@@ -448,17 +448,26 @@ const ImageUploadNew = () => {
                           ))}
                         </div>
                       </ul>
+
                     )}
-                    {selectedBreedImage && (
-                      <div className="flex items-center justify-center z-[1] py-4">
-                        {/* Adjusted the padding (py-4) to reduce vertical space */}
+                    {selectedBreedImage ? (
+                      <div className="flex items-center justify-center z-[1] py-[4rem]">
                         <img
                           src={selectedBreedInfo[0].image_link}
                           alt={`Selected ${selectedPredictionIndex + 1}`}
                           className="sm:w-32 sm:h-32 md:w-64 md:h-64 rounded-full drop-shadow-xl"
                         />
                       </div>
+                    ) : (
+                      <div className="flex items-center justify-center z-[1] py-[4rem]">
+                        <img
+                          src={'https://i.pngimg.me/thumb/f/720/m2i8Z5K9i8K9H7N4.jpg'}
+                          className="sm:w-32 sm:h-32 md:w-64 md:h-64 rounded-full drop-shadow-xl"
+                        />
+                      </div>
                     )}
+
+
                   </div>
 
 
@@ -516,7 +525,7 @@ const ImageUploadNew = () => {
           </div>
         )}
       </div>
-    </div>
+    </div >
   );
 };
 
