@@ -441,7 +441,7 @@ const ImageUploadNew = () => {
                       {selectedBreed != null ? `${selectedBreed}` : 'Compare to Other dogs'}
                     </div>
                     {isDropdownOpen && (
-                      <ul className="dropdown-content z-[2] menu p-2 *:shadow bg-base-100 rounded-box sm:max-h-64 w-52 max-h-50">
+                      <ul className="dropdown-content absolute top-0 left-32 z-[2] menu p-2 *:shadow bg-base-100 rounded-box sm:max-h-64 w-52 max-h-50">
                         {/* Adjusted the margin-top (mt-2) to reduce vertical space */}
                         <div className="overflow-y-auto max-h-96">
                           {breeds.map((breed, index) => (
