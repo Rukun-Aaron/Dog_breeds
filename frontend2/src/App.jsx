@@ -13,8 +13,8 @@ function App() {
   return (
     <Router>
       <div className="w-full h-screen drawer drawer-end">
-        <Navbar />
-        <div className="h-full w-full dark:bg-neutral-900 scrollbar overflow-y-auto">
+        {/* <Navbar /> */}
+        <div className="h-full w-full dark:bg-neutral-900">
           <Routes>
             <Route path="/" element={<Homepage />} />
             <Route path="/detection" element={<ImageUploadNew />} />

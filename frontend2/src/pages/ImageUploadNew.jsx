@@ -17,6 +17,7 @@ import {
 } from "chart.js";
 
 import { Radar, Bar, Chart } from 'react-chartjs-2';
+import Navbar from '../components/NavBar';
 
 ChartJS.register(
   ArcElement,
@@ -249,9 +250,10 @@ const ImageUploadNew = () => {
     setSelectedPredictionIndex(null);
   }
   return (
-    <div className="w-full h-full flex justify-center overflow-x-hidden pt-24 pb-4">
+    <div className="w-full h-full flex flex-col items-center overflow-x-hidden pb-4">
+      <Navbar/>
       <div className="max-w-4xl xl:max-w-5xl w-11/12 flex flex-col items-center h-full gap-1">
-        <h1 className="text-2xl font-bold underline p-1">Classify Your Dog</h1>
+        <h1 className="text-2xl font-bold pt-4">Classify Your Dog</h1>
         <h1 className="text-xl font-varela text-center dark:text-neutral-100">
           Drag and Drop or Browse to Upload Image
         </h1>

@@ -1,26 +1,37 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import Navbar from './NavBar';
 
 function Homepage() {
     
   const navigate = useNavigate();
 
   return (
-    <div className="w-full h-full flex flex-col items-center relative z-0">
+    <div className="w-full flex flex-col items-center relative z-0">
       {/* Section 1: Blue background with a dog image */}
-      <div className="w-full min-h-screen bg-white relative">
-        <div className="bg-blue-400 text-white w-full h-4/5 pt-20 pb-10 relative overflow-hidden">
-          <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between relative">
-            <div className="md:w-3/4 mt-28">
-              <h1 className="text-5xl font-bold mb-4">Identify dog breeds from photos with AI</h1>
-              <p className="text-lg mb-6">
-                Discover the best services and products for your furry friends.
-              </p>
-              <button onClick={() => navigate('/detection')} className="bg-orange-500 text-white px-12 py-3 rounded-full">
-                Start Now
-              </button>
+      <div className="w-full min-h-screen bg-white relative"> 
+        <div className="text-white w-full h-full pb-10 relative overflow-hidden"
+            style={{
+            backgroundImage: `url('/polygon2.png')`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            height: '90vh',
+            }}
+        >
+            
+      <Navbar isHomepage />
+        
+            <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between relative">
+                <div className="md:w-3/4 mt-28">
+                    <h1 className="text-5xl font-bold mb-4">Identify dog breeds from photos with AI</h1>
+                    <p className="text-lg mb-6">
+                        Discover the best services and products for your furry friends.
+                    </p>
+                    <button onClick={() => navigate('/detection')} className="btn btn-ghost bg-orange-500 text-white px-12 py-3 rounded-full">
+                        Start Now
+                    </button>
+                </div>
             </div>
-          </div>
         </div>
 
         <div className="absolute bottom-0 right-0 w-1/2 h-3/4 md:w-2/3 z-5">
@@ -86,14 +97,15 @@ function Homepage() {
                         </li>
                     </ul>
                 </div>
-                <button onClick={() => navigate('/detection')} className="bg-orange-500 text-white px-12 py-3 rounded-full mt-4">
+                <button onClick={() => navigate('/detection')} className="btn btn-ghost bg-orange-500 text-white px-12 py-3 rounded-full mt-4">
                 Start Now
                 </button>
             </div>
         </div>
       </div>
 
-      <div className="w-full min-h-40 bg-blue-300"></div>
+        {/* Footer */}
+        <div className="w-full min-h-40 bg-blue-300 clip-path-[polygon(0 0, 100% 0, 100% 80%, 0 100%)]"></div>
     </div>
   );
 }
