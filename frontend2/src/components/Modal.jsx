@@ -13,11 +13,11 @@ import {
     LineElement,
     RadialLinearScale,
     registerables
-  } from "chart.js";
-  
-  import { Radar, Bar, Chart } from 'react-chartjs-2';
-  
-  ChartJS.register(
+} from "chart.js";
+
+import { Radar, Bar, Chart } from 'react-chartjs-2';
+
+ChartJS.register(
     ArcElement,
     Tooltip,
     Legend,
@@ -26,23 +26,28 @@ import {
     RadialLinearScale,
     CategoryScale,
     ...registerables
-  )
-const Modal = ({ showModal, handleModalClose, predictions, selectedPredictionIndex, toggleDropdown, selectedBreed, isDropdownOpen, breeds, breedInfo, images, selectedBreedImage, selectedBreedInfo, datasetsList, handleBreedSelect }) => {
+)
+const Modal = ({ showModal, handleModalClose, predictions, selectedPredictionIndex, toggleDropdown, selectedBreed, isDropdownOpen,
+    breeds, breedInfo, images, selectedBreedImage, selectedBreedInfo, datasetsList, handleBreedSelect }) => {
     return (
         <>
+            {/* sm:w-9/12 sm:h-48 md:w-9/12 md:h-[30rem] lg:h-[30rem] xl:h-[45rem]  2xl:h-[49rem] */}
             {showModal && (
-                <div className="z-50 fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center font-outfit">
-                    <div className="relative bg-white p-4 rounded-md sm:w-9/12 sm:h-48 md:w-9/12 md:h-[30rem] lg:h-[30rem] xl:h-[30rem] 2xl:h-[47rem] text-center overflow-y-auto">
-                        <h1 className="text-3xl font-bold mb-4">What is it like owning a {predictions[selectedPredictionIndex].label}?</h1>
-                        <button
-                            onClick={handleModalClose}
-                            type="button"
-                            className="w-12 h-12 dark:text-neutral-100 btn btn-sm btn-circle btn-ghost absolute top-4 right-4">
-                            <FontAwesomeIcon icon={faTimes} size="lg" />
-                        </button>
+                <div className="z-50 fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center  items-center font-outfit">
+                    <div className="relative  bg-white p-4 m-2 rounded-2xl min-w-fu h-[80%] min-w-[320px] aspect-9/16 sm:aspect-4/3 md:h-[80%] lg:aspect-video  lg:h-[40rem] xl:h-[44rem]  text-center overflow-y-auto">
+                        <div className='flex flex-row justify-center'>
+                            <span className="text-3xl font-bold mb-4 text-center">What is it like owning a {predictions[selectedPredictionIndex].label}?</span>
+                            <button
+                                onClick={handleModalClose}
+                                type="button"
+                                className="w-12 h-12 dark:text-neutral-100 btn btn-sm btn-circle btn-ghost absolute top-4 right-4">
+                                <FontAwesomeIcon icon={faTimes} size="lg" />
+                            </button>
+                        </div>
+                        {/* mid:grid-cols-2 2xl:grid-cols-3 */}
 
                         {selectedPredictionIndex !== null && (
-                            <div className="grid grid-cols-1 gap-4 py-1 md:grid-cols-2 lg:grid-cols-3 lg:gap-y-1 lg:gap-x-4 text-gray-700 justify-center content-center	">
+                            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 text-gray-700 justify-center content-center ">
                                 <div className='flex  items-center justify-center px-5'>
                                     <div tabIndex={0} role="button" className="btn w-48   " onClick={toggleDropdown}>
                                         {predictions[selectedPredictionIndex].label}
@@ -54,7 +59,7 @@ const Modal = ({ showModal, handleModalClose, predictions, selectedPredictionInd
                                     <p>{predictions[selectedPredictionIndex].label}  Characteristics</p>
 
                                 </div>
-                                <div className="dropdown dropdown-bottom flex  justify-center items-center md:row-start-3 lg:row-start-1 lg:col-start-3 ">
+                                <div className="dropdown dropdown-bottom flex  justify-center items-center">
                                     <div tabIndex={0} role="button" className="btn w-48   " onClick={toggleDropdown}>
                                         {selectedBreed != null ? `${selectedBreed}` : 'Compare to Other dogs'}
                                     </div>
@@ -77,7 +82,7 @@ const Modal = ({ showModal, handleModalClose, predictions, selectedPredictionInd
                                     <img
                                         src={URL.createObjectURL(images[selectedPredictionIndex])}
                                         alt={`Selected ${selectedPredictionIndex + 1}`}
-                                        className="sm:w-32 sm:h-32 md:w-64 md:h-64 rounded-full drop-shadow-xl "
+                                        className="sm:w-64 sm:h-64 md:w-64 md:h-64 rounded-full drop-shadow-xl "
                                     />
 
                                 </div>
@@ -153,7 +158,7 @@ const Modal = ({ showModal, handleModalClose, predictions, selectedPredictionInd
                                         <img
                                             src={selectedBreedInfo[0].image_link}
                                             alt={`Selected ${selectedPredictionIndex + 1}`}
-                                            className="sm:w-32 sm:h-32 md:w-64 md:h-64 rounded-full drop-shadow-xl"
+                                            className="sm:w-64 sm:h-64 md:w-64 md:h-64 rounded-full drop-shadow-xl"
                                         />
                                     </div>
                                 ) : (
@@ -165,7 +170,7 @@ const Modal = ({ showModal, handleModalClose, predictions, selectedPredictionInd
                                     </div>
                                 )}
 
-                                <div className='row-start-3 flex  flex-col'>
+                                <div className=' flex  flex-col'>
                                     {/* {predictions[selectedPredictionIndex].score && (
                         <p>Confidence score: {predictions[selectedPredictionIndex].score * 100}%</p>
                       )} */}
@@ -183,7 +188,7 @@ const Modal = ({ showModal, handleModalClose, predictions, selectedPredictionInd
                                 </div>
                                 {
                                     selectedBreedInfo.length > 0 && (
-                                        <div className='   md:col-start-2 md:row-start-5 lg:row-start-3 lg:col-start-3'>
+                                        <div className='flex  flex-col'>
 
                                             <p>Life expectancy: {selectedBreedInfo[0].min_life_expectancy} to {" "}
                                                 {selectedBreedInfo[0].max_life_expectancy} Years</p>
@@ -204,7 +209,7 @@ const Modal = ({ showModal, handleModalClose, predictions, selectedPredictionInd
                         )}
 
                         <button
-                            className="mt-4 p-2 bg-primary rounded-md"
+                            className="mt-4 p-2 bg-primary rounded-md  inline-block md:hidden "
                             onClick={handleModalClose}>
                             Close
                         </button>
