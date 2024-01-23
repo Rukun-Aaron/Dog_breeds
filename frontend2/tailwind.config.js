@@ -5,11 +5,20 @@ module.exports = {
   ],
   darkMode: 'class',
   theme: {
+    
     extend: {
       fontFamily: {
         'varela': ['Varela Round', 'sans-serif'],
-        'outfit':['Outfit', 'sans-serif'],
-      }
+        'outfit': ['Outfit', 'sans-serif'],
+      },
+      screens: {
+        'mid': '1375px',
+        'lap-l': '1440px'
+      },
+      aspectRatio: {
+        '4/3': '4 / 3',
+        '9/16': '9 / 16',
+      },
 
     },
   },
