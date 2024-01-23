@@ -38,7 +38,7 @@ function Homepage() {
         <div className="absolute bottom-0 right-0 w-1/2 h-3/4 md:w-2/3 z-5">
           <img
             alt="dogs"
-            src="/dog3.png"
+            src={process.env.PUBLIC_URL+ "/dog3.png"}
             style={{ position: 'sticky', width: '50vw', top: 0, bottom: 0 }}
           />
         </div>
@@ -63,13 +63,13 @@ function Homepage() {
             <div className="w-1/2 p-8 relative">
                 <img
                 alt="bernese-mountain-dog"
-                src="/bernese-mountain-dog.jpg"
+                src={process.env.PUBLIC_URL+"/bernese-mountain-dog.jpg"}
                 style={{ borderRadius: '28px' }}
                 />
                 <div className="absolute bottom-0 right-0 w-1/2 h-1/2" >
         <img
             alt="second-dog-image"
-            src="/stats.png"
+            src={process.env.PUBLIC_URL+"/stats.png"}
             style={{ borderRadius: '28px', boxShadow: '0 4px 16px rgba(0, 0, 0, 0.2)' }}
         />
     </div>
