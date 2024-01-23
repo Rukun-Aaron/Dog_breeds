@@ -7,33 +7,34 @@ function Homepage() {
   const navigate = useNavigate();
 
   return (
-    <div className="w-full flex flex-col items-center relative z-0">
+    <div className="w-full h-full flex flex-col items-center relative z-0">
       {/* Section 1: Blue background with a dog image */}
       <div className="w-full min-h-screen bg-white relative"> 
-        <div className="text-white w-full h-full pb-10 relative overflow-hidden"
-            style={{
-            backgroundImage: `url('/polygon2.png')`,
+        <div
+          className="text-white w-full h-full pb-10 relative overflow-hidden"
+          style={{
+            backgroundImage: `url('/bg.png')`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             height: '90vh',
-            }}
+          }}
         >
-            
-      <Navbar isHomepage />
-        
-            <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between relative">
-                <div className="md:w-3/4 mt-28">
-                    <h1 className="text-5xl font-bold mb-4">Identify dog breeds from photos with AI</h1>
-                    <p className="text-lg mb-6">
-                        Discover the best services and products for your furry friends.
-                    </p>
-                    <button onClick={() => navigate('/detection')} className="btn btn-ghost bg-orange-500 text-white px-12 py-3 rounded-full">
-                        Start Now
-                    </button>
-                </div>
+          <Navbar isHomepage />
+          <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between relative">
+            <div className="md:w-3/4 mt-28">
+              <h1 className="text-5xl font-bold mb-4" style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.3)' }}>Identify dog breeds from photos with AI</h1>
+              <p className="text-2xl mb-6" style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.3)' }}>
+                Discover the best services blah blah blah.
+              </p>
+              <button onClick={() => navigate('/detection')} className="btn btn-ghost shadow-md bg-orange-500 text-white px-12 py-3 rounded-full">
+                Start Now
+              </button>
             </div>
+          </div>
+
         </div>
 
+        {/* Dog image */}
         <div className="absolute bottom-0 right-0 w-1/2 h-3/4 md:w-2/3 z-5">
           <img
             alt="dogs"
@@ -97,7 +98,7 @@ function Homepage() {
                         </li>
                     </ul>
                 </div>
-                <button onClick={() => navigate('/detection')} className="btn btn-ghost bg-orange-500 text-white px-12 py-3 rounded-full mt-4">
+                <button onClick={() => navigate('/detection')} className="btn btn-ghost shadow-md bg-orange-500 text-white px-12 py-3 rounded-full mt-4">
                 Start Now
                 </button>
             </div>
@@ -105,7 +106,14 @@ function Homepage() {
       </div>
 
         {/* Footer */}
-        <div className="w-full min-h-40 bg-blue-300 clip-path-[polygon(0 0, 100% 0, 100% 80%, 0 100%)]"></div>
+        {/* <div className="w-full min-h-30 bg-blue-300 clip-path-[polygon(0 0, 100% 0, 100% 80%, 0 100%)]"
+            style={{
+                backgroundImage: `url('/footerbg.png')`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                height: '20vh',
+            }}
+        ></div> */}
     </div>
   );
 }
