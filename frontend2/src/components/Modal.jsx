@@ -34,7 +34,7 @@ const Modal = ({ showModal, handleModalClose, predictions, selectedPredictionInd
             {/* sm:w-9/12 sm:h-48 md:w-9/12 md:h-[30rem] lg:h-[30rem] xl:h-[45rem]  2xl:h-[49rem] */}
             {showModal && (
                 <div className="z-50 fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center  items-center font-outfit">
-                    <div className="relative  bg-white p-4 m-2 rounded-2xl min-w-fu h-[80%] min-w-[320px] aspect-9/16 sm:aspect-4/3 md:h-[80%] lg:aspect-video  lg:h-[40rem] xl:h-[44rem]  text-center overflow-y-auto">
+                    <div className="relative  bg-white p-4 m-2 rounded-2xl  h-[80%] min-w-[320px] aspect-9/16 sm sm:aspect-auto  md:h-[80%] lg:aspect-video  lg:h-[40rem] xl:h-[44rem]  text-center overflow-y-auto">
                         <div className='flex flex-row justify-center'>
                             <span className="text-3xl font-bold mb-4 text-center">What is it like owning a {predictions[selectedPredictionIndex].label}?</span>
                             <button
@@ -47,8 +47,8 @@ const Modal = ({ showModal, handleModalClose, predictions, selectedPredictionInd
                         {/* mid:grid-cols-2 2xl:grid-cols-3 */}
 
                         {selectedPredictionIndex !== null && (
-                            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 text-gray-700 justify-center content-center ">
-                                <div className='flex  items-center justify-center px-5'>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 text-gray-700 justify-center content-center ">
+                                <div className='flex  items-center justify-center px-5 row-start-1 lg:col-start-1'>
                                     <div tabIndex={0} role="button" className="btn w-48   " onClick={toggleDropdown}>
                                         {predictions[selectedPredictionIndex].label}
                                     </div>
