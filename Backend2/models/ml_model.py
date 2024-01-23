@@ -33,7 +33,7 @@ def get_predictions_VIT(file_path, new_path):
     VIT_model.eval()
 
     feature_extractor = ViTFeatureExtractor.from_pretrained('google/vit-base-patch16-224')
-    new_image = Image.open(new_path)
+    new_image = Image.open(new_path).convert("RGB")
     inputs = feature_extractor(images = new_image, return_tensors="pt")['pixel_values']
 
     with torch.no_grad():
