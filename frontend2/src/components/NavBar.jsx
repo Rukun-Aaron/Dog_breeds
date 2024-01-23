@@ -5,7 +5,7 @@ import {
   faHome, faMagnifyingGlass, faUserAlt, faRightToBracket, faBars,
 } from '@fortawesome/free-solid-svg-icons';
 
-function Navbar() {
+function Navbar({ isHomepage }) {
   const [isHomePage, setIsHomePage] = useState(false);
 
   const navigate = useNavigate();
@@ -16,26 +16,28 @@ function Navbar() {
   }, [location]);
 
   return (
-    <div className={`navbar  z-10 left-1/2 -translate-x-1/2 w-11/12 max-w-4xl xl:max-w-5xl top-4 shadow dark:shadow-xl bg-blue-400 opacity-90 dark:bg-neutral-800 backdrop-blur-sm rounded-xl  ${isHomePage ? 'absolute' : 'fixed'}`}>
+    
+    // <div className={`navbar z-10 left-1/2 -translate-x-1/2 px-4 w-full top-4 shadow dark:shadow-xl opacity-90 dark:bg-neutral-800 backdrop-blur-sm rounded-xl ${isHomePage ? 'absolute' : 'fixed'}`}>  
+    <div className={`navbar z-8 left-1/2 -translate-x-1/2 px-4 w-full pt-2 relative ${isHomepage ? '' : 'shadow'}`}>
       <div className="flex-1 flex gap-2">
         <div className="cursor-pointer flex items-center justify-center" onClick={() => navigate('/')}>
           <div className="pl-4 pr-3">
             <img
               alt="logo"
-              src={process.env.PUBLIC_URL + '/logo2.ico'}
+              src={`${isHomepage ? process.env.PUBLIC_URL + '/logo2.ico' : process.env.PUBLIC_URL + '/logo3.ico'}`}
               className="h-12 w-12"
             />
           </div>
-          <p className="text-xl text-white font-semibold">
+          <p className={`text-xl font-semibold ${isHomepage ? 'text-white' : 'text-black'}`}>
             DogIO
           </p>
         </div>
       </div>
-      <div className="gap-2 text-white pr-4">
-        <button onClick={() => navigate('/')} className='btn btn-ghost rounded-full px-8 py-2'>
+      <div className="gap-2 pr-4">
+        <button onClick={() => navigate('/')} className={`btn btn-ghost rounded-full px-8 py-2 ${isHomepage ? 'text-white' : 'text-black'}`}>
           Home
         </button>
-        <button className="bg-orange-500 px-8 py-2 rounded-full btn btn-ghost" onClick={() => navigate('/detection')}>
+        <button className="bg-orange-500 px-8 rounded-full btn btn-ghost text-white" onClick={() => navigate('/detection')}>
           Detect
         </button>
       </div>
