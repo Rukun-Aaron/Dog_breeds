@@ -22,7 +22,7 @@ function Navbar() {
           <div className="pl-4 pr-3">
             <img
               alt="logo"
-              src={process.env.PUBLIC_URL + '//logo2.ico'}
+              src={process.env.PUBLIC_URL + '/logo2.ico'}
               className="h-12 w-12"
             />
           </div>
