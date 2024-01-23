@@ -24,7 +24,7 @@ function Navbar({ isHomepage }) {
           <div className="pl-4 pr-3">
             <img
               alt="logo"
-              src={`${isHomepage ? '/logo2.ico' : '/logo3.ico'}`}
+              src={`${isHomepage ? process.env.PUBLIC_URL + '/logo2.ico' : process.env.PUBLIC_URL + '/logo3.ico'}`}
               className="h-12 w-12"
             />
           </div>
