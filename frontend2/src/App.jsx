@@ -11,7 +11,7 @@ import Homepage from './components/Homepage';
 
 function App() {
   return (
-    <Router basename="/Dog_breeds/frontend2">
+    <Router>
       <div className="w-full h-screen drawer drawer-end">
         <Navbar />
         <div className="h-full w-full dark:bg-neutral-900 scrollbar overflow-y-auto">
