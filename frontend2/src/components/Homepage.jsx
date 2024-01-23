@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import Navbar from './NavBar';
 
 function Homepage() {
     
@@ -8,27 +9,46 @@ function Homepage() {
   return (
     <div className="w-full h-full flex flex-col items-center relative z-0">
       {/* Section 1: Blue background with a dog image */}
-      <div className="w-full min-h-screen bg-white relative">
-        <div className="bg-blue-400 text-white w-full h-4/5 pt-20 pb-10 relative overflow-hidden">
+      <div className="w-full min-h-screen bg-white relative"> 
+        <div
+          className="text-white w-full h-full pb-10 relative"
+          style={{
+            backgroundImage: `url('/bg3.png')`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            height: '90vh',
+          }}
+        >
+          <Navbar isHomepage />
           <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between relative">
             <div className="md:w-3/4 mt-28">
-              <h1 className="text-5xl font-bold mb-4">Identify dog breeds from photos with AI</h1>
-              <p className="text-lg mb-6">
-                Discover the best services and products for your furry friends.
+              <h1 className="text-5xl font-bold mb-4" style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.3)' }}>Identify dog breeds from photos with AI</h1>
+              <p className="text-2xl mb-6" style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.3)' }}>
+                Discover the best services blah blah blah.
               </p>
-              <button onClick={() => navigate('/detection')} className="bg-orange-500 text-white px-12 py-3 rounded-full">
+              <button onClick={() => navigate('/detection')} className="btn btn-ghost bg-orange-500 text-white px-12 py-3 rounded-full">
                 Start Now
               </button>
             </div>
           </div>
+
         </div>
 
+        {/* Dog image */}
         <div className="absolute bottom-0 right-0 w-1/2 h-3/4 md:w-2/3 z-5">
           <img
             alt="dogs"
-            src="/dog3.png"
+            src={process.env.PUBLIC_URL+ "/dog3.png"}
             style={{ position: 'sticky', width: '50vw', top: 0, bottom: 0 }}
           />
+        </div>
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+            {/* <div className="w-0 h-0 border-t-4 border-r-4 border-transparent border-dashed border-gray-500 transform rotate-45"></div> */}
+            <img
+              alt="logo"
+              src="/arrow.ico"
+              className="h-4 w-4 opacity-50"
+            />
         </div>
       </div>
 
@@ -43,13 +63,13 @@ function Homepage() {
             <div className="w-1/2 p-8 relative">
                 <img
                 alt="bernese-mountain-dog"
-                src="/bernese-mountain-dog.jpg"
+                src={process.env.PUBLIC_URL+"/bernese-mountain-dog.jpg"}
                 style={{ borderRadius: '28px' }}
                 />
                 <div className="absolute bottom-0 right-0 w-1/2 h-1/2" >
         <img
             alt="second-dog-image"
-            src="/stats.png"
+            src={process.env.PUBLIC_URL+"/stats.png"}
             style={{ borderRadius: '28px', boxShadow: '0 4px 16px rgba(0, 0, 0, 0.2)' }}
         />
     </div>
@@ -86,14 +106,22 @@ function Homepage() {
                         </li>
                     </ul>
                 </div>
-                <button onClick={() => navigate('/detection')} className="bg-orange-500 text-white px-12 py-3 rounded-full mt-4">
+                <button onClick={() => navigate('/detection')} className="btn btn-ghost shadow-md bg-orange-500 text-white px-12 py-3 rounded-full mt-4">
                 Start Now
                 </button>
             </div>
         </div>
       </div>
 
-      <div className="w-full min-h-40 bg-blue-300"></div>
+        {/* Footer */}
+        {/* <div className="w-full min-h-30 bg-blue-300 clip-path-[polygon(0 0, 100% 0, 100% 80%, 0 100%)]"
+            style={{
+                backgroundImage: `url('/footerbg.png')`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                height: '20vh',
+            }}
+        ></div> */}
     </div>
   );
 }
