@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCloudArrowUp, faXmark } from '@fortawesome/free-solid-svg-icons';
 import Modal from '../components/Modal';
-
+import Navbar from '../components/NavBar';
 import {
   getPredictions, getBreedInfo, getAllBreedInfo
 } from '../services/apiService';
