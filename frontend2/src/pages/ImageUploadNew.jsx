@@ -481,15 +481,15 @@ const ImageUploadNew = () => {
                     {/* {predictions[selectedPredictionIndex].score && (
                         <p>Confidence score: {predictions[selectedPredictionIndex].score * 100}%</p>
                       )} */}
-                    <p>Life expectancy: {breedInfo[selectedPredictionIndex][0].min_life_expectancy} to
+                    <p>Life expectancy: {breedInfo[selectedPredictionIndex][0].min_life_expectancy} to {" "}
                       {breedInfo[selectedPredictionIndex][0].max_life_expectancy} Years</p>
-                    <p>Height in Males: {breedInfo[selectedPredictionIndex][0].min_height_male} to
+                    <p>Height in Males: {breedInfo[selectedPredictionIndex][0].min_height_male} to {" "}
                       {breedInfo[selectedPredictionIndex][0].max_height_male} Inches</p>
-                    <p>Height in Females: {breedInfo[selectedPredictionIndex][0].min_height_female} to
+                    <p>Height in Females: {breedInfo[selectedPredictionIndex][0].min_height_female} to {" "}
                       {breedInfo[selectedPredictionIndex][0].max_height_female} Inches</p>
-                    <p>Weight in Males: {breedInfo[selectedPredictionIndex][0].min_weight_male} to
+                    <p>Weight in Males: {breedInfo[selectedPredictionIndex][0].min_weight_male} to {" "}
                       {breedInfo[selectedPredictionIndex][0].max_weight_male} Lbs</p>
-                    <p>Weight in Females: {breedInfo[selectedPredictionIndex][0].min_weight_female} to
+                    <p>Weight in Females: {breedInfo[selectedPredictionIndex][0].min_weight_female} to {" "}
                       {breedInfo[selectedPredictionIndex][0].max_weight_female} Lbs</p>
 
                   </div>
@@ -497,15 +497,15 @@ const ImageUploadNew = () => {
                     selectedBreedInfo.length > 0 && (
                       <div className='   md:col-start-2 md:row-start-5 lg:row-start-3 lg:col-start-3'>
 
-                        <p>Life expectancy: {selectedBreedInfo[0].min_life_expectancy} to
+                        <p>Life expectancy: {selectedBreedInfo[0].min_life_expectancy} to {" "}
                           {selectedBreedInfo[0].max_life_expectancy} Years</p>
-                        <p>Height in Males: {selectedBreedInfo[0].min_height_male} to
+                        <p>Height in Males: {selectedBreedInfo[0].min_height_male} to {" "}
                           {selectedBreedInfo[0].max_height_male} Inches</p>
-                        <p>Height in Females: {selectedBreedInfo[0].min_height_female} to
+                        <p>Height in Females: {selectedBreedInfo[0].min_height_female} to {" "}
                           {selectedBreedInfo[0].max_height_female} Inches</p>
-                        <p>Weight in Males: {selectedBreedInfo[0].min_weight_male} to
+                        <p>Weight in Males: {selectedBreedInfo[0].min_weight_male} to {" "}
                           {selectedBreedInfo[0].max_weight_male} Lbs</p>
-                        <p>Weight in Females: {selectedBreedInfo[0].min_weight_female} to
+                        <p>Weight in Females: {selectedBreedInfo[0].min_weight_female} to {" "}
                           {selectedBreedInfo[0].max_weight_female} Lbs</p>
 
                       </div>
