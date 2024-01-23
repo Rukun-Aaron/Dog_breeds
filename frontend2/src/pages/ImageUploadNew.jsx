@@ -121,6 +121,7 @@ const ImageUploadNew = () => {
 
     // console.log(isDropdownOpen);
   };
+  
   const onFileChange = async (event) => {
     const file = event.target.files[0];
 
@@ -325,7 +326,7 @@ const ImageUploadNew = () => {
                   {uploadedImage.name}
                 </div>
                 {predictions.length > 0 && predictions[index] && (
-                  <div className="text-primary rounded-2xl border border-primary pl-1 pr-1">
+                  <div className="text-[#3EA2EA] rounded-2xl border border-[#3EA2EA] pl-1 pr-1">
                     {predictions[index].label} {(predictions[index].score * 100).toFixed(2)}%
                   </div>
                 )}
