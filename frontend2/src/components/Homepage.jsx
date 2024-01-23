@@ -11,9 +11,9 @@ function Homepage() {
       {/* Section 1: Blue background with a dog image */}
       <div className="w-full min-h-screen bg-white relative"> 
         <div
-          className="text-white w-full h-full pb-10 relative overflow-hidden"
+          className="text-white w-full h-full pb-10 relative"
           style={{
-            backgroundImage: `url('/bg.png')`,
+            backgroundImage: `url('/bg3.png')`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             height: '90vh',
@@ -26,7 +26,7 @@ function Homepage() {
               <p className="text-2xl mb-6" style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.3)' }}>
                 Discover the best services blah blah blah.
               </p>
-              <button onClick={() => navigate('/detection')} className="btn btn-ghost shadow-md bg-orange-500 text-white px-12 py-3 rounded-full">
+              <button onClick={() => navigate('/detection')} className="btn btn-ghost bg-orange-500 text-white px-12 py-3 rounded-full">
                 Start Now
               </button>
             </div>
@@ -41,6 +41,14 @@ function Homepage() {
             src="/dog3.png"
             style={{ position: 'sticky', width: '50vw', top: 0, bottom: 0 }}
           />
+        </div>
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+            {/* <div className="w-0 h-0 border-t-4 border-r-4 border-transparent border-dashed border-gray-500 transform rotate-45"></div> */}
+            <img
+              alt="logo"
+              src="/arrow.ico"
+              className="h-4 w-4 opacity-50"
+            />
         </div>
       </div>
 

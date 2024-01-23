@@ -8,13 +8,14 @@ import {
 import Navbar from './components/NavBar';
 import ImageUploadNew from './pages/ImageUploadNew';
 import Homepage from './components/Homepage';
+import './styles/scrollbar.css';
 
 function App() {
   return (
     <Router>
       <div className="w-full h-screen drawer drawer-end">
         {/* <Navbar /> */}
-        <div className="h-full w-full dark:bg-neutral-900">
+        <div className="h-full w-full dark:bg-neutral-900 scrollbar overflow-y-auto">
           <Routes>
             <Route path="/" element={<Homepage />} />
             <Route path="/detection" element={<ImageUploadNew />} />

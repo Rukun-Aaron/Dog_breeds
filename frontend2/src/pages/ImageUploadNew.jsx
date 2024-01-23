@@ -18,6 +18,7 @@ import {
 
 import { Radar, Bar, Chart } from 'react-chartjs-2';
 import Navbar from '../components/NavBar';
+import '../styles/scrollbar.css';
 
 ChartJS.register(
   ArcElement,
@@ -254,10 +255,10 @@ const ImageUploadNew = () => {
       <Navbar/>
       <div className="max-w-4xl xl:max-w-5xl w-11/12 flex flex-col items-center h-full gap-1">
         <h1 className="text-2xl font-bold pt-4">Classify Your Dog</h1>
-        <h1 className="text-xl font-varela text-center dark:text-neutral-100">
+        <h1 className="text-xl text-center dark:text-neutral-100">
           Drag and Drop or Browse to Upload Image
         </h1>
-        <p className="text-gray-500 font-varela text-center dark:text-neutral-400 pb-4">
+        <p className="text-gray-500 text-center dark:text-neutral-400 pb-4">
           Upload unlimited images at once
         </p>
         <input
@@ -283,17 +284,17 @@ const ImageUploadNew = () => {
         >
           <div className={images.length > 0 ? 'flex flex-row' : 'md:flex flex-col hidden'}>
             <FontAwesomeIcon
-              className={images.length > 0 ? 'text-blue-400 opacity-90 p-4' : 'text-blue-400 opacity-90'}
+              className={images.length > 0 ? 'text-[#3EA2EA] p-4' : 'text-[#3EA2EA]'}
               icon={faCloudArrowUp}
               size={images.length > 0 ? '3x' : '5x'}
             />
             <div className="flex flex-col items-center justify-center">
               <h2
-                className={`dark:text-neutral-100 text-lg font-varela ${images.length === 0 && 'mt-8'} text-center`}
+                className={`dark:text-neutral-100 text-lg ${images.length === 0 && 'mt-8'} text-center`}
               >
                 Select a file or drag and drop here
               </h2>
-              <p className="text-gray-500 mt-4 font-varela text-center dark:text-neutral-400">
+              <p className="text-gray-500 mt-4 text-center dark:text-neutral-400">
                 JPG, PNG, file size no more than 10MB
               </p>
             </div>
@@ -310,7 +311,7 @@ const ImageUploadNew = () => {
               >
                 {isLoading && selectedFile === uploadedImage && (
                   <div className="absolute inset-0 flex items-center justify-end rounded-xl pr-40">
-                    <div className="w-6 h-6 border-t-2 border-primary border-solid rounded-full animate-spin ml-auto"></div>
+                    <div className="w-6 h-6 border-t-2 border-[#3EA2EA] border-solid rounded-full animate-spin ml-auto"></div>
                   </div>
                 )}
                 <div className="w-32 h-16 flex items-center justify-center">
@@ -346,7 +347,7 @@ const ImageUploadNew = () => {
           </div>
         )} */}
         {showModal && (
-          <div className="z-200 fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center font-outfit">
+          <div className="z-200 fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
             <div className="relative z-10 bg-white p-4 rounded-md  sm:w-full sm:h-48 md:w-9/12 md:h-[45rem] lg:h-[42rem] xl:h-[33rem] 2xl:h-[46rem] text-center overflow-y-auto">
               <h1 className="text-3xl font-bold mb-4">What is it like owning a {predictions[selectedPredictionIndex].label}?</h1>
               <button
@@ -500,7 +501,7 @@ const ImageUploadNew = () => {
                 </div>
               )}
               <button
-                className="mt-4 p-2 bg-primary rounded-md"
+                className="btn btn-ghost text-white bg-[#3EA2EA] rounded-full px-8 py-2"
                 onClick={() => {
                   handleModalClose();
                 }}

@@ -18,7 +18,7 @@ function Navbar({ isHomepage }) {
   return (
     
     // <div className={`navbar z-10 left-1/2 -translate-x-1/2 px-4 w-full top-4 shadow dark:shadow-xl opacity-90 dark:bg-neutral-800 backdrop-blur-sm rounded-xl ${isHomePage ? 'absolute' : 'fixed'}`}>  
-    <div className={`navbar z-10 left-1/2 -translate-x-1/2 px-4 w-full pt-2 relative ${isHomepage ? '' : 'shadow'}`}>
+    <div className={`navbar z-8 left-1/2 -translate-x-1/2 px-4 w-full pt-2 relative ${isHomepage ? '' : 'shadow'}`}>
       <div className="flex-1 flex gap-2">
         <div className="cursor-pointer flex items-center justify-center" onClick={() => navigate('/')}>
           <div className="pl-4 pr-3">
@@ -28,7 +28,7 @@ function Navbar({ isHomepage }) {
               className="h-12 w-12"
             />
           </div>
-          <p className={`text-xl text-white font-semibold ${isHomepage ? 'text-white' : 'text-black'}`}>
+          <p className={`text-xl font-semibold ${isHomepage ? 'text-white' : 'text-black'}`}>
             DogIO
           </p>
         </div>
