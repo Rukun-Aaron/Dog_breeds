@@ -89,7 +89,7 @@ const Modal = ({ showModal, handleModalClose, predictions, selectedPredictionInd
 
                                 {breedInfo[selectedPredictionIndex][0] && (
 
-                                    <div className=" flex  justify-center col-start-1 h-[21rem] sm:col-span-2 sm:h-auto sm:w-auto aspect-square lg:col-span-1 lg:row-start-2  lg:col-start-2">
+                                    <div className=" flex  justify-center col-start-1 aspect-square h-full w-full sm:col-span-2 sm:h-auto sm:w-auto  lg:col-span-1 lg:row-start-2  lg:col-start-2">
 
                                         <Radar
                                             className='p-2 w-[100%] h-[100%] flex-grow'
@@ -186,7 +186,7 @@ const Modal = ({ showModal, handleModalClose, predictions, selectedPredictionInd
                                 </div>
                                 {
                                     selectedBreedInfo.length > 0 && (
-                                        <div className='flex  flex-col justify-center col-start-1 row-start-6 sm:col-start-2 lg:row-start-3 lg:col-start-3'>
+                                        <div className='flex  flex-col justify-center col-start-1 row-start-6 sm:row-start-3 sm:col-start-2 lg:row-start-3 lg:col-start-3'>
 
                                             <p>Life expectancy: {selectedBreedInfo[0].min_life_expectancy} to {" "}
                                                 {selectedBreedInfo[0].max_life_expectancy} Years</p>
