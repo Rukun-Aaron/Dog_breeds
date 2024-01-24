@@ -1,8 +1,10 @@
 // ModalComponent.js
-import React from 'react';
+import React, { useState, useEffect, } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
-
+import {
+    getPredictions, getBreedInfo, getAllBreedInfo
+} from '../services/apiService';
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -27,8 +29,78 @@ ChartJS.register(
     CategoryScale,
     ...registerables
 )
-const Modal = ({ showModal, handleModalClose, predictions, selectedPredictionIndex, toggleDropdown, selectedBreed, isDropdownOpen,
-    breeds, breedInfo, images, selectedBreedImage, selectedBreedInfo, datasetsList, handleBreedSelect }) => {
+
+const Modal = ({ showModal, handleModalClose, predictions, selectedPredictionIndex, breeds, breedInfo, images,
+     selectedBreedImage2, selectedBreedInfo2, selectedBreed2 }) => {
+
+    const [selectedBreed, setSelectedBreed] = useState(null);
+    const [selectedBreedInfo, setSelectedBreedInfo] = useState([]);
+    const [selectedBreedImage, setSelectedBreedImage] = useState(null);
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const [datasetsList, setDatasetsList] = useState([]);
+
+    // const [datasetsList, setDatasetsList] = useState([]);
+    const handleBreedSelect = async (breed) => {
+        // Update the selected breed state
+        setSelectedBreed(breed);
+        try {
+            const response = await getBreedInfo(breed);
+            const data = await response.json();
+            setSelectedBreedImage(data[0].image_link);
+            setSelectedBreedInfo(data);
+
+            // console.log(selectedBreedInfo);
+        } catch (error) {
+            console.error('Error fetching selected breed info:', error);
+        }
+        setIsDropdownOpen(false);
+
+    };
+    const toggleDropdown = () => {
+        // Toggle the dropdown state
+        setIsDropdownOpen(!isDropdownOpen);
+
+        // console.log(isDropdownOpen);
+    };
+    useEffect(() => {
+        // This code will be executed when selectedBreedInfo changes
+        console.log('Selected Breed Info:', selectedBreedInfo);
+
+        if (selectedBreedInfo.length > 0) {
+            const newDataset = {
+                label: `${selectedBreed}: Score out of 5`,
+                data: [
+                    selectedBreedInfo[0].good_with_children,
+                    selectedBreedInfo[0].good_with_other_dogs,
+                    selectedBreedInfo[0].shedding,
+                    selectedBreedInfo[0].grooming,
+                    selectedBreedInfo[0].drooling,
+                    selectedBreedInfo[0].coat_length,
+
+                    selectedBreedInfo[0].playfulness,
+                    selectedBreedInfo[0].protectiveness,
+                    selectedBreedInfo[0].trainability,
+                    selectedBreedInfo[0].energy,
+                    selectedBreedInfo[0].barking,
+                    selectedBreedInfo[0].good_with_strangers,
+                ],
+                backgroundColor: 'rgba(255, 107, 168, 0.3)',
+                borderColor: 'black',
+                borderWidth: 1,
+            };
+            const updatedDatasets = [newDataset];
+            setDatasetsList(updatedDatasets);
+            console.log(updatedDatasets);
+        }
+    }, [selectedBreedInfo]);
+    const handleClose=()=>{
+        setSelectedBreed(null);
+        setSelectedBreedInfo([]);
+        setSelectedBreedImage(null);
+        setIsDropdownOpen(false);
+        setDatasetsList([]);
+        handleModalClose();
+    }
     return (
         <>
             {/* sm:w-9/12 sm:h-48 md:w-9/12 md:h-[30rem] lg:h-[30rem] xl:h-[45rem]  2xl:h-[49rem] */}
@@ -38,7 +110,7 @@ const Modal = ({ showModal, handleModalClose, predictions, selectedPredictionInd
                         <div className='flex flex-row justify-center'>
                             <span className="text-3xl font-bold mb-4 text-center">What is it like owning a {predictions[selectedPredictionIndex].label}?</span>
                             <button
-                                onClick={handleModalClose}
+                                onClick={handleClose}
                                 type="button"
                                 className="w-12 h-12 dark:text-neutral-100 btn btn-sm btn-circle btn-ghost absolute top-4 right-4">
                                 <FontAwesomeIcon icon={faTimes} size="lg" />
@@ -223,7 +295,7 @@ const Modal = ({ showModal, handleModalClose, predictions, selectedPredictionInd
 
                         <button
                             className="mt-4 p-2 bg-primary rounded-md  inline-block lg:hidden "
-                            onClick={handleModalClose}>
+                            onClick={handleClose}>
                             Close
                         </button>
                     </div>
