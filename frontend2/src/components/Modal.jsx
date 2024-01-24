@@ -185,7 +185,7 @@ const Modal = ({ showModal, handleModalClose, predictions, selectedPredictionInd
                                 <div className='flex items-center justify-center px-5 col-start-1 row-start-2'>
 
                                     <img
-                                        src={URL.createObjectURL(images[selectedPredictionIndex])}
+                                        src= {selectedBreedInfo2.length > 0 ? selectedBreedInfo2[0].image_link : URL.createObjectURL(images[selectedPredictionIndex])}
                                         alt={`Selected ${selectedPredictionIndex + 1}`}
                                         className=" h-56 h- w-56 lg:w-64 lg:h-64 rounded-full drop-shadow-xl "
                                     />
