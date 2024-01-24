@@ -48,12 +48,28 @@ const Modal = ({ showModal, handleModalClose, predictions, selectedPredictionInd
 
                         {selectedPredictionIndex !== null && (
                             <div className="grid grid-cols-1 gap-y-5 sm:gap-0 sm:grid-cols-2 lg:grid-cols-3 text-gray-700 justify-center content-center ">
-                                <div className='flex  items-center justify-center px-5 col-span-1 col-start-1 row-start-1 lg:col-start-1'>
+                                {/* <div className='flex  items-center justify-center px-5 col-span-1 col-start-1 row-start-1 lg:col-start-1'>
                                     <div tabIndex={0} role="button" className="btn w-48   " onClick={toggleDropdown}>
                                         {predictions[selectedPredictionIndex].label}
                                     </div>
-                                    {/* <p> {predictions[selectedPredictionIndex].label} detected with {(predictions[selectedPredictionIndex].score * 100).toFixed(1)} %</p> */}
+                                    <p> {predictions[selectedPredictionIndex].label} detected with {(predictions[selectedPredictionIndex].score * 100).toFixed(1)} %</p>
 
+                                </div> */}
+                                <div className="dropdown dropdown-bottom flex  justify-center items-center px-5  col-span-1 col-start-1 row-start-1 lg:col-start-1">
+                                    <div tabIndex={0} role="button" className="btn w-48 " onClick={toggleDropdown}>
+                                        {selectedBreed != null ? `${selectedBreed}` : 'Compare to Other dogs'}
+                                    </div>
+                                    {isDropdownOpen && (
+                                        <ul className="dropdown-content z-[2] menu p-2 *:shadow bg-base-100 rounded-box sm:max-h-64 w-52 max-h-50">
+                                            <div className="overflow-y-auto max-h-96">
+                                                {breeds.map((breed, index) => (
+                                                    <li key={index} onClick={() => handleBreedSelect(breed[0])}>
+                                                        <button className='btn btn-ghost text-center content-center'>{breed[0]}</button>
+                                                    </li>
+                                                ))}
+                                            </div>
+                                        </ul>
+                                    )}
                                 </div>
                                 <div className='flex items-center justify-center px-5 sm:col-span-2 sm:mt-3 col-start-1 lg:col-span-1 lg:col-start-2'>
                                     <p>{predictions[selectedPredictionIndex].label}  Characteristics</p>
@@ -65,7 +81,6 @@ const Modal = ({ showModal, handleModalClose, predictions, selectedPredictionInd
                                     </div>
                                     {isDropdownOpen && (
                                         <ul className="dropdown-content z-[2] menu p-2 *:shadow bg-base-100 rounded-box sm:max-h-64 w-52 max-h-50">
-                                            {/* Adjusted the margin-top (mt-2) to reduce vertical space */}
                                             <div className="overflow-y-auto max-h-96">
                                                 {breeds.map((breed, index) => (
                                                     <li key={index} onClick={() => handleBreedSelect(breed[0])}>

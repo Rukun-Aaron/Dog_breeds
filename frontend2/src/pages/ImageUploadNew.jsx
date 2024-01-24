@@ -23,6 +23,9 @@ const ImageUploadNew = () => {
   const [selectedBreed, setSelectedBreed] = useState(null);
   const [selectedBreedInfo, setSelectedBreedInfo] = useState([]);
   const [selectedBreedImage, setSelectedBreedImage] = useState(null);
+  const [selectedBreed2, setSelectedBreed2]= useState(null);
+  const [selectedBreedInfo2, setSelectedBreedInfo2] = useState([]);
+  const [selectedBreedImage2, setSelectedBreedImage2] = useState(null);
   const [datasetsList, setDatasetsList] = useState([]);
 
 
