@@ -20,13 +20,8 @@ const ImageUploadNew = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedPredictionIndex, setSelectedPredictionIndex] = useState(null);
   const [breeds, setBreeds] = useState([]);
-  const [selectedBreed, setSelectedBreed] = useState(null);
-  const [selectedBreedInfo, setSelectedBreedInfo] = useState([]);
-  const [selectedBreedImage, setSelectedBreedImage] = useState(null);
-  const [datasetsList, setDatasetsList] = useState([]);
 
 
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   useEffect(() => {
     // Fetch breed data when the component mounts
@@ -44,61 +39,6 @@ const ImageUploadNew = () => {
   }, []);
 
 
-  const handleBreedSelect = async (breed) => {
-    // Update the selected breed state
-    setSelectedBreed(breed);
-    try {
-      const response = await getBreedInfo(breed);
-      const data = await response.json();
-      setSelectedBreedImage(data[0].image_link);
-      setSelectedBreedInfo(data);
-
-      // console.log(selectedBreedInfo);
-    } catch (error) {
-      console.error('Error fetching selected breed info:', error);
-    }
-    setIsDropdownOpen(false);
-
-  };
-
-  useEffect(() => {
-    // This code will be executed when selectedBreedInfo changes
-    console.log('Selected Breed Info:', selectedBreedInfo);
-
-    if (selectedBreedInfo.length > 0) {
-      const newDataset = {
-        label: `${selectedBreed}: Score out of 5`,
-        data: [
-          selectedBreedInfo[0].good_with_children,
-          selectedBreedInfo[0].good_with_other_dogs,
-          selectedBreedInfo[0].shedding,
-          selectedBreedInfo[0].grooming,
-          selectedBreedInfo[0].drooling,
-          selectedBreedInfo[0].coat_length,
-
-          selectedBreedInfo[0].playfulness,
-          selectedBreedInfo[0].protectiveness,
-          selectedBreedInfo[0].trainability,
-          selectedBreedInfo[0].energy,
-          selectedBreedInfo[0].barking,
-          selectedBreedInfo[0].good_with_strangers,
-        ],
-        backgroundColor: 'rgba(255, 107, 168, 0.3)',
-        borderColor: 'black',
-        borderWidth: 1,
-      };
-      const updatedDatasets = [newDataset];
-      setDatasetsList(updatedDatasets);
-      console.log(updatedDatasets);
-    }
-  }, [selectedBreedInfo]);
-  const toggleDropdown = () => {
-    // Toggle the dropdown state
-    setIsDropdownOpen(!isDropdownOpen);
-
-    // console.log(isDropdownOpen);
-  };
-  
   const onFileChange = async (event) => {
     const file = event.target.files[0];
 
@@ -222,15 +162,14 @@ const ImageUploadNew = () => {
 
   const handleModalClose = () => {
     setShowModal(false);
-    setSelectedBreed(null);
-    setSelectedBreedInfo([]);
-    setSelectedBreedImage(null);
-    setDatasetsList([]);
+  
     setSelectedPredictionIndex(null);
   }
+
+
   return (
     <div className="w-full h-full flex flex-col items-center overflow-x-hidden pb-4">
-      <Navbar/>
+      <Navbar />
       <div className="max-w-4xl xl:max-w-5xl w-11/12 flex flex-col items-center h-full gap-1">
         <h1 className="text-2xl font-bold pt-4">Classify Your Dog</h1>
         <h1 className="text-xl text-center dark:text-neutral-100">
@@ -315,21 +254,15 @@ const ImageUploadNew = () => {
           </div>
         )}
 
-        <Modal 
+        <Modal
           showModal={showModal}
           handleModalClose={handleModalClose}
           predictions={predictions}
           selectedPredictionIndex={selectedPredictionIndex}
-          toggleDropdown={toggleDropdown}
-          selectedBreed={selectedBreed}
-          isDropdownOpen={isDropdownOpen}
           breeds={breeds}
           breedInfo={breedInfo}
           images={images}
-          selectedBreedImage={selectedBreedImage}
-          selectedBreedInfo={selectedBreedInfo}
-          datasetsList={datasetsList}
-          handleBreedSelect={handleBreedSelect}
+        
         />
 
       </div>
