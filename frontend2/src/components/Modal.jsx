@@ -30,26 +30,79 @@ ChartJS.register(
     ...registerables
 )
 
-const Modal = ({ showModal, handleModalClose, predictions, selectedPredictionIndex, breeds, breedInfo, images,
-     selectedBreedImage2, selectedBreedInfo2, selectedBreed2 }) => {
+const Modal = ({ showModal, handleModalClose, predictions, selectedPredictionIndex, breeds, breedInfo, images}) => {
 
     const [selectedBreed, setSelectedBreed] = useState(null);
     const [selectedBreedInfo, setSelectedBreedInfo] = useState([]);
-    const [selectedBreedImage, setSelectedBreedImage] = useState(null);
+
+
+    const [selectedBreed2, setSelectedBreed2] = useState(null);
+  const [selectedBreedInfo2, setSelectedBreedInfo2] = useState([]);
+
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [datasetsList, setDatasetsList] = useState([]);
 
-    // const [datasetsList, setDatasetsList] = useState([]);
+    
     const handleBreedSelect = async (breed) => {
         // Update the selected breed state
         setSelectedBreed(breed);
         try {
             const response = await getBreedInfo(breed);
             const data = await response.json();
-            setSelectedBreedImage(data[0].image_link);
+            // setSelectedBreedImage(data[0].image_link);
             setSelectedBreedInfo(data);
 
             // console.log(selectedBreedInfo);
+        } catch (error) {
+            console.error('Error fetching selected breed info:', error);
+        }
+        setIsDropdownOpen(false);
+
+    };
+    
+  useEffect(() => {
+    // This code will be executed when selectedBreedInfo changes
+    // console.log('Selected Breed Info:', selectedBreedInfo);
+
+    if (selectedBreedInfo.length > 0) {
+      const newDataset = {
+        label: `${selectedBreed}: Score out of 5`,
+        data: [
+          selectedBreedInfo[0].good_with_children,
+          selectedBreedInfo[0].good_with_other_dogs,
+          selectedBreedInfo[0].shedding,
+          selectedBreedInfo[0].grooming,
+          selectedBreedInfo[0].drooling,
+          selectedBreedInfo[0].coat_length,
+
+          selectedBreedInfo[0].playfulness,
+          selectedBreedInfo[0].protectiveness,
+          selectedBreedInfo[0].trainability,
+          selectedBreedInfo[0].energy,
+          selectedBreedInfo[0].barking,
+          selectedBreedInfo[0].good_with_strangers,
+        ],
+        backgroundColor: 'rgba(255, 107, 168, 0.3)',
+        borderColor: 'black',
+        borderWidth: 1,
+      };
+      const updatedDatasets = [newDataset];
+      setDatasetsList(updatedDatasets);
+ 
+    }
+  }, [selectedBreedInfo]);
+
+    // useEffect(() => {console.log(selectedBreedInfo)},[selectedBreed2])
+    const handleBreedSelect2 = async (breed) => {
+        // Update the selected breed state
+        setSelectedBreed2(breed);
+        try {
+            const response = await getBreedInfo(breed);
+            const data = await response.json();
+         
+            setSelectedBreedInfo2(data);
+
+            
         } catch (error) {
             console.error('Error fetching selected breed info:', error);
         }
@@ -62,41 +115,12 @@ const Modal = ({ showModal, handleModalClose, predictions, selectedPredictionInd
 
         // console.log(isDropdownOpen);
     };
-    useEffect(() => {
-        // This code will be executed when selectedBreedInfo changes
-        console.log('Selected Breed Info:', selectedBreedInfo);
 
-        if (selectedBreedInfo.length > 0) {
-            const newDataset = {
-                label: `${selectedBreed}: Score out of 5`,
-                data: [
-                    selectedBreedInfo[0].good_with_children,
-                    selectedBreedInfo[0].good_with_other_dogs,
-                    selectedBreedInfo[0].shedding,
-                    selectedBreedInfo[0].grooming,
-                    selectedBreedInfo[0].drooling,
-                    selectedBreedInfo[0].coat_length,
-
-                    selectedBreedInfo[0].playfulness,
-                    selectedBreedInfo[0].protectiveness,
-                    selectedBreedInfo[0].trainability,
-                    selectedBreedInfo[0].energy,
-                    selectedBreedInfo[0].barking,
-                    selectedBreedInfo[0].good_with_strangers,
-                ],
-                backgroundColor: 'rgba(255, 107, 168, 0.3)',
-                borderColor: 'black',
-                borderWidth: 1,
-            };
-            const updatedDatasets = [newDataset];
-            setDatasetsList(updatedDatasets);
-            console.log(updatedDatasets);
-        }
-    }, [selectedBreedInfo]);
     const handleClose=()=>{
         setSelectedBreed(null);
         setSelectedBreedInfo([]);
-        setSelectedBreedImage(null);
+        setSelectedBreed2(null);
+        setSelectedBreedInfo2([]);
         setIsDropdownOpen(false);
         setDatasetsList([]);
         handleModalClose();
@@ -120,22 +144,16 @@ const Modal = ({ showModal, handleModalClose, predictions, selectedPredictionInd
 
                         {selectedPredictionIndex !== null && (
                             <div className="grid grid-cols-1 gap-y-5 sm:gap-0 sm:grid-cols-2 lg:grid-cols-3 text-gray-700 justify-center content-center ">
-                                {/* <div className='flex  items-center justify-center px-5 col-span-1 col-start-1 row-start-1 lg:col-start-1'>
-                                    <div tabIndex={0} role="button" className="btn w-48   " onClick={toggleDropdown}>
-                                        {predictions[selectedPredictionIndex].label}
-                                    </div>
-                                    <p> {predictions[selectedPredictionIndex].label} detected with {(predictions[selectedPredictionIndex].score * 100).toFixed(1)} %</p>
-
-                                </div> */}
+                            
                                 <div className="dropdown dropdown-bottom flex  justify-center items-center px-5  col-span-1 col-start-1 row-start-1 lg:col-start-1">
                                     <div tabIndex={0} role="button" className="btn w-48 " onClick={toggleDropdown}>
-                                        {selectedBreed != null ? `${selectedBreed}` : 'Compare to Other dogs'}
+                                        {selectedBreed2 != null ? `${selectedBreed2}` :  predictions[selectedPredictionIndex].label}
                                     </div>
                                     {isDropdownOpen && (
                                         <ul className="dropdown-content z-[2] menu p-2 *:shadow bg-base-100 rounded-box sm:max-h-64 w-52 max-h-50">
                                             <div className="overflow-y-auto max-h-96">
                                                 {breeds.map((breed, index) => (
-                                                    <li key={index} onClick={() => handleBreedSelect(breed[0])}>
+                                                    <li key={index} onClick={() => handleBreedSelect2(breed[0])}>
                                                         <button className='btn btn-ghost text-center content-center'>{breed[0]}</button>
                                                     </li>
                                                 ))}
@@ -174,7 +192,7 @@ const Modal = ({ showModal, handleModalClose, predictions, selectedPredictionInd
 
                                 </div>
 
-                                {breedInfo[selectedPredictionIndex][0] && (
+                                {breedInfo && (
 
                                     <div className=" flex  justify-center col-start-1 aspect-square h-full w-full sm:col-span-2 sm:h-auto sm:w-auto  lg:col-span-1 lg:row-start-2  lg:col-start-2">
 
@@ -196,21 +214,35 @@ const Modal = ({ showModal, handleModalClose, predictions, selectedPredictionInd
                                                     'Good with Strangers',],
                                                 datasets: [{
                                                     label: `${predictions[selectedPredictionIndex].label}: Score out of 5`,
-                                                    data: [
+                                                    data: selectedBreedInfo2.length > 0
+                                                    ? [
+                                                        selectedBreedInfo2[0].good_with_children,
+                                                        selectedBreedInfo2[0].good_with_other_dogs,
+                                                        selectedBreedInfo2[0].shedding,
+                                                        selectedBreedInfo2[0].grooming,
+                                                        selectedBreedInfo2[0].drooling,
+                                                        selectedBreedInfo2[0].coat_length,
+                                                        selectedBreedInfo2[0].playfulness,
+                                                        selectedBreedInfo2[0].protectiveness,
+                                                        selectedBreedInfo2[0].trainability,
+                                                        selectedBreedInfo2[0].energy,
+                                                        selectedBreedInfo2[0].barking,
+                                                        selectedBreedInfo2[0].good_with_strangers,
+                                                      ]
+                                                    : [
                                                         breedInfo[selectedPredictionIndex][0].good_with_children,
                                                         breedInfo[selectedPredictionIndex][0].good_with_other_dogs,
                                                         breedInfo[selectedPredictionIndex][0].shedding,
                                                         breedInfo[selectedPredictionIndex][0].grooming,
                                                         breedInfo[selectedPredictionIndex][0].drooling,
                                                         breedInfo[selectedPredictionIndex][0].coat_length,
-
                                                         breedInfo[selectedPredictionIndex][0].playfulness,
                                                         breedInfo[selectedPredictionIndex][0].protectiveness,
                                                         breedInfo[selectedPredictionIndex][0].trainability,
                                                         breedInfo[selectedPredictionIndex][0].energy,
                                                         breedInfo[selectedPredictionIndex][0].barking,
                                                         breedInfo[selectedPredictionIndex][0].good_with_strangers,
-                                                    ],
+                                                      ],
                                                     backgroundColor: 'rgba(103, 97, 168, 0.3)',
                                                     borderColor: 'black',
                                                     borderWidth: 1,
@@ -241,7 +273,7 @@ const Modal = ({ showModal, handleModalClose, predictions, selectedPredictionInd
                                     </div>
                                 )}
 
-                                {selectedBreedImage ? (
+                                {selectedBreedInfo[0]  ? (
                                     <div className="flex items-center justify-center px-5  py-2  col-start-1 row-start-5 sm:col-start-2 sm:row-start-2  lg:py-0 lg:row-start-2 lg:col-start-3">
                                         <img
                                             src={selectedBreedInfo[0].image_link}

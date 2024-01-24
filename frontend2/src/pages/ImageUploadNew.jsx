@@ -20,13 +20,6 @@ const ImageUploadNew = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedPredictionIndex, setSelectedPredictionIndex] = useState(null);
   const [breeds, setBreeds] = useState([]);
-  // const [selectedBreed, setSelectedBreed] = useState(null);
-  // const [selectedBreedInfo, setSelectedBreedInfo] = useState([]);
-  // const [selectedBreedImage, setSelectedBreedImage] = useState(null);
-  const [selectedBreed2, setSelectedBreed2] = useState(null);
-  const [selectedBreedInfo2, setSelectedBreedInfo2] = useState([]);
-  const [selectedBreedImage2, setSelectedBreedImage2] = useState(null);
-
 
 
 
@@ -44,56 +37,6 @@ const ImageUploadNew = () => {
 
     fetchData();
   }, []);
-
-
-  // const handleBreedSelect = async (breed) => {
-  //   // Update the selected breed state
-  //   setSelectedBreed(breed);
-  //   try {
-  //     const response = await getBreedInfo(breed);
-  //     const data = await response.json();
-  //     setSelectedBreedImage(data[0].image_link);
-  //     setSelectedBreedInfo(data);
-
-  //     // console.log(selectedBreedInfo);
-  //   } catch (error) {
-  //     console.error('Error fetching selected breed info:', error);
-  //   }
-  //   setIsDropdownOpen(false);
-
-  // };
-
-  // useEffect(() => {
-  //   // This code will be executed when selectedBreedInfo changes
-  //   console.log('Selected Breed Info:', selectedBreedInfo);
-
-  //   if (selectedBreedInfo.length > 0) {
-  //     const newDataset = {
-  //       label: `${selectedBreed}: Score out of 5`,
-  //       data: [
-  //         selectedBreedInfo[0].good_with_children,
-  //         selectedBreedInfo[0].good_with_other_dogs,
-  //         selectedBreedInfo[0].shedding,
-  //         selectedBreedInfo[0].grooming,
-  //         selectedBreedInfo[0].drooling,
-  //         selectedBreedInfo[0].coat_length,
-
-  //         selectedBreedInfo[0].playfulness,
-  //         selectedBreedInfo[0].protectiveness,
-  //         selectedBreedInfo[0].trainability,
-  //         selectedBreedInfo[0].energy,
-  //         selectedBreedInfo[0].barking,
-  //         selectedBreedInfo[0].good_with_strangers,
-  //       ],
-  //       backgroundColor: 'rgba(255, 107, 168, 0.3)',
-  //       borderColor: 'black',
-  //       borderWidth: 1,
-  //     };
-  //     const updatedDatasets = [newDataset];
-  //     setDatasetsList(updatedDatasets);
-  //     console.log(updatedDatasets);
-  //   }
-  // }, [selectedBreedInfo]);
 
 
   const onFileChange = async (event) => {
@@ -219,16 +162,11 @@ const ImageUploadNew = () => {
 
   const handleModalClose = () => {
     setShowModal(false);
-    // setSelectedBreed(null);
-    // setSelectedBreedInfo([]);
-    // setSelectedBreedImage(null);
-    // setDatasetsList([]);
+  
     setSelectedPredictionIndex(null);
   }
 
-  // const updateDatasetsList = (newDatasets) => {
-  //   setDatasetsList(newDatasets);
-  // };
+
   return (
     <div className="w-full h-full flex flex-col items-center overflow-x-hidden pb-4">
       <Navbar />
@@ -321,20 +259,10 @@ const ImageUploadNew = () => {
           handleModalClose={handleModalClose}
           predictions={predictions}
           selectedPredictionIndex={selectedPredictionIndex}
-          // toggleDropdown={toggleDropdown}
-          // selectedBreed={selectedBreed}
-          // isDropdownOpen={isDropdownOpen}
           breeds={breeds}
           breedInfo={breedInfo}
           images={images}
-          // selectedBreedImage={selectedBreedImage}
-          // selectedBreedInfo={selectedBreedInfo}
-          // datasetsList={datasetsList}
-          // updateDatasetsList={updateDatasetsList}
-          // handleBreedSelect={handleBreedSelect}
-          selectedBreedImage2={selectedBreedImage2}
-          selectedBreedInfo2={selectedBreedInfo2}
-          selectedBreed2={selectedBreed2}
+        
         />
 
       </div>
