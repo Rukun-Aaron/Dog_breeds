@@ -13,16 +13,16 @@ function Homepage() {
         <div
           className="text-black w-full h-full relative"
           style={{
-            backgroundImage: `url('/bg.png')`,
+            backgroundImage: `url('/bg2.png')`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             height: '100vh',
           }}
         >
-          <Navbar/>
+          <div className="pt-4"><Navbar/></div>
           <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between relative">
             <div className="md:w-3/5 mt-40">
-              <h1 className="text-5xl font-bold mb-4 leading-tight">Identify dog breeds from photos with AI</h1>
+              <h1 className="text-5xl font-bold mb-4 leading-tight">Identify <span className="text-[#694DDB]">Dog Breeds</span> From Photos With AI</h1>
               <p className="text-2xl mb-6">
                 Discover the best services blah blah blah.
               </p>
@@ -40,14 +40,14 @@ function Homepage() {
             <img
               alt="logo"
               src="/arrow.ico"
-              className="h-4 w-4 opacity-50"
+              className="h-8 w-8 opacity-30"
             />
         </div>
       </div>
 
       {/* Section 2: Details */}
       <div className="w-full min-h-screen bg-[#F7F8FF] flex flex-col items-center">
-        <h1 className="text-4xl font-bold mb-2 text-center mt-24">Can’t decide on a new furry friend?</h1>
+        <h1 className="text-4xl font-bold mb-2 text-center mt-24">Can’t Decide On A New <span className="text-[#694DDB]">Furry Friend?</span></h1>
         <h2 className="text-xl mb-6 text-center">Our dog breed identification interface helps users decide on a new breed personalised to their preferences.</h2>
 
         {/* Left and Right Division */}

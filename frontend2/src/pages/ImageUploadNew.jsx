@@ -168,10 +168,17 @@ const ImageUploadNew = () => {
 
 
   return (
-    <div className="w-full h-full flex flex-col items-center pb-4">
+    <div className="bg-[#F5F1FF] w-full h-full flex flex-col items-center pb-4 pt-4"
+    style={{
+      backgroundImage: `url('/bg_no_dog.png')`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      height: '100vh',
+    }}
+    >
       <Navbar/>
-      <div className="max-w-4xl xl:max-w-5xl w-11/12 flex flex-col items-center h-full gap-1 pt-4">
-        <h1 className="text-2xl font-bold pt-4 pt-16">Classify Your Dog</h1>
+      <div className="bg-white max-w-4xl xl:max-w-5xl w-11/12 flex flex-col items-center h-full gap-1 rounded-3xl mt-20 shadow dark:shadow-xl">
+        <h1 className="text-2xl font-bold pt-10">Classify Your Dog</h1>
         <h1 className="text-xl text-center dark:text-neutral-100">
           Drag and Drop or Browse to Upload Image
         </h1>
@@ -189,10 +196,10 @@ const ImageUploadNew = () => {
           accept="image/png, image/jpeg, image/webp"
         />
         <div
-          className={`dark:border-neutral-100 transition-all cursor-pointer card w-full border-2 border-dashed rounded-3xl border-gray-300 ${images.length > 0
+          className={`bg-[#F5F1FF] h-full mb-12 dark:border-neutral-100 transition-all cursor-pointer card w-10/12 border-2 border-dashed rounded-3xl border-[#694DDB] ${images.length > 0
             ? 'flex flex-col sm:flex-row justify-around items-center p-4'
             : 'aspect-video flex items-center justify-center p-4'
-            } ${isDraggingOver ? 'bg-green-200 dark:bg-green-800' : 'bg-transparent'}`}
+            } ${isDraggingOver ? 'bg-[#E4D9FF] dark:bg-green-800' : 'bg-transparent'}`}
           onClick={handleClick}
           onDragOver={handleDragOver}
           onDragEnter={handleDragEnter}
@@ -201,7 +208,7 @@ const ImageUploadNew = () => {
         >
           <div className={images.length > 0 ? 'flex flex-row' : 'md:flex flex-col hidden'}>
             <FontAwesomeIcon
-              className={images.length > 0 ? 'text-[#FFA55B] p-4' : 'text-[#FFA55B]'}
+              className={images.length > 0 ? 'text-[#694DDB] p-4' : 'text-[#694DDB]'}
               icon={faCloudArrowUp}
               size={images.length > 0 ? '3x' : '5x'}
             />
@@ -211,15 +218,15 @@ const ImageUploadNew = () => {
               >
                 Select a file or drag and drop here
               </h2>
-              <p className="text-gray-500 mt-4 text-center dark:text-neutral-400">
+              <p className="text-gray-500 mt-2 text-center dark:text-neutral-400">
                 JPG, PNG, file size no more than 10MB
               </p>
             </div>
           </div>
         </div>
         {images.length > 0 && (
-          <div className="mt-4 w-full flex flex-col gap-4">
-            <h2 className="text-lg dark:text-neutral-100">Files Added</h2>
+          <div className="mt-4 w-full flex flex-col gap-2 my-8 px-8">
+            <h2 className="text-lg dark:text-neutral-100 px-8">Files Added</h2>
             {images.map((uploadedImage, index) => (
               <div
                 key={index}
