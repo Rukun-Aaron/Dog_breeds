@@ -19,7 +19,7 @@ function Homepage() {
             height: '100vh',
           }}
         >
-          <Navbar isHomepage />
+          <Navbar/>
           <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between relative">
             <div className="md:w-3/5 mt-32">
               <h1 className="text-5xl font-bold mb-4">Identify dog breeds from photos with AI</h1>
