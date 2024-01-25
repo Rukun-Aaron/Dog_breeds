@@ -8,6 +8,7 @@ import {
 import Navbar from './components/NavBar';
 import ImageUploadNew from './pages/ImageUploadNew';
 import Homepage from './components/Homepage';
+import Compare from './pages/Compare';
 import './styles/scrollbar.css';
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Homepage />} />
             <Route path="/detection" element={<ImageUploadNew />} />
+            <Route path="/compare" element={<Compare />} />
           </Routes>
         </div>
       </div>
