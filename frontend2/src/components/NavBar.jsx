@@ -22,17 +22,21 @@ function Navbar({ isHomepage }) {
               className="h-12 w-12"
             />
           </div>
-          <p className="text-xl font-semibold text-black">
+          <p className="text-xl  font-varela  font-semibold text-black">
             DogIO
           </p>
         </div>
       </div>
-      <div className="gap-2 pr-2">
-        <button onClick={() => navigate('/')} className="btn btn-ghost rounded-full px-8 py-2 text-black">
+      <div className="gap-3 pr-2">
+        <button onClick={() => navigate('/')} className="btn btn-ghost rounded-full px-8 py-2  font-varela text-black">
           Home
         </button>
-        <button className="bg-[#694DDB] px-8 rounded-full btn btn-ghost text-[#F5F1FF]" onClick={() => navigate('/detection')}>
+        {/* CHANGE LATER TO :6B5BBF */}
+        <button className="bg-[#694DDB] px-8 rounded-full btn btn-ghost text-[#F5F1FF]  font-varela" onClick={() => navigate('/detection')}>
           Detect
+        </button>
+        <button className="bg-[#DE6FEC] px-8 rounded-full btn btn-ghost text-[#F5F1FF]  font-varela" onClick={() => navigate('/compare')}>
+          Compare
         </button>
       </div>
     </div>)};
