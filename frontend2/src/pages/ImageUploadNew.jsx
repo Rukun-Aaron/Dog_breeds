@@ -170,8 +170,8 @@ const ImageUploadNew = () => {
   return (
     <div className="w-full h-full flex flex-col items-center pb-4">
       <Navbar/>
-      <div className="max-w-4xl xl:max-w-5xl w-11/12 flex flex-col items-center h-full gap-1">
-        <h1 className="text-2xl font-bold pt-4 pt-20">Classify Your Dog</h1>
+      <div className="max-w-4xl xl:max-w-5xl w-11/12 flex flex-col items-center h-full gap-1 pt-4">
+        <h1 className="text-2xl font-bold pt-4 pt-16">Classify Your Dog</h1>
         <h1 className="text-xl text-center dark:text-neutral-100">
           Drag and Drop or Browse to Upload Image
         </h1>
@@ -189,7 +189,7 @@ const ImageUploadNew = () => {
           accept="image/png, image/jpeg, image/webp"
         />
         <div
-          className={`dark:border-neutral-100 transition-all cursor-pointer card w-full border-2 border-dashed rounded-lg border-gray-300 ${images.length > 0
+          className={`dark:border-neutral-100 transition-all cursor-pointer card w-full border-2 border-dashed rounded-3xl border-gray-300 ${images.length > 0
             ? 'flex flex-col sm:flex-row justify-around items-center p-4'
             : 'aspect-video flex items-center justify-center p-4'
             } ${isDraggingOver ? 'bg-green-200 dark:bg-green-800' : 'bg-transparent'}`}

@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-function Navbar() {
+function Navbar({ isHomepage }) {
+  const [isHomePage, setIsHomePage] = useState(false);
 
   const navigate = useNavigate();
   const location = useLocation();
 
+  useEffect(() => {
+    setIsHomePage(location.pathname === '/');
+  }, [location]);
+
   return (
-    
-    // <div className={`navbar z-10 left-1/2 -translate-x-1/2 px-4 w-full top-4 shadow dark:shadow-xl opacity-90 dark:bg-neutral-800 backdrop-blur-sm rounded-xl fixed>  
-    // <div className="navbar z-8 left-1/2 -translate-x-1/2 w-11/12 max-w-4xl xl:max-w-5xl shadow dark:shadow-xl backdrop-blur-sm rounded-2xl top-2 relative">
-    <div className={`navbar z-[1] left-1/2 -translate-x-1/2 w-11/12 max-w-4xl xl:max-w-5xl shadow dark:shadow-xl dark:bg-neutral-800 rounded-full fixed`}>
+    <div className={`navbar z-[1] left-1/2 -translate-x-1/2 w-11/12 max-w-4xl xl:max-w-5xl shadow dark:shadow-xl dark:bg-neutral-800 rounded-full ${isHomePage ? 'relative' : 'fixed'}`}>
         <div className="flex-1 flex gap-2">
         <div className="cursor-pointer flex items-center justify-center" onClick={() => navigate('/')}>
           <div className="pl-4 pr-3">

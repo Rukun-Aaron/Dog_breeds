@@ -21,8 +21,8 @@ function Homepage() {
         >
           <Navbar/>
           <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between relative">
-            <div className="md:w-3/5 mt-32">
-              <h1 className="text-5xl font-bold mb-4">Identify dog breeds from photos with AI</h1>
+            <div className="md:w-3/5 mt-40">
+              <h1 className="text-5xl font-bold mb-4 leading-tight">Identify dog breeds from photos with AI</h1>
               <p className="text-2xl mb-6">
                 Discover the best services blah blah blah.
               </p>
