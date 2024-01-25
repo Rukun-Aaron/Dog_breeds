@@ -1,43 +1,35 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faHome, faMagnifyingGlass, faUserAlt, faRightToBracket, faBars,
-} from '@fortawesome/free-solid-svg-icons';
 
-function Navbar({ isHomepage }) {
-  const [isHomePage, setIsHomePage] = useState(false);
+function Navbar() {
 
   const navigate = useNavigate();
   const location = useLocation();
 
-  useEffect(() => {
-    setIsHomePage(location.pathname === '/');
-  }, [location]);
-
   return (
     
-    // <div className={`navbar z-10 left-1/2 -translate-x-1/2 px-4 w-full top-4 shadow dark:shadow-xl opacity-90 dark:bg-neutral-800 backdrop-blur-sm rounded-xl ${isHomePage ? 'absolute' : 'fixed'}`}>  
-    <div className={`navbar z-8 left-1/2 -translate-x-1/2 px-4 w-full pt-2 relative ${isHomepage ? '' : 'shadow'}`}>
-      <div className="flex-1 flex gap-2">
+    // <div className={`navbar z-10 left-1/2 -translate-x-1/2 px-4 w-full top-4 shadow dark:shadow-xl opacity-90 dark:bg-neutral-800 backdrop-blur-sm rounded-xl fixed>  
+    // <div className="navbar z-8 left-1/2 -translate-x-1/2 w-11/12 max-w-4xl xl:max-w-5xl shadow dark:shadow-xl backdrop-blur-sm rounded-2xl top-2 relative">
+    <div className={`navbar z-[1] left-1/2 -translate-x-1/2 w-11/12 max-w-4xl xl:max-w-5xl shadow dark:shadow-xl dark:bg-neutral-800 rounded-full fixed`}>
+        <div className="flex-1 flex gap-2">
         <div className="cursor-pointer flex items-center justify-center" onClick={() => navigate('/')}>
           <div className="pl-4 pr-3">
             <img
               alt="logo"
-              src={`${isHomepage ? process.env.PUBLIC_URL + '/logo2.ico' : process.env.PUBLIC_URL + '/logo3.ico'}`}
+              src= {process.env.PUBLIC_URL + "/logo3.ico"}
               className="h-12 w-12"
             />
           </div>
-          <p className={`text-xl font-semibold ${isHomepage ? 'text-white' : 'text-black'}`}>
+          <p className="text-xl font-semibold text-black">
             DogIO
           </p>
         </div>
       </div>
-      <div className="gap-2 pr-4">
-        <button onClick={() => navigate('/')} className={`btn btn-ghost rounded-full px-8 py-2 ${isHomepage ? 'text-white' : 'text-black'}`}>
+      <div className="gap-2 pr-2">
+        <button onClick={() => navigate('/')} className="btn btn-ghost rounded-full px-8 py-2 text-black">
           Home
         </button>
-        <button className="bg-orange-500 px-8 rounded-full btn btn-ghost text-white" onClick={() => navigate('/detection')}>
+        <button className="bg-[#694DDB] px-8 rounded-full btn btn-ghost text-[#F5F1FF]" onClick={() => navigate('/detection')}>
           Detect
         </button>
       </div>

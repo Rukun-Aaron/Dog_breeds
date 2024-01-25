@@ -168,10 +168,10 @@ const ImageUploadNew = () => {
 
 
   return (
-    <div className="w-full h-full flex flex-col items-center overflow-x-hidden pb-4">
-      <Navbar />
+    <div className="w-full h-full flex flex-col items-center pb-4">
+      <Navbar/>
       <div className="max-w-4xl xl:max-w-5xl w-11/12 flex flex-col items-center h-full gap-1">
-        <h1 className="text-2xl font-bold pt-4">Classify Your Dog</h1>
+        <h1 className="text-2xl font-bold pt-4 pt-20">Classify Your Dog</h1>
         <h1 className="text-xl text-center dark:text-neutral-100">
           Drag and Drop or Browse to Upload Image
         </h1>
@@ -201,7 +201,7 @@ const ImageUploadNew = () => {
         >
           <div className={images.length > 0 ? 'flex flex-row' : 'md:flex flex-col hidden'}>
             <FontAwesomeIcon
-              className={images.length > 0 ? 'text-[#3EA2EA] p-4' : 'text-[#3EA2EA]'}
+              className={images.length > 0 ? 'text-[#FFA55B] p-4' : 'text-[#FFA55B]'}
               icon={faCloudArrowUp}
               size={images.length > 0 ? '3x' : '5x'}
             />
@@ -228,7 +228,7 @@ const ImageUploadNew = () => {
               >
                 {isLoading && selectedFile === uploadedImage && (
                   <div className="absolute inset-0 flex items-center justify-end rounded-xl pr-40">
-                    <div className="w-6 h-6 border-t-2 border-[#3EA2EA] border-solid rounded-full animate-spin ml-auto"></div>
+                    <div className="w-6 h-6 border-t-2 border-[#694DDB] border-solid rounded-full animate-spin ml-auto"></div>
                   </div>
                 )}
                 <div className="w-32 h-16 flex items-center justify-center">
@@ -242,7 +242,7 @@ const ImageUploadNew = () => {
                   {uploadedImage.name}
                 </div>
                 {predictions.length > 0 && predictions[index] && (
-                  <div className="text-[#3EA2EA] rounded-2xl border border-[#3EA2EA] pl-1 pr-1">
+                  <div className="text-[#694DDB] rounded-2xl border border-[#694DDB] pl-1 pr-1">
                     {predictions[index].label} {(predictions[index].score * 100).toFixed(2)}%
                   </div>
                 )}
