@@ -1,35 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCloudArrowUp, faXmark } from '@fortawesome/free-solid-svg-icons';
+import Modal from '../components/Modal';
+import Navbar from '../components/NavBar';
 import {
   getPredictions, getBreedInfo, getAllBreedInfo
 } from '../services/apiService';
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  ArcElement,
-  Tooltip,
-  Legend,
-  PointElement,
-  LineElement,
-  RadialLinearScale,
-  registerables
-} from "chart.js";
 
-import { Radar, Bar, Chart } from 'react-chartjs-2';
-import Navbar from '../components/NavBar';
-import '../styles/scrollbar.css';
-
-ChartJS.register(
-  ArcElement,
-  Tooltip,
-  Legend,
-  PointElement,
-  LineElement,
-  RadialLinearScale,
-  CategoryScale,
-  ...registerables
-)
 
 const ImageUploadNew = () => {
   const [image, setImage] = useState(null);
@@ -43,13 +20,8 @@ const ImageUploadNew = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedPredictionIndex, setSelectedPredictionIndex] = useState(null);
   const [breeds, setBreeds] = useState([]);
-  const [selectedBreed, setSelectedBreed] = useState(null);
-  const [selectedBreedInfo, setSelectedBreedInfo] = useState([]);
-  const [selectedBreedImage, setSelectedBreedImage] = useState(null);
-  const [datasetsList, setDatasetsList] = useState([]);
 
 
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   useEffect(() => {
     // Fetch breed data when the component mounts
@@ -67,61 +39,6 @@ const ImageUploadNew = () => {
   }, []);
 
 
-  const handleBreedSelect = async (breed) => {
-    // Update the selected breed state
-    setSelectedBreed(breed);
-    try {
-      const response = await getBreedInfo(breed);
-      const data = await response.json();
-      setSelectedBreedImage(data[0].image_link);
-      setSelectedBreedInfo(data);
-
-      // console.log(selectedBreedInfo);
-    } catch (error) {
-      console.error('Error fetching selected breed info:', error);
-    }
-    setIsDropdownOpen(false);
-
-  };
-
-  useEffect(() => {
-    // This code will be executed when selectedBreedInfo changes
-    console.log('Selected Breed Info:', selectedBreedInfo);
-
-    if (selectedBreedInfo.length > 0) {
-      const newDataset = {
-        label: `${selectedBreed}: Score out of 5`,
-        data: [
-          selectedBreedInfo[0].good_with_children,
-          selectedBreedInfo[0].good_with_other_dogs,
-          selectedBreedInfo[0].shedding,
-          selectedBreedInfo[0].grooming,
-          selectedBreedInfo[0].drooling,
-          selectedBreedInfo[0].coat_length,
-
-          selectedBreedInfo[0].playfulness,
-          selectedBreedInfo[0].protectiveness,
-          selectedBreedInfo[0].trainability,
-          selectedBreedInfo[0].energy,
-          selectedBreedInfo[0].barking,
-          selectedBreedInfo[0].good_with_strangers,
-        ],
-        backgroundColor: 'rgba(255, 107, 168, 0.3)',
-        borderColor: 'black',
-        borderWidth: 1,
-      };
-      const updatedDatasets = [newDataset];
-      setDatasetsList(updatedDatasets);
-      console.log(updatedDatasets);
-    }
-  }, [selectedBreedInfo]);
-  const toggleDropdown = () => {
-    // Toggle the dropdown state
-    setIsDropdownOpen(!isDropdownOpen);
-
-    // console.log(isDropdownOpen);
-  };
-  
   const onFileChange = async (event) => {
     const file = event.target.files[0];
 
@@ -245,12 +162,11 @@ const ImageUploadNew = () => {
 
   const handleModalClose = () => {
     setShowModal(false);
-    setSelectedBreed(null);
-    setSelectedBreedInfo([]);
-    setSelectedBreedImage(null);
-    setDatasetsList([]);
+  
     setSelectedPredictionIndex(null);
   }
+
+
   return (
     <div className="w-full h-full flex flex-col items-center pb-4">
       <Navbar/>
@@ -337,183 +253,20 @@ const ImageUploadNew = () => {
             ))}
           </div>
         )}
-        {/* {isLoading && (
-          <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
-            <div className="bg-white p-4 rounded-md">
-              <h2 className="text-lg font-bold mb-4">Loading</h2>
-              <div className="w-full h-2 bg-gray-300 mb-4">
-                <div className="h-full bg-primary" style={{ width: '50%' }}></div>
-              </div>
-            </div>
-          </div>
-        )} */}
-        {showModal && (
-          <div className="z-50 fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
-            <div className="relative z-10 bg-white p-4 rounded-md  sm:w-full sm:h-48 md:w-9/12 md:h-[45rem] lg:h-[42rem] xl:h-[33rem] 2xl:h-[46rem] text-center overflow-y-auto">
-              <h1 className="text-3xl font-bold mb-4">What is it like owning a {predictions[selectedPredictionIndex].label}?</h1>
-              <button
-                onClick={() => handleModalClose()}
-                type="button"
-                className="w-12 h-12 dark:text-neutral-100 btn btn-sm btn-circle btn-ghost absolute top-4 right-4">
-                <FontAwesomeIcon icon={faXmark} size="lg" />
-              </button>
-              {selectedPredictionIndex !== null && (
-                <div className="grid grid-cols-1 gap-4 py-1 md:grid-cols-2  lg:py-4 lg:grid-cols-3 lg:gap-y-1 lg:gap-x-4 text-gray-700 justify-center content-center	">
-                  <div className='flex items-center justify-center px-5'>
-                    <p> {predictions[selectedPredictionIndex].label} detected with {(predictions[selectedPredictionIndex].score * 100).toFixed(1)} %</p>
 
-                  </div>
-                  <div className='flex items-center justify-center px-5'>
-                    <p>{predictions[selectedPredictionIndex].label}  Characteristics</p>
-                  </div>
-                  <div className="dropdown dropdown-bottom flex justify-center content-center md:row-start-3  lg:row-start-1 lg:col-start-3">
-                    <div tabIndex={0} role="button" className="btn m-1 w-48" onClick={toggleDropdown}>
-                      {selectedBreed != null ? `${selectedBreed}` : 'Compare to Other dogs'}
-                    </div>
-                    {isDropdownOpen && (
-                      <ul
-                        className="dropdown-content z-[1] menu p-2 *:shadow bg-base-100 rounded-box sm:max-h-48 w-52 max-h-50">
-                        <div className="overflow-y-auto max-h-96">
-                          {breeds.map((breed, index) => (
-                            <li key={index} onClick={() => handleBreedSelect(breed[0])} >
-                              <button className='btn btn-ghost text-center content-center' >{breed[0]}</button>
-                            </li>
-                          ))}
-                        </div>
-                      </ul>)}
-                  </div>
-                  <div className="flex items-center justify-center px-5 md:row-start-2">
-                    <img
-                      src={URL.createObjectURL(images[selectedPredictionIndex])}
-                      alt={`Selected ${selectedPredictionIndex + 1}`}
-                      className="sm:w-32 sm:h-32 md:w-64 md:h-64 rounded-full drop-shadow-xl"
-                    />
-                  </div>
-                  {breedInfo[selectedPredictionIndex][0] && (
+        <Modal
+          showModal={showModal}
+          handleModalClose={handleModalClose}
+          predictions={predictions}
+          selectedPredictionIndex={selectedPredictionIndex}
+          breeds={breeds}
+          breedInfo={breedInfo}
+          images={images}
+        
+        />
 
-                    <div className=" flex items-center justify-center h-96 min-w-80 md:row-start-2 ">
-
-                      <Radar
-                        data={{
-                          labels: ['Good with Children',
-                            'Good with Other Dogs',
-                            'Shedding',
-                            'Grooming',
-                            'Drooling',
-                            'Coat Length',
-
-                            'Playfulness',
-                            'Protectiveness',
-                            'Trainability',
-                            'Energy',
-                            'Barking',
-                            'Good with Strangers',],
-                          datasets: [{
-                            label: `${predictions[selectedPredictionIndex].label}: Score out of 5`,
-                            data: [
-                              breedInfo[selectedPredictionIndex][0].good_with_children,
-                              breedInfo[selectedPredictionIndex][0].good_with_other_dogs,
-                              breedInfo[selectedPredictionIndex][0].shedding,
-                              breedInfo[selectedPredictionIndex][0].grooming,
-                              breedInfo[selectedPredictionIndex][0].drooling,
-                              breedInfo[selectedPredictionIndex][0].coat_length,
-
-                              breedInfo[selectedPredictionIndex][0].playfulness,
-                              breedInfo[selectedPredictionIndex][0].protectiveness,
-                              breedInfo[selectedPredictionIndex][0].trainability,
-                              breedInfo[selectedPredictionIndex][0].energy,
-                              breedInfo[selectedPredictionIndex][0].barking,
-                              breedInfo[selectedPredictionIndex][0].good_with_strangers,
-                            ],
-                            backgroundColor: 'rgba(103, 97, 168, 0.3)',
-                            borderColor: 'black',
-                            borderWidth: 1,
-
-                          }].concat(datasetsList)
-
-                        }}
-                        options={{
-
-                          scale: {
-                            min: 0,
-                            max: 5,
-                            stepSize: 1,
-                            ticks: {
-                              // beginAtZero: true,
-                              // min: 0,
-                              // max: 10,
-                              // stepSize: 2,
-                            },
-                          },
-                          plugins: {
-                            legend: {
-                              display: false,
-                            }
-                          }
-                        }}
-                      ></Radar>
-                    </div>
-                  )}
-                  {selectedBreedImage && (
-                    <div className="flex items-center justify-center px-5 md:row-start-5 md:col-start-1 lg:col-start-3 lg:row-start-2">
-                      <img
-                        src={selectedBreedInfo[0].image_link}
-                        alt={`Selected ${selectedPredictionIndex + 1}`}
-                        className="sm:w-32 sm:h-32 md:w-64 md:h-64 rounded-full drop-shadow-xl"
-                      />
-                    </div>
-                  )}
-
-                  <div className='row-start-3 '>
-                    {/* {predictions[selectedPredictionIndex].score && (
-                        <p>Confidence score: {predictions[selectedPredictionIndex].score * 100}%</p>
-                      )} */}
-                    <p>Life expectancy: {breedInfo[selectedPredictionIndex][0].min_life_expectancy} to
-                      {breedInfo[selectedPredictionIndex][0].max_life_expectancy} Years</p>
-                    <p>Height in Males: {breedInfo[selectedPredictionIndex][0].min_height_male} to
-                      {breedInfo[selectedPredictionIndex][0].max_height_male} Inches</p>
-                    <p>Height in Females: {breedInfo[selectedPredictionIndex][0].min_height_female} to
-                      {breedInfo[selectedPredictionIndex][0].max_height_female} Inches</p>
-                    <p>Weight in Males: {breedInfo[selectedPredictionIndex][0].min_weight_male} to
-                      {breedInfo[selectedPredictionIndex][0].max_weight_male} Lbs</p>
-                    <p>Weight in Females: {breedInfo[selectedPredictionIndex][0].min_weight_female} to
-                      {breedInfo[selectedPredictionIndex][0].max_weight_female} Lbs</p>
-
-                  </div>
-                  {
-                    selectedBreedInfo.length > 0 && (
-                      <div className='   md:col-start-2 md:row-start-5 lg:row-start-3 lg:col-start-3'>
-
-                        <p>Life expectancy: {selectedBreedInfo[0].min_life_expectancy} to
-                          {selectedBreedInfo[0].max_life_expectancy} Years</p>
-                        <p>Height in Males: {selectedBreedInfo[0].min_height_male} to
-                          {selectedBreedInfo[0].max_height_male} Inches</p>
-                        <p>Height in Females: {selectedBreedInfo[0].min_height_female} to
-                          {selectedBreedInfo[0].max_height_female} Inches</p>
-                        <p>Weight in Males: {selectedBreedInfo[0].min_weight_male} to
-                          {selectedBreedInfo[0].max_weight_male} Lbs</p>
-                        <p>Weight in Females: {selectedBreedInfo[0].min_weight_female} to
-                          {selectedBreedInfo[0].max_weight_female} Lbs</p>
-
-                      </div>
-                    )}
-
-
-                </div>
-              )}
-              <button
-                className="btn btn-ghost text-white bg-[#694DDB] rounded-full px-8 py-2"
-                onClick={() => {
-                  handleModalClose();
-                }}
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        )}
       </div>
-    </div>
+    </div >
   );
 };
 
