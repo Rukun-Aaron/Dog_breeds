@@ -1,2 +1,4 @@
 
-    # Load JSON data from the file
+    #     if connection:
+    #         cursor.close()
+    #         connection.close()
