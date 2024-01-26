@@ -4,13 +4,13 @@ import json
 
 # with open('labels.txt') as f:
 #     breeds = f.read().splitlines()
-with open('dog_info.json', 'r') as file:
+# with open('dog_info.json', 'r') as file:
     # Load JSON data from the file
-    data = json.load(file)
+    # data = json.load(file)
 
 # Now 'data' contains the contents of the JSON file as a Python dictionary
 
-loaded_dogs = [dog[0]['name'] for dog in data]
+# loaded_dogs = [dog[0]['name'] for dog in data]
 # print(loaded_dogs)
 # print(breeds)
 breeds=['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
@@ -28,7 +28,7 @@ for dog_breed in breeds:
             print(f'No dog breeds : {dog_breed}')
         
         for d in dog_info:
-            if d['name'] not in loaded_dogs:
+            if d['name'] not in loaded_names:
                 loaded_names.append(d['name'])
                 dog_info_list.append(d)
                 print(f'Added dog breed : {d["name"]}')
