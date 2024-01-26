@@ -81,7 +81,7 @@ def insert_data(cursor, data):
 
 def main():
     # Connect to the PostgreSQL database
-    # try:
+    try:
         connection = psycopg2.connect(**db_config)
         cursor = connection.cursor()
 
@@ -98,13 +98,13 @@ def main():
         # Commit the changes and close the connection
         connection.commit()
 
-    # except (Exception, psycopg2.Error) as error:
-    #     print(f"Error: {error}")
+    except (Exception, psycopg2.Error) as error:
+        print(f"Error: {error}")
 
-    # finally:
-    #     if connection:
-    #         cursor.close()
-    #         connection.close()
+    finally:
+        if connection:
+            cursor.close()
+            connection.close()
 
 if __name__ == "__main__":
     main()

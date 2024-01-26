@@ -32,11 +32,7 @@ ChartJS.register(
 )
 
 const Modal = ({ showModal, handleModalClose, predictions, selectedPredictionIndex, breeds, breedInfo, images }) => {
-    const options = [
-        { value: "jack", label: "Jack", color: "#FF8B00" },
-        { value: "john", label: "John", color: "#36B37E" },
-        { value: "mike", label: "Mike", color: "#0052CC" },
-    ];
+   
     const [selectedBreed, setSelectedBreed] = useState(null);
     const [selectedBreedInfo, setSelectedBreedInfo] = useState([]);
 
@@ -52,6 +48,7 @@ const Modal = ({ showModal, handleModalClose, predictions, selectedPredictionInd
     useEffect(() => {
         // This code will be executed when selectedBreedInfo changes
         // console.log('Selected Breed Info:', selectedBreedInfo);
+       
 
         if (selectedBreedInfo.length > 0) {
             const newDataset = {
@@ -79,6 +76,11 @@ const Modal = ({ showModal, handleModalClose, predictions, selectedPredictionInd
             setDatasetsList(updatedDatasets);
 
         }
+        // if (predictions.length > 0) {
+        //     console.log(breeds);
+        //     console.log(predictions[selectedPredictionIndex].label);
+        //     const defaultIndex = breeds.findIndex(breed => breed.label === predictions[selectedPredictionIndex].label);
+        // console.log(defaultIndex);}
     }, [selectedBreedInfo]);
     
     const handleBreedSelect = async (breed) => {
@@ -153,7 +155,7 @@ const Modal = ({ showModal, handleModalClose, predictions, selectedPredictionInd
                             <div className="grid grid-cols-1 gap-y-5 sm:gap-0 sm:grid-cols-2 lg:grid-cols-3 text-gray-700 justify-center content-center ">
                                 <div className=" flex  justify-center items-center px-5  col-span-1 col-start-1 row-start-1 lg:col-start-1 ">
 
-                                    <Select options={breeds} className='min-w-56' onChange={handleBreedSelect2} />
+                                    <Select options={breeds} className='min-w-56' onChange={handleBreedSelect2}   defaultValue={breeds[breeds.findIndex(breed => breed.label === predictions[selectedPredictionIndex].label)]} />
                                 </div>
                                 {/* <div className="dropdown dropdown-bottom flex  justify-center items-center px-5  col-span-1 col-start-1 row-start-1 lg:col-start-1">
                                     <div tabIndex={0} role="button" className="btn w-48 " onClick={toggleDropdown}>
@@ -225,7 +227,7 @@ const Modal = ({ showModal, handleModalClose, predictions, selectedPredictionInd
                                                     'Barking',
                                                     'Good with Strangers',],
                                                 datasets: [{
-                                                    label: `${predictions[selectedPredictionIndex].label}: Score out of 5`,
+                                                    label: selectedBreed2? `${predictions[selectedPredictionIndex].label}: Score out of 5`: `${selectedBreed2}: Score out of 5`,
                                                     data: selectedBreedInfo2.length > 0
                                                         ? [
                                                             selectedBreedInfo2[0].good_with_children,
