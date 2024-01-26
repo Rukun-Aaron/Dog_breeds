@@ -1,6 +1,11 @@
 #read labels.txt and store in list
 import requests
 import json
+import os
+from dotenv import load_dotenv
+
+
+load_dotenv()
 
 # with open('labels.txt') as f:
 #     breeds = f.read().splitlines()
@@ -13,6 +18,7 @@ import json
 # loaded_dogs = [dog[0]['name'] for dog in data]
 # print(loaded_dogs)
 # print(breeds)
+load_dotenv()
 breeds=['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
 # breeds =['x']
 loaded_names =[]
@@ -24,7 +30,7 @@ for dog_breed in breeds:
     
     while True:
             api_url = 'https://api.api-ninjas.com/v1/dogs?name={}&offset={}'.format(dog_breed, offset)
-            response = requests.get(api_url, headers={'X-Api-Key': 'OeclnfZ3nbQxgF6yH03Acg==0zJ1dL8aWoYWJ50H'})
+            response = requests.get(api_url, headers={'X-Api-Key': os.getenv('KEY')})
             if response.status_code == 200:
                 dog_info = response.json()
                 if len(dog_info) == 0:
