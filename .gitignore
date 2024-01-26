@@ -1,4 +1,5 @@
 archive/
+.env
 imgs/
 fine_tuned_vit_model_35
 fine_tuned_vit_model_45

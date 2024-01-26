@@ -15,7 +15,7 @@ db_config = {
 }
 
 # Path to your dog_info.json file
-json_file_path = 'dog_info.json'
+json_file_path = 'all_dogs_info.json'
 
 def create_table(cursor): 
     # SQL command to create the table
@@ -76,8 +76,8 @@ def insert_data(cursor, data):
 
     # Insert each record into the database
     for breed_list in data:
-        for record in breed_list:
-            cursor.execute(insert_query, record)
+       
+            cursor.execute(insert_query, breed_list)
 
 def main():
     # Connect to the PostgreSQL database
