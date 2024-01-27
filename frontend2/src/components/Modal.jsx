@@ -6,7 +6,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import {
-    getPredictions, getBreedInfo, getAllBreedInfo
+    getPredictions, getBreedInfo,
 } from '../services/apiService';
 import {
     Chart as ChartJS,
@@ -88,37 +88,54 @@ const Modal = ({ showModal, handleModalClose, predictions, selectedPredictionInd
 
     const handleBreedSelect = async (breed) => {
         // Update the selected breed state
-        const breedName = breed['label'];
-        setSelectedBreed(breedName);
-        try {
-            const response = await getBreedInfo(breedName);
-            const data = await response.json();
-            // setSelectedBreedImage(data[0].image_link);
-            setSelectedBreedInfo(data);
+        if (breed) {
+            const breedName = breed['label'];
+            setSelectedBreed(breedName);
+            try {
+                const response = await getBreedInfo(breedName);
+                const data = await response.json();
+                // setSelectedBreedImage(data[0].image_link);
+                setSelectedBreedInfo(data);
 
-            // console.log(selectedBreedInfo);
-        } catch (error) {
-            console.error('Error fetching selected breed info:', error);
+                // console.log(selectedBreedInfo);
+            } catch (error) {
+                console.error('Error fetching selected breed info:', error);
+            }
+            setIsDropdownOpen(false);
         }
-        setIsDropdownOpen(false);
+
+        else {
+            setSelectedBreed(null);
+            setSelectedBreedInfo([]);
+            setIsDropdownOpen(false);
+        }
+
 
     };
     // useEffect(() => {console.log(selectedBreedInfo)},[selectedBreed2])
     const handleBreedSelect2 = async (breed) => {
         // Update the selected breed state
-        const breedName2 = breed['label'];
-        setSelectedBreed2(breedName2);
-        try {
-            const response = await getBreedInfo(breedName2);
-            const data = await response.json();
+        if (breed) {
+            const breedName2 = breed['label'];
+            setSelectedBreed2(breedName2);
+            try {
+                const response = await getBreedInfo(breedName2);
+                const data = await response.json();
 
-            setSelectedBreedInfo2(data);
+                setSelectedBreedInfo2(data);
 
 
-        } catch (error) {
-            console.error('Error fetching selected breed info:', error);
+            } catch (error) {
+                console.error('Error fetching selected breed info:', error);
+            }
+            setIsDropdownOpen(false);
         }
-        setIsDropdownOpen(false);
+        else{
+            setSelectedBreed2(null);
+            setSelectedBreedInfo2([]);
+            setIsDropdownOpen(false);
+        }
+
 
     };
     const toggleDropdown = () => {
@@ -165,7 +182,7 @@ const Modal = ({ showModal, handleModalClose, predictions, selectedPredictionInd
                                         options={breeds}
                                         // sx={{ width: 300 }}
                                         defaultValue={breeds[breeds.findIndex(breed => breed.label === predictions[selectedPredictionIndex].label)]}
-                                        renderInput={(params) => <TextField {...params} InputProps={{ ...params.InputProps, type: 'search',style: { fontFamily: "Outfit" } }} margin="normal" label="Dogs" />}
+                                        renderInput={(params) => <TextField {...params} InputProps={{ ...params.InputProps, type: 'search', style: { fontFamily: "Outfit" } }} margin="normal" label="Dogs" />}
                                     />
                                     {/* <Select options={breeds} className='min-w-56 ' onChange={handleBreedSelect2} defaultValue={breeds[breeds.findIndex(breed => breed.label === predictions[selectedPredictionIndex].label)]} /> */}
                                 </div>
@@ -214,8 +231,8 @@ const Modal = ({ showModal, handleModalClose, predictions, selectedPredictionInd
                                         options={breeds}
                                         // sx={{ width: 300 }}
                                         // defaultValue='hi'
-                                        renderInput={(params) => <TextField {...params} InputProps={{ ...params.InputProps, type: 'search',style: { fontFamily: "Outfit" } }} 
-                                        label="Compare to other Dogs"  />}
+                                        renderInput={(params) => <TextField {...params} InputProps={{ ...params.InputProps, type: 'search', style: { fontFamily: "Outfit" } }}
+                                            label="Compare to other Dogs" />}
                                     />
                                     {/* <Select options={breeds} className=' min-w-56' onChange={handleBreedSelect} /> */}
                                 </div>

@@ -55,33 +55,7 @@ def get_breed_info(breed):
         if connection:
             connection.close()
     
-def get_all_breeds():
-    cursor = None
-    connection = None
-    
-    try:
-        connection = psycopg2.connect(**db_config)
-        cursor = connection.cursor()
-        
-        select_query = """
-        SELECT name FROM dog_breeds;
-        """
-        cursor.execute(select_query)
-        breeds = cursor.fetchall()  
-        
-        return breeds
-    
-    except (Exception, psycopg2.Error) as error:
-        
-        print(f"Error: {error}")
-        return []
-    
-    finally:
-        if connection:
-            connection.close()
-        if cursor:
-            cursor.close()
-    
+
 def get_all_breeds():
     cursor = None
     connection = None
@@ -108,4 +82,60 @@ def get_all_breeds():
             connection.close()
         if cursor:
             cursor.close()    
+def get_all_breed_info():
+    cursor = None
+    connection = None
+    return_breed_info = list()
+    try:     
+        connection = psycopg2.connect(**db_config)
+        cursor = connection.cursor()
+        
+        select_query = f"""
+        SELECT * FROM dog_breeds;
+        """
+        cursor.execute(select_query)
+        
+        data = cursor.fetchall()
+        breed_info=None
+        for row in data:
+            
+            breed_info = dict(zip(labels, row))
+            return_breed_info.append(breed_info)
 
+        if breed_info is None:
+            return (f"No dog_breeds  found in the database.")
+        else:
+            return return_breed_info
+        
+    except (Exception, psycopg2.Error) as error:
+        return (f"Error: {error}")
+    finally:
+        if cursor:
+            cursor.close()
+        if connection:
+            connection.close()
+    
+def get_all_breeds_and_image():
+    cursor = None
+    connection = 0
+    
+    try:
+        
+        connection = psycopg2.connect(**db_config)
+        cursor = connection.cursor()
+        
+        select_query = """
+        SELECT name, image_link FROM dog_breeds;
+        """
+        cursor.execute(select_query)
+        breeds = cursor.fetchall()
+        
+        return breeds
+    except (Exception, psycopg2.Error) as error:
+        print(f"Error: {error}")
+        return []
+    finally:
+        if connection:
+            connection.close()
+        if cursor:
+            cursor.close()
