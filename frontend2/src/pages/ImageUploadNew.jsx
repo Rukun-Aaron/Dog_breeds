@@ -170,7 +170,7 @@ const ImageUploadNew = () => {
   return (
     <div className="bg-[#F5F1FF] w-full h-full flex flex-col items-center pb-4 pt-4"
     style={{
-      backgroundImage: `url('/bg_no_dog.png')`,
+      backgroundImage: `url('/mirror3.png')`,
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       height: '100vh',
