@@ -10,9 +10,17 @@ import ImageUploadNew from './pages/ImageUploadNew';
 import Homepage from './components/Homepage';
 import Compare from './pages/Compare';
 import './styles/scrollbar.css';
-
-function App() {
+import { createTheme,ThemeProvider} from '@mui/material/styles';function App() {
+  const theme=createTheme({
+    typography: {
+      fontFamily: [
+        'Outfit',
+        'sans-serif'
+      ].join(','),
+    }
+  })
   return (
+    <ThemeProvider theme={theme}>
     <Router>
       <div className="w-full h-screen drawer drawer-end">
         {/* <Navbar /> */}
@@ -25,6 +33,7 @@ function App() {
         </div>
       </div>
     </Router>
+    </ThemeProvider>
   );
 }
 

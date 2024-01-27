@@ -1,6 +1,8 @@
 // ModalComponent.js
 import React, { useState, useEffect, } from 'react';
 import Select from 'react-select';
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import {
@@ -32,7 +34,7 @@ ChartJS.register(
 )
 
 const Modal = ({ showModal, handleModalClose, predictions, selectedPredictionIndex, breeds, breedInfo, images }) => {
-   
+
     const [selectedBreed, setSelectedBreed] = useState(null);
     const [selectedBreedInfo, setSelectedBreedInfo] = useState([]);
 
@@ -48,7 +50,7 @@ const Modal = ({ showModal, handleModalClose, predictions, selectedPredictionInd
     useEffect(() => {
         // This code will be executed when selectedBreedInfo changes
         // console.log('Selected Breed Info:', selectedBreedInfo);
-       
+
 
         if (selectedBreedInfo.length > 0) {
             const newDataset = {
@@ -80,9 +82,10 @@ const Modal = ({ showModal, handleModalClose, predictions, selectedPredictionInd
         //     console.log(breeds);
         //     console.log(predictions[selectedPredictionIndex].label);
         //     const defaultIndex = breeds.findIndex(breed => breed.label === predictions[selectedPredictionIndex].label);
-        // console.log(defaultIndex);}
+        //     console.log(defaultIndex);
+        // }
     }, [selectedBreedInfo]);
-    
+
     const handleBreedSelect = async (breed) => {
         // Update the selected breed state
         const breedName = breed['label'];
@@ -154,8 +157,17 @@ const Modal = ({ showModal, handleModalClose, predictions, selectedPredictionInd
                         {selectedPredictionIndex !== null && (
                             <div className="grid grid-cols-1 gap-y-5 sm:gap-0 sm:grid-cols-2 lg:grid-cols-3 text-gray-700 justify-center content-center ">
                                 <div className=" flex  justify-center items-center px-5  col-span-1 col-start-1 row-start-1 lg:col-start-1 ">
-
-                                    <Select options={breeds} className='min-w-56' onChange={handleBreedSelect2}   defaultValue={breeds[breeds.findIndex(breed => breed.label === predictions[selectedPredictionIndex].label)]} />
+                                    <Autocomplete
+                                        disablePortal
+                                        className={"min-w-72"}
+                                        id="combo-box-demo"
+                                        onChange={(e, v) => handleBreedSelect2(v)}
+                                        options={breeds}
+                                        // sx={{ width: 300 }}
+                                        defaultValue={breeds[breeds.findIndex(breed => breed.label === predictions[selectedPredictionIndex].label)]}
+                                        renderInput={(params) => <TextField {...params} InputProps={{ ...params.InputProps, style: { fontFamily: "Outfit" } }} margin="normal" label="Dogs" />}
+                                    />
+                                    {/* <Select options={breeds} className='min-w-56 ' onChange={handleBreedSelect2} defaultValue={breeds[breeds.findIndex(breed => breed.label === predictions[selectedPredictionIndex].label)]} /> */}
                                 </div>
                                 {/* <div className="dropdown dropdown-bottom flex  justify-center items-center px-5  col-span-1 col-start-1 row-start-1 lg:col-start-1">
                                     <div tabIndex={0} role="button" className="btn w-48 " onClick={toggleDropdown}>
@@ -194,7 +206,17 @@ const Modal = ({ showModal, handleModalClose, predictions, selectedPredictionInd
                                     )}
                                 </div> */}
                                 <div className=" flex  justify-center items-center px-5 row-start-4 col-start-1 sm:row-start-1 sm:col-start-2  lg:row-start-1 lg:col-start-3">
-                                    <Select options={breeds} className=' min-w-56' onChange={handleBreedSelect} />
+                                    <Autocomplete
+                                        disablePortal
+                                        className={"min-w-72"}
+                                        id="combo-box-demo"
+                                        onChange={(e, v) => handleBreedSelect(v)}
+                                        options={breeds}
+                                        // sx={{ width: 300 }}
+                                        // defaultValue='hi'
+                                        renderInput={(params) => <TextField {...params} InputProps={{ ...params.InputProps, style: { fontFamily: "Outfit" } }} label="Compare to other Dogs" />}
+                                    />
+                                    {/* <Select options={breeds} className=' min-w-56' onChange={handleBreedSelect} /> */}
                                 </div>
                                 <div className='flex items-center justify-center px-5 col-start-1 row-start-2'>
 
@@ -227,7 +249,7 @@ const Modal = ({ showModal, handleModalClose, predictions, selectedPredictionInd
                                                     'Barking',
                                                     'Good with Strangers',],
                                                 datasets: [{
-                                                    label: selectedBreed2? `${predictions[selectedPredictionIndex].label}: Score out of 5`: `${selectedBreed2}: Score out of 5`,
+                                                    label: selectedBreed2 ? `${predictions[selectedPredictionIndex].label}: Score out of 5` : `${selectedBreed2}: Score out of 5`,
                                                     data: selectedBreedInfo2.length > 0
                                                         ? [
                                                             selectedBreedInfo2[0].good_with_children,
@@ -312,7 +334,7 @@ const Modal = ({ showModal, handleModalClose, predictions, selectedPredictionInd
                                         />
                                     </div>
                                 )}
-                                { selectedBreedInfo2.length > 0 ? (
+                                {selectedBreedInfo2.length > 0 ? (
                                     <div className=' flex  flex-col row-start-3 col-start-1  lg:col-start-1 justify-center '>
                                         <p>Life expectancy: {selectedBreedInfo2[0].min_life_expectancy} to {" "}
                                             {selectedBreedInfo2[0].max_life_expectancy} Years</p>
