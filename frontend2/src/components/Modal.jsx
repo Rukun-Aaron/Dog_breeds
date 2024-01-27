@@ -1,5 +1,6 @@
 // ModalComponent.js
 import React, { useState, useEffect, } from 'react';
+import Select from 'react-select';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import {
@@ -31,7 +32,7 @@ ChartJS.register(
 )
 
 const Modal = ({ showModal, handleModalClose, predictions, selectedPredictionIndex, breeds, breedInfo, images }) => {
-
+   
     const [selectedBreed, setSelectedBreed] = useState(null);
     const [selectedBreedInfo, setSelectedBreedInfo] = useState([]);
 
@@ -43,26 +44,11 @@ const Modal = ({ showModal, handleModalClose, predictions, selectedPredictionInd
     const [datasetsList, setDatasetsList] = useState([]);
 
 
-    const handleBreedSelect = async (breed) => {
-        // Update the selected breed state
-        setSelectedBreed(breed);
-        try {
-            const response = await getBreedInfo(breed);
-            const data = await response.json();
-            // setSelectedBreedImage(data[0].image_link);
-            setSelectedBreedInfo(data);
-
-            // console.log(selectedBreedInfo);
-        } catch (error) {
-            console.error('Error fetching selected breed info:', error);
-        }
-        setIsDropdownOpen(false);
-
-    };
 
     useEffect(() => {
         // This code will be executed when selectedBreedInfo changes
         // console.log('Selected Breed Info:', selectedBreedInfo);
+       
 
         if (selectedBreedInfo.length > 0) {
             const newDataset = {
@@ -90,14 +76,37 @@ const Modal = ({ showModal, handleModalClose, predictions, selectedPredictionInd
             setDatasetsList(updatedDatasets);
 
         }
+        // if (predictions.length > 0) {
+        //     console.log(breeds);
+        //     console.log(predictions[selectedPredictionIndex].label);
+        //     const defaultIndex = breeds.findIndex(breed => breed.label === predictions[selectedPredictionIndex].label);
+        // console.log(defaultIndex);}
     }, [selectedBreedInfo]);
+    
+    const handleBreedSelect = async (breed) => {
+        // Update the selected breed state
+        const breedName = breed['label'];
+        setSelectedBreed(breedName);
+        try {
+            const response = await getBreedInfo(breedName);
+            const data = await response.json();
+            // setSelectedBreedImage(data[0].image_link);
+            setSelectedBreedInfo(data);
 
+            // console.log(selectedBreedInfo);
+        } catch (error) {
+            console.error('Error fetching selected breed info:', error);
+        }
+        setIsDropdownOpen(false);
+
+    };
     // useEffect(() => {console.log(selectedBreedInfo)},[selectedBreed2])
     const handleBreedSelect2 = async (breed) => {
         // Update the selected breed state
-        setSelectedBreed2(breed);
+        const breedName2 = breed['label'];
+        setSelectedBreed2(breedName2);
         try {
-            const response = await getBreedInfo(breed);
+            const response = await getBreedInfo(breedName2);
             const data = await response.json();
 
             setSelectedBreedInfo2(data);
@@ -144,8 +153,11 @@ const Modal = ({ showModal, handleModalClose, predictions, selectedPredictionInd
 
                         {selectedPredictionIndex !== null && (
                             <div className="grid grid-cols-1 gap-y-5 sm:gap-0 sm:grid-cols-2 lg:grid-cols-3 text-gray-700 justify-center content-center ">
+                                <div className=" flex  justify-center items-center px-5  col-span-1 col-start-1 row-start-1 lg:col-start-1 ">
 
-                                <div className="dropdown dropdown-bottom flex  justify-center items-center px-5  col-span-1 col-start-1 row-start-1 lg:col-start-1">
+                                    <Select options={breeds} className='min-w-56' onChange={handleBreedSelect2}   defaultValue={breeds[breeds.findIndex(breed => breed.label === predictions[selectedPredictionIndex].label)]} />
+                                </div>
+                                {/* <div className="dropdown dropdown-bottom flex  justify-center items-center px-5  col-span-1 col-start-1 row-start-1 lg:col-start-1">
                                     <div tabIndex={0} role="button" className="btn w-48 " onClick={toggleDropdown}>
                                         {selectedBreed2 != null ? `${selectedBreed2}` : predictions[selectedPredictionIndex].label}
                                     </div>
@@ -160,12 +172,12 @@ const Modal = ({ showModal, handleModalClose, predictions, selectedPredictionInd
                                             </div>
                                         </ul>
                                     )}
-                                </div>
+                                </div> */}
                                 <div className='flex items-center justify-center px-5 sm:col-span-2 sm:mt-3 col-start-1 lg:col-span-1 lg:col-start-2'>
                                     <p>{predictions[selectedPredictionIndex].label}  Characteristics</p>
 
                                 </div>
-                                <div className="dropdown dropdown-bottom flex  justify-center items-center px-5 row-start-4 col-start-1 sm:row-start-1 sm:col-start-2  lg:row-start-1 lg:col-start-3">
+                                {/* <div className="dropdown dropdown-bottom flex  justify-center items-center px-5 row-start-4 col-start-1 sm:row-start-1 sm:col-start-2  lg:row-start-1 lg:col-start-3">
                                     <div tabIndex={0} role="button" className="btn w-48 " onClick={toggleDropdown}>
                                         {selectedBreed != null ? `${selectedBreed}` : 'Compare to Other dogs'}
                                     </div>
@@ -180,8 +192,10 @@ const Modal = ({ showModal, handleModalClose, predictions, selectedPredictionInd
                                             </div>
                                         </ul>
                                     )}
+                                </div> */}
+                                <div className=" flex  justify-center items-center px-5 row-start-4 col-start-1 sm:row-start-1 sm:col-start-2  lg:row-start-1 lg:col-start-3">
+                                    <Select options={breeds} className=' min-w-56' onChange={handleBreedSelect} />
                                 </div>
-
                                 <div className='flex items-center justify-center px-5 col-start-1 row-start-2'>
 
                                     <img
@@ -213,7 +227,7 @@ const Modal = ({ showModal, handleModalClose, predictions, selectedPredictionInd
                                                     'Barking',
                                                     'Good with Strangers',],
                                                 datasets: [{
-                                                    label: `${predictions[selectedPredictionIndex].label}: Score out of 5`,
+                                                    label: selectedBreed2? `${predictions[selectedPredictionIndex].label}: Score out of 5`: `${selectedBreed2}: Score out of 5`,
                                                     data: selectedBreedInfo2.length > 0
                                                         ? [
                                                             selectedBreedInfo2[0].good_with_children,
@@ -260,14 +274,14 @@ const Modal = ({ showModal, handleModalClose, predictions, selectedPredictionInd
                                                         font: {
                                                             size: 15
                                                         },
-                                                        
+
                                                     },
-                                                  
+
                                                     legend: {
                                                         labels: {
                                                             fontColor: 'red'
                                                         }
-                                                        
+
                                                     },
                                                 },
                                                 plugins: {
@@ -298,20 +312,35 @@ const Modal = ({ showModal, handleModalClose, predictions, selectedPredictionInd
                                         />
                                     </div>
                                 )}
-
-                                <div className=' flex  flex-col row-start-3 col-start-1  lg:col-start-1 justify-center '>
-                                    <p>Life expectancy: {breedInfo[selectedPredictionIndex][0].min_life_expectancy} to {" "}
-                                        {breedInfo[selectedPredictionIndex][0].max_life_expectancy} Years</p>
-                                    <p>Height in Males: {breedInfo[selectedPredictionIndex][0].min_height_male} to {" "}
-                                        {breedInfo[selectedPredictionIndex][0].max_height_male} Inches</p>
-                                    <p>Height in Females: {breedInfo[selectedPredictionIndex][0].min_height_female} to {" "}
-                                        {breedInfo[selectedPredictionIndex][0].max_height_female} Inches</p>
-                                    <p>Weight in Males: {breedInfo[selectedPredictionIndex][0].min_weight_male} to {" "}
-                                        {breedInfo[selectedPredictionIndex][0].max_weight_male} Lbs</p>
-                                    <p>Weight in Females: {breedInfo[selectedPredictionIndex][0].min_weight_female} to {" "}
-                                        {breedInfo[selectedPredictionIndex][0].max_weight_female} Lbs</p>
-
-                                </div>
+                                { selectedBreedInfo2.length > 0 ? (
+                                    <div className=' flex  flex-col row-start-3 col-start-1  lg:col-start-1 justify-center '>
+                                        <p>Life expectancy: {selectedBreedInfo2[0].min_life_expectancy} to {" "}
+                                            {selectedBreedInfo2[0].max_life_expectancy} Years</p>
+                                        <p>Height in Males: {selectedBreedInfo2[0].min_height_male} to {" "}
+                                            {selectedBreedInfo2[0].max_height_male} Inches</p>
+                                        <p>Height in Females: {selectedBreedInfo2[0].min_height_female} to {" "}
+                                            {selectedBreedInfo2[0].max_height_female} Inches</p>
+                                        <p>Weight in Males: {selectedBreedInfo2[0].min_weight_male} to {" "}
+                                            {selectedBreedInfo2[0].max_weight_male} Lbs</p>
+                                        <p>Weight in Females: {selectedBreedInfo2[0].min_weight_female} to {" "}
+                                            {selectedBreedInfo2[0].max_weight_female} Lbs</p>
+                                    </div>
+                                ) :
+                                    (
+                                        <div className=' flex  flex-col row-start-3 col-start-1  lg:col-start-1 justify-center '>
+                                            <p>Life expectancy: {breedInfo[selectedPredictionIndex][0].min_life_expectancy} to {" "}
+                                                {breedInfo[selectedPredictionIndex][0].max_life_expectancy} Years</p>
+                                            <p>Height in Males: {breedInfo[selectedPredictionIndex][0].min_height_male} to {" "}
+                                                {breedInfo[selectedPredictionIndex][0].max_height_male} Inches</p>
+                                            <p>Height in Females: {breedInfo[selectedPredictionIndex][0].min_height_female} to {" "}
+                                                {breedInfo[selectedPredictionIndex][0].max_height_female} Inches</p>
+                                            <p>Weight in Males: {breedInfo[selectedPredictionIndex][0].min_weight_male} to {" "}
+                                                {breedInfo[selectedPredictionIndex][0].max_weight_male} Lbs</p>
+                                            <p>Weight in Females: {breedInfo[selectedPredictionIndex][0].min_weight_female} to {" "}
+                                                {breedInfo[selectedPredictionIndex][0].max_weight_female} Lbs</p>
+                                        </div>
+                                    )
+                                }
                                 {
                                     selectedBreedInfo.length > 0 && (
                                         <div className='flex  flex-col justify-center col-start-1 row-start-6 sm:row-start-3 sm:col-start-2 lg:row-start-3 lg:col-start-3'>

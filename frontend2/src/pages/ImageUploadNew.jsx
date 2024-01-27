@@ -29,7 +29,11 @@ const ImageUploadNew = () => {
       try {
         const response = await getAllBreedInfo();
         const data = await response.json();
-        setBreeds(data);
+        const formattedData = data.map((item, index) => ({
+          value: `value${index}`, // You can adjust the value as needed
+          label: item[0],
+        }));
+        setBreeds(formattedData);
       } catch (error) {
         console.error('Error fetching breed data:', error);
       }
