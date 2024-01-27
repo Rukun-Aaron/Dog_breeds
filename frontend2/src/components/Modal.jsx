@@ -165,7 +165,7 @@ const Modal = ({ showModal, handleModalClose, predictions, selectedPredictionInd
                                         options={breeds}
                                         // sx={{ width: 300 }}
                                         defaultValue={breeds[breeds.findIndex(breed => breed.label === predictions[selectedPredictionIndex].label)]}
-                                        renderInput={(params) => <TextField {...params} InputProps={{ ...params.InputProps, style: { fontFamily: "Outfit" } }} margin="normal" label="Dogs" />}
+                                        renderInput={(params) => <TextField {...params} InputProps={{ ...params.InputProps, type: 'search',style: { fontFamily: "Outfit" } }} margin="normal" label="Dogs" />}
                                     />
                                     {/* <Select options={breeds} className='min-w-56 ' onChange={handleBreedSelect2} defaultValue={breeds[breeds.findIndex(breed => breed.label === predictions[selectedPredictionIndex].label)]} /> */}
                                 </div>
@@ -214,7 +214,8 @@ const Modal = ({ showModal, handleModalClose, predictions, selectedPredictionInd
                                         options={breeds}
                                         // sx={{ width: 300 }}
                                         // defaultValue='hi'
-                                        renderInput={(params) => <TextField {...params} InputProps={{ ...params.InputProps, style: { fontFamily: "Outfit" } }} label="Compare to other Dogs" />}
+                                        renderInput={(params) => <TextField {...params} InputProps={{ ...params.InputProps, type: 'search',style: { fontFamily: "Outfit" } }} 
+                                        label="Compare to other Dogs"  />}
                                     />
                                     {/* <Select options={breeds} className=' min-w-56' onChange={handleBreedSelect} /> */}
                                 </div>
