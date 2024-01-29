@@ -2,7 +2,7 @@ import  { useState, useEffect } from 'react'
 import * as React from 'react';
 
 import Navbar from '../components/NavBar'
-import { getBreedInfoImage } from '../services/apiService';
+import { getAllBreedInfo } from '../services/apiService';
 
 import Checkbox from '@mui/material/Checkbox';
 import TextField from '@mui/material/TextField';
@@ -20,40 +20,40 @@ const Compare = () => {
   const [selectedOptions, setSelectedOptions] = useState(null);
 
   const handleOnChange = (event, value) => {
-    console.log( value);
     setSelectedOptions(value);
   }
   const filteredBreeds = breeds.filter((breed) => {
-    return breed.name.toLowerCase().includes(filter.toLowerCase())
+    const filterByName = breed.name.toLowerCase().includes(filter.toLowerCase())
+  
+    return filterByName
   })
+  console.log(breeds)
   const tags = [
-    { title: 'Trainable' },
-    { title: 'Energetic' },
-    { title: 'Less Tendancy to Bark' },
-    { title: 'Good with Strangers' },
-    { title: 'Good with Kids' },
-    { title: 'Good with Other Dogs' },
-    { title: 'Less Tendancy to Shed' },
-    { title: 'Little Grooming Needs' },
-    { title: 'Tendancy to Drool' },
-    { title: 'Long Coat Length' },
-    { title: 'Short Coat Length' },
-    { title: 'Playful' },
-    { title: 'Protective' }
+    { title: 'Trainable' , value:'trainability' },
+    { title: 'Energetic' , value:'energy'},
+    { title: 'Less Tendancy to Bark', value:'barking' },
+    { title: 'Good with Strangers', value:'good_with_strangers' },
+    { title: 'Good with Kids' , value:'good_with_children'},
+    { title: 'Good with Other Dogs', value:'good_with_other_dogs' },
+    { title: 'Less Tendancy to Shed', value:'shedding'},
+    { title: 'Little Grooming Needs', value:'grooming' },
+    { title: 'Tendancy to Drool', value:'drooling'},
+    { title: 'Long Coat Length', value:'coat_length' },
+    { title: 'Short Coat Length', value:'coat_length'},
+    { title: 'Playful', value:'playfulness' },
+    { title: 'Protective', value:'protectiveness' }
   ]
-
-  console.log(selectedOptions);
   useEffect(() => {
     // Fetch breed data when the component mounts
     const fetchData = async () => {
       try {
-        const response = await getBreedInfoImage();
+        const response = await getAllBreedInfo();
         const data = await response.json();
-        const formattedData = data.map((item) => ({
-          name: item[0], // You can adjust the value as needed
-          image: item[1],
-        }));
-        setBreeds(formattedData);
+        // const formattedData = data.map((item) => ({
+        //   name: item[0], // You can adjust the value as needed
+        //   image: item[1],
+        // }));
+        setBreeds(data);
       } catch (error) {
         console.error('Error fetching breed data:', error);
       }
@@ -117,7 +117,7 @@ const Compare = () => {
                       >
                         <div className="w-32 h-16 flex items-center justify-center">
                           <img
-                            src={breed.image}
+                            src={breed.image_link}
                             alt={`Selected ${index + 1}`}
                             className="max-w-32 max-h-16 rounded-md"
                           />
