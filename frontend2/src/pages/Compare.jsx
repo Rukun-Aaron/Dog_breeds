@@ -17,6 +17,12 @@ const Compare = () => {
   const [breeds, setBreeds] = useState([])
   const [filter, setFilter] = useState('')
   
+  const [selectedOptions, setSelectedOptions] = useState(null);
+
+  const handleOnChange = (event, value) => {
+    console.log( value);
+    setSelectedOptions(value);
+  }
   const filteredBreeds = breeds.filter((breed) => {
     return breed.name.toLowerCase().includes(filter.toLowerCase())
   })
@@ -36,7 +42,7 @@ const Compare = () => {
     { title: 'Protective' }
   ]
 
-  console.log(filteredBreeds);
+  console.log(selectedOptions);
   useEffect(() => {
     // Fetch breed data when the component mounts
     const fetchData = async () => {
@@ -78,6 +84,7 @@ const Compare = () => {
                     multiple
                     id="checkboxes-tags-demo"
                     options={tags}
+                    onChange={handleOnChange}
                     disableCloseOnSelect
                     getOptionLabel={(option) => option.title}
                     renderOption={(props, option, { selected }) => (
