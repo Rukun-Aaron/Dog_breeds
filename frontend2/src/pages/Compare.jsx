@@ -35,7 +35,7 @@ const Compare = () => {
     { title: 'Good with Other Dogs' },
     { title: 'Less Tendancy to Shed' },
     { title: 'Little Grooming Needs' },
-    { title: 'Tendancy to Droom' },
+    { title: 'Tendancy to Drool' },
     { title: 'Long Coat Length' },
     { title: 'Short Coat Length' },
     { title: 'Playful' },
