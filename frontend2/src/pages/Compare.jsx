@@ -1,4 +1,4 @@
-import  { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import * as React from 'react';
 
 import Navbar from '../components/NavBar'
@@ -16,32 +16,36 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
 const Compare = () => {
   const [breeds, setBreeds] = useState([])
   const [filter, setFilter] = useState('')
-  
-  const [selectedOptions, setSelectedOptions] = useState(null);
+
+  const [selectedOptions, setSelectedOptions] = useState([]);
 
   const handleOnChange = (event, value) => {
     setSelectedOptions(value);
   }
   const filteredBreeds = breeds.filter((breed) => {
-    const filterByName = breed.name.toLowerCase().includes(filter.toLowerCase())
-  
-    return filterByName
-  })
+    // const filterByName = breed.name.toLowerCase().includes(filter.toLowerCase())
+
+    // return filterByName
+    return selectedOptions.every((option) => {
+      // Check if breed has the selected option and its value is >= 3
+      return breed[option.value] && breed[option.value] >= 3;
+    });
+  });
   console.log(breeds)
   const tags = [
-    { title: 'Trainable' , value:'trainability' },
-    { title: 'Energetic' , value:'energy'},
-    { title: 'Less Tendancy to Bark', value:'barking' },
-    { title: 'Good with Strangers', value:'good_with_strangers' },
-    { title: 'Good with Kids' , value:'good_with_children'},
-    { title: 'Good with Other Dogs', value:'good_with_other_dogs' },
-    { title: 'Less Tendancy to Shed', value:'shedding'},
-    { title: 'Little Grooming Needs', value:'grooming' },
-    { title: 'Tendancy to Drool', value:'drooling'},
-    { title: 'Long Coat Length', value:'coat_length' },
-    { title: 'Short Coat Length', value:'coat_length'},
-    { title: 'Playful', value:'playfulness' },
-    { title: 'Protective', value:'protectiveness' }
+    { title: 'Trainable', value: 'trainability' },
+    { title: 'Energetic', value: 'energy' },
+    { title: 'Less Tendancy to Bark', value: 'barking' },
+    { title: 'Good with Strangers', value: 'good_with_strangers' },
+    { title: 'Good with Kids', value: 'good_with_children' },
+    { title: 'Good with Other Dogs', value: 'good_with_other_dogs' },
+    { title: 'Less Tendancy to Shed', value: 'shedding' },
+    { title: 'Little Grooming Needs', value: 'grooming' },
+    { title: 'Tendancy to Drool', value: 'drooling' },
+    { title: 'Long Coat Length', value: 'coat_length' },
+    { title: 'Short Coat Length', value: 'coat_length' },
+    { title: 'Playful', value: 'playfulness' },
+    { title: 'Protective', value: 'protectiveness' }
   ]
   useEffect(() => {
     // Fetch breed data when the component mounts
