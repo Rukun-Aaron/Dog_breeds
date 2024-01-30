@@ -122,11 +122,30 @@ const Compare = () => {
           <div className='flex justify-center overflow-x-hidden pt-24 pb-4 h-fit w-full'>
             <div className='max-w-5xl xl:max-w-6xl w-11/12'>
               <div className='sm:px-2 pb-2 flex items-center justify-between'>
-                <div className='join-vertical'>
+                <div className='join'>
+                <Autocomplete
+                      multiple
+                      id="checkboxes-tags-demo"
+                      options={tags}
+                      disableCloseOnSelect
+                      getOptionLabel={(tag) => tag.value}
+                      renderOption={(props, tag, { selected }) => (
+                        <li {...props}>
+                          {selected ? checkedIcon : icon}
+                          {tag.value}
+                        </li>
+                      )}
+                      style={{ width: 400 }}
+                      value={selectedTags} // Connect to state for selected tags
+                      onChange={(event, newSelectedTags) => setSelectedTags(newSelectedTags)} // Update state on change
+                      renderInput={(params) => (
+                        <TextField {...params} label="Tags" placeholder="Select tags" />
+                      )}
+                    />
                   <input
                     placeholder="Filter"
                     className="dark:bg-neutral-900 dark:text-neutral-100 dark:border-white 
-                    input input-bordered join-item w-full mb-5"
+                    input input-bordered join-item w-full h-14 "
                     onChange={(e) => {
                       e.preventDefault();
                       setFilter(e.target.value);
@@ -158,26 +177,8 @@ const Compare = () => {
                       <TextField {...params} label="Checkboxes" placeholder="Favorites" />
                     )}
                   /> */}
-                  <div>
-                    <Autocomplete
-                      multiple
-                      id="checkboxes-tags-demo"
-                      options={tags}
-                      disableCloseOnSelect
-                      getOptionLabel={(tag) => tag.value}
-                      renderOption={(props, tag, { selected }) => (
-                        <li {...props}>
-                          {selected ? checkedIcon : icon}
-                          {tag.value}
-                        </li>
-                      )}
-                      style={{ width: 500 }}
-                      value={selectedTags} // Connect to state for selected tags
-                      onChange={(event, newSelectedTags) => setSelectedTags(newSelectedTags)} // Update state on change
-                      renderInput={(params) => (
-                        <TextField {...params} label="Tags" placeholder="Select tags" />
-                      )}
-                    />
+                  
+                   
                     {/* <FormControl sx={{ m: 1, width: 300 }}>
                       <InputLabel id="demo-multiple-checkbox-label">Tags</InputLabel>
                       <Select
@@ -198,7 +199,7 @@ const Compare = () => {
                         ))}
                       </Select>
                     </FormControl> */}
-                  </div>
+                  
                 </div>
               </div>
               <div className='w-full'>
