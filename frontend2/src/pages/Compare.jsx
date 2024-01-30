@@ -84,7 +84,7 @@ const Compare = () => {
     const filterByName = breed.name.toLowerCase().includes(filter.toLowerCase())
 
     // return filterByName
-    
+
     return filterByName && selectedTags.every((option) => {
       if (option.title == "barking" || option.title == "shedding" || option.title == "drooling" || option.title == "grooming") {
         return breed[option.title] && breed[option.title] < 2;
@@ -123,25 +123,25 @@ const Compare = () => {
             <div className='max-w-5xl xl:max-w-6xl w-11/12'>
               <div className='sm:px-2 pb-2 flex items-center justify-between'>
                 <div className='join'>
-                <Autocomplete
-                      multiple
-                      id="checkboxes-tags-demo"
-                      options={tags}
-                      disableCloseOnSelect
-                      getOptionLabel={(tag) => tag.value}
-                      renderOption={(props, tag, { selected }) => (
-                        <li {...props}>
-                          {selected ? checkedIcon : icon}
-                          {tag.value}
-                        </li>
-                      )}
-                      style={{ width: 400 }}
-                      value={selectedTags} // Connect to state for selected tags
-                      onChange={(event, newSelectedTags) => setSelectedTags(newSelectedTags)} // Update state on change
-                      renderInput={(params) => (
-                        <TextField {...params} label="Tags" placeholder="Select tags" />
-                      )}
-                    />
+                  <Autocomplete
+                    multiple
+                    id="checkboxes-tags-demo"
+                    options={tags}
+                    disableCloseOnSelect
+                    getOptionLabel={(tag) => tag.value}
+                    renderOption={(props, tag, { selected }) => (
+                      <MenuItem {...props} sx={{ padding: '20px 0' }}>
+                        {selected ? checkedIcon : icon}
+                        {tag.value}
+                      </MenuItem>
+                    )}
+                    style={{ width: 400 }}
+                    value={selectedTags} // Connect to state for selected tags
+                    onChange={(event, newSelectedTags) => setSelectedTags(newSelectedTags)} // Update state on change
+                    renderInput={(params) => (
+                      <TextField {...params} label="Tags" placeholder="Select tags" />
+                    )}
+                  />
                   <input
                     placeholder="Filter"
                     className="dark:bg-neutral-900 dark:text-neutral-100 dark:border-white 
@@ -177,9 +177,9 @@ const Compare = () => {
                       <TextField {...params} label="Checkboxes" placeholder="Favorites" />
                     )}
                   /> */}
-                  
-                   
-                    {/* <FormControl sx={{ m: 1, width: 300 }}>
+
+
+                  {/* <FormControl sx={{ m: 1, width: 300 }}>
                       <InputLabel id="demo-multiple-checkbox-label">Tags</InputLabel>
                       <Select
                         labelId="demo-multiple-checkbox-label"
@@ -199,7 +199,7 @@ const Compare = () => {
                         ))}
                       </Select>
                     </FormControl> */}
-                  
+
                 </div>
               </div>
               <div className='w-full'>
