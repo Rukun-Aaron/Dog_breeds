@@ -52,57 +52,57 @@ function Homepage() {
 
         {/* Left and Right Division */}
         <div className="w-full flex items-center justify-center md:w-2/3 gap-10">
-            {/* Left side */}
-            <div className="w-1/2 p-8 relative">
-                <img
-                alt="bernese-mountain-dog"
-                src={process.env.PUBLIC_URL+"/bernese-mountain-dog.jpg"}
-                style={{ borderRadius: '28px' }}
-                />
-                <div className="absolute bottom-0 right-0 w-1/2 h-1/2" >
-        <img
-            alt="second-dog-image"
-            src={process.env.PUBLIC_URL+"/stats.png"}
-            style={{ borderRadius: '28px', boxShadow: '0 4px 16px rgba(0, 0, 0, 0.2)' }}
-        />
-    </div>
+          {/* Left side */}
+          <div className="w-1/2 p-8 relative">
+            <img
+            alt="bernese-mountain-dog"
+            src={process.env.PUBLIC_URL+"/bernese-mountain-dog.jpg"}
+            style={{ borderRadius: '28px' }}
+            />
+            <div className="absolute bottom-0 right-0 w-1/2 h-1/2" >
+              <img
+                  alt="second-dog-image"
+                  src={process.env.PUBLIC_URL+"/stats.png"}
+                  style={{ borderRadius: '28px', boxShadow: '0 4px 16px rgba(0, 0, 0, 0.2)' }}
+              />
             </div>
+          </div>
 
-            {/* Right side */}
-            <div className="w-1/2 p-8">
-                <h2 className="text-3xl mb-8">How to identify a dog's breed?</h2>
-                <div className="w-full h-full flex items-center">
-                    <ul className="list-none p-0">
-                        <li className="flex items-center mb-6">
-                        <div className="rounded-full bg-[#FFA55B] text-white w-8 h-8 flex items-center justify-center mr-6">
-                            1
-                        </div>
-                        <div className="text-lg">
-                            Navigate to 'Start Now' 
-                        </div>
-                        </li>
-                        <li className="flex items-center mb-6">
-                        <div className="rounded-full bg-[#FFA55B] text-white w-8 h-8 flex items-center justify-center mr-6">
-                            2
-                        </div>
-                        <div className="text-lg">
-                            Upload your dog images, our AI will identify the breed 
-                        </div>
-                        </li>
-                        <li className="flex items-center mb-6">
-                        <div className="rounded-full bg-[#FFA55B] text-white w-8 h-8 flex items-center justify-center mr-6">
-                            3
-                        </div>
-                        <div className="text-lg">
-                            Download results to your local device
-                        </div>
-                        </li>
-                    </ul>
-                </div>
-                <button onClick={() => navigate('/detection')} className="btn btn-ghost shadow-md bg-[#694DDB] text-white px-12 py-3 rounded-full mt-4">
-                Start Now
-                </button>
+          {/* Right side */}
+          <div className="w-1/2 p-8">
+            <h2 className="text-3xl mb-8">How to identify a dog's breed?</h2>
+            <div className="w-full h-full flex items-center">
+              <ul className="list-none p-0">
+                  <li className="flex items-center mb-6">
+                  <div className="rounded-full bg-[#FFA55B] text-white w-8 h-8 flex items-center justify-center mr-6">
+                      1
+                  </div>
+                  <div className="text-lg">
+                      Navigate to 'Start Now' 
+                  </div>
+                  </li>
+                  <li className="flex items-center mb-6">
+                  <div className="rounded-full bg-[#FFA55B] text-white w-8 h-8 flex items-center justify-center mr-6">
+                      2
+                  </div>
+                  <div className="text-lg">
+                      Upload your dog images, our AI will identify the breed 
+                  </div>
+                  </li>
+                  <li className="flex items-center mb-6">
+                  <div className="rounded-full bg-[#FFA55B] text-white w-8 h-8 flex items-center justify-center mr-6">
+                      3
+                  </div>
+                  <div className="text-lg">
+                      Download results to your local device
+                  </div>
+                  </li>
+              </ul>
             </div>
+            <button onClick={() => navigate('/detection')} className="btn btn-ghost shadow-md bg-[#694DDB] text-white px-12 py-3 rounded-full mt-4">
+            Start Now
+            </button>
+          </div>
         </div>
       </div>
 
