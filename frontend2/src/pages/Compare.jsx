@@ -9,44 +9,93 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import ListItemText from '@mui/material/ListItemText';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+// import Checkbox from '@mui/material/Checkbox';
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
+
+
+
+const names = [
+  'Oliver Hansen',
+  'Van Henry',
+  'April Tucker',
+  'Ralph Hubbard',
+  'Omar Alexander',
+  'Carlos Abbott',
+  'Miriam Wagner',
+  'Bradley Wilkerson',
+  'Virginia Andrews',
+  'Kelly Snyder',
+];
+
+const tags = [
+  { value: 'Trainable', title: 'trainability' },
+  { value: 'Energetic', title: 'energy' },
+  { value: 'Less Tendancy to Bark', title: 'barking' },
+  { value: 'Good with Strangers', title: 'good_with_strangers' },
+  { value: 'Good with Kids', title: 'good_with_children' },
+  { value: 'Good with Other Dogs', title: 'good_with_other_dogs' },
+  { value: 'Less Tendancy to Shed', title: 'shedding' },
+  { value: 'Little Grooming Needs', title: 'grooming' },
+  { value: 'Less Tendancy to Drool', title: 'drooling' },
+  // { value: 'Long Coat Length', title: 'coat_length' },
+  // { value: 'Short Coat Length', title: 'coat_length' },
+  { value: 'Playful', title: 'playfulness' },
+  { value: 'Protective', title: 'protectiveness' }
+]
 const Compare = () => {
   const [breeds, setBreeds] = useState([])
   const [filter, setFilter] = useState('')
 
-  const [selectedOptions, setSelectedOptions] = useState([]);
+  // const [selectedOptions, setSelectedOptions] = useState([]);
 
-  const handleOnChange = (event, value) => {
-    setSelectedOptions(value);
-  }
+
+
+
+  const [selectedTags, setSelectedTags] = React.useState([]);
+
+  const handleChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setSelectedTags(
+      typeof value === 'string' ? value.split(',') : value
+    );
+  };
   const filteredBreeds = breeds.filter((breed) => {
-    // const filterByName = breed.name.toLowerCase().includes(filter.toLowerCase())
+    const filterByName = breed.name.toLowerCase().includes(filter.toLowerCase())
 
     // return filterByName
-    return selectedOptions.every((option) => {
-      // Check if breed has the selected option and its value is >= 3
-      return breed[option.value] && breed[option.value] >= 3;
+    
+    return filterByName && selectedTags.every((option) => {
+      if (option.title == "barking" || option.title == "shedding" || option.title == "drooling" || option.title == "grooming") {
+        return breed[option.title] && breed[option.title] < 2;
+      } else {
+        return breed[option.title] && breed[option.title] >= 3;
+      }
+
     });
   });
-  console.log(breeds)
-  const tags = [
-    { title: 'Trainable', value: 'trainability' },
-    { title: 'Energetic', value: 'energy' },
-    { title: 'Less Tendancy to Bark', value: 'barking' },
-    { title: 'Good with Strangers', value: 'good_with_strangers' },
-    { title: 'Good with Kids', value: 'good_with_children' },
-    { title: 'Good with Other Dogs', value: 'good_with_other_dogs' },
-    { title: 'Less Tendancy to Shed', value: 'shedding' },
-    { title: 'Little Grooming Needs', value: 'grooming' },
-    { title: 'Tendancy to Drool', value: 'drooling' },
-    { title: 'Long Coat Length', value: 'coat_length' },
-    { title: 'Short Coat Length', value: 'coat_length' },
-    { title: 'Playful', value: 'playfulness' },
-    { title: 'Protective', value: 'protectiveness' }
-  ]
+  // console.log(selectedOptions)
+
   useEffect(() => {
     // Fetch breed data when the component mounts
     const fetchData = async () => {
@@ -84,13 +133,14 @@ const Compare = () => {
                       // setCurrentPage(1);
                     }}
                   />
-                  <Autocomplete
+                  {/* <Autocomplete
                     multiple
                     id="checkboxes-tags-demo"
                     options={tags}
-                    onChange={handleOnChange}
+                    //  value={selectedOptions}
                     disableCloseOnSelect
                     getOptionLabel={(option) => option.title}
+                    onChange={handleOnChange}
                     renderOption={(props, option, { selected }) => (
                       <li {...props}>
                         <Checkbox
@@ -98,6 +148,7 @@ const Compare = () => {
                           checkedIcon={checkedIcon}
                           style={{ marginRight: 8 }}
                           checked={selected}
+                          
                         />
                         {option.title}
                       </li>
@@ -106,7 +157,48 @@ const Compare = () => {
                     renderInput={(params) => (
                       <TextField {...params} label="Checkboxes" placeholder="Favorites" />
                     )}
-                  />
+                  /> */}
+                  <div>
+                    <Autocomplete
+                      multiple
+                      id="checkboxes-tags-demo"
+                      options={tags}
+                      disableCloseOnSelect
+                      getOptionLabel={(tag) => tag.value}
+                      renderOption={(props, tag, { selected }) => (
+                        <li {...props}>
+                          {selected ? checkedIcon : icon}
+                          {tag.value}
+                        </li>
+                      )}
+                      style={{ width: 500 }}
+                      value={selectedTags} // Connect to state for selected tags
+                      onChange={(event, newSelectedTags) => setSelectedTags(newSelectedTags)} // Update state on change
+                      renderInput={(params) => (
+                        <TextField {...params} label="Tags" placeholder="Select tags" />
+                      )}
+                    />
+                    {/* <FormControl sx={{ m: 1, width: 300 }}>
+                      <InputLabel id="demo-multiple-checkbox-label">Tags</InputLabel>
+                      <Select
+                        labelId="demo-multiple-checkbox-label"
+                        id="demo-multiple-checkbox"
+                        multiple
+                        value={selectedTags}
+                        onChange={handleChange}
+                        input={<OutlinedInput label="Tags" />}
+                        renderValue={(selected) => selected.join(', ')}
+                        MenuProps={MenuProps}
+                      >
+                        {tags.map((tag) => (
+                          <MenuItem key={tag.value} value={tag.value}>
+                            <Checkbox checked={selectedTags.indexOf(tag.value) > -1} />
+                            <ListItemText primary={tag.value} secondary={tag.title} />
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl> */}
+                  </div>
                 </div>
               </div>
               <div className='w-full'>
