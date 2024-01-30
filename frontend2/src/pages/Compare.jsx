@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import * as React from 'react';
 
 import Navbar from '../components/NavBar'
-import { getAllBreedInfo } from '../services/apiService';
+import  {getAllBreedInfo}  from '../services/apiService';
 
 import Checkbox from '@mui/material/Checkbox';
 import TextField from '@mui/material/TextField';
