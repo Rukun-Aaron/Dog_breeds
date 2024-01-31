@@ -18,8 +18,24 @@ export const getBreedInfo = async(label)=>{
   
 }
 
-export const getAllBreedInfo = async()=>{
+export const getAllBreedNames = async()=>{
   const getAllBreedInfoResponse =await fetch(`http://127.0.0.1:8000/get_all_breeds`,{
+    method: 'GET'
+  });
+  return getAllBreedInfoResponse;
+}
+
+
+export const getBreedInfoImage = async()=>{
+  const getAllBreedInfoResponse =await fetch(`http://127.0.0.1:8000/get_all_breeds_with_images`,{
+    method: 'GET'
+  });
+  return getAllBreedInfoResponse;
+}
+
+
+export const getAllBreedInfo = async()=>{
+  const getAllBreedInfoResponse =await fetch(`http://127.0.0.1:8000/get_all_breed_info`,{
     method: 'GET'
   });
   return getAllBreedInfoResponse;
