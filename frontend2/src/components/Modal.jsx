@@ -300,7 +300,7 @@ const Modal = ({ showModal, handleModalClose, predictions, selectedPredictionInd
                                         <img
                                             src={selectedBreedInfo[0].image_link}
                                             alt={`Selected ${selectedPredictionIndex + 1}`}
-                                            className="h-56 h- w-56 lg:w-64 lg:h-64 rounded-full drop-shadow-xl"
+                                            className="h-56 h- w-56 lg:w-64 lg:h-64 rounded-full mt-4 drop-shadow-xl"
                                         />
                                     </div>
                                 ) : (
