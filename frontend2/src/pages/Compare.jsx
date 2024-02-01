@@ -14,6 +14,7 @@ import FormControl from '@mui/material/FormControl';
 import ListItemText from '@mui/material/ListItemText';
 import Select from '@mui/material/Select';
 import Pagination from '@mui/material/Pagination';
+import Modal2 from '../components/Modal2';
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
@@ -63,7 +64,10 @@ const Compare = () => {
   const [filter, setFilter] = useState('');
   const [selectedTags, setSelectedTags] = React.useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const breedsPerPage = 10;
+  const breedsPerPage = 6;
+  const [breedInfo, setBreedInfo] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(null);
 
   const handleChange = (event) => {
     const {
@@ -106,14 +110,24 @@ const Compare = () => {
     fetchData();
   }, []);
 
+  const handleModalClick = (index) => {
+    setShowModal(true);
+    setSelectedIndex((currentPage - 1) * breedsPerPage + index);
+  };
+
+  const handleModalClose = () => {
+    setShowModal(false);
+    setSelectedIndex(null);
+  }
+
   return (
     <div className='w-full h-screen drawer drawer-end' >
       <div className="pt-4"><Navbar />
 
-        <div className='h-full w-full dark:bg-neutral-900 scrollbar overflow-y-auto'>
-          <div className='flex justify-center overflow-x-hidden pt-24 pb-4 h-fit w-full'>
-            <div className='max-w-5xl xl:max-w-6xl w-11/12'>
-              <div className='sm:px-2 pb-2 flex items-center justify-between'>
+        <div className='h-full dark:bg-neutral-900 scrollbar overflow-y-auto'>
+          <div className='flex justify-center overflow-x-hidden pt-24 h-fit'>
+            <div className='w-11/12 max-w-5xl xl:max-w-6xl'>
+              <div className='flex items-center justify-between'>
                 <div className='join'>
                   <Autocomplete
                     multiple
@@ -131,101 +145,61 @@ const Compare = () => {
                     value={selectedTags} // Connect to state for selected tags
                     onChange={(event, newSelectedTags) => setSelectedTags(newSelectedTags)} // Update state on change
                     renderInput={(params) => (
-                      <TextField {...params} label="Tags" placeholder="Select tags" />
+                      <TextField {...params} label="Tags" placeholder="Select tags"/>
                     )}
                   />
                   <input
                     placeholder="Search"
                     className="dark:bg-neutral-900 dark:text-neutral-100 dark:border-white 
-                    input input-bordered join-item w-full h-14 "
+                    input input-bordered join-item w-full h-14"
                     onChange={(e) => {
                       e.preventDefault();
                       setFilter(e.target.value);
-                      // setCurrentPage(1);
                     }}
                   />
-                  {/* <Autocomplete
-                    multiple
-                    id="checkboxes-tags-demo"
-                    options={tags}
-                    //  value={selectedOptions}
-                    disableCloseOnSelect
-                    getOptionLabel={(option) => option.title}
-                    onChange={handleOnChange}
-                    renderOption={(props, option, { selected }) => (
-                      <li {...props}>
-                        <Checkbox
-                          icon={icon}
-                          checkedIcon={checkedIcon}
-                          style={{ marginRight: 8 }}
-                          checked={selected}
-                          
-                        />
-                        {option.title}
-                      </li>
-                    )}
-                    style={{ width: 500 }}
-                    renderInput={(params) => (
-                      <TextField {...params} label="Checkboxes" placeholder="Favorites" />
-                    )}
-                  /> */}
-
-
-                  {/* <FormControl sx={{ m: 1, width: 300 }}>
-                      <InputLabel id="demo-multiple-checkbox-label">Tags</InputLabel>
-                      <Select
-                        labelId="demo-multiple-checkbox-label"
-                        id="demo-multiple-checkbox"
-                        multiple
-                        value={selectedTags}
-                        onChange={handleChange}
-                        input={<OutlinedInput label="Tags" />}
-                        renderValue={(selected) => selected.join(', ')}
-                        MenuProps={MenuProps}
-                      >
-                        {tags.map((tag) => (
-                          <MenuItem key={tag.value} value={tag.value}>
-                            <Checkbox checked={selectedTags.indexOf(tag.value) > -1} />
-                            <ListItemText primary={tag.value} secondary={tag.title} />
-                          </MenuItem>
-                        ))}
-                      </Select>
-                    </FormControl> */}
-
                 </div>
               </div>
               <div className='w-full'>
-      {filteredBreeds.length > 0 && (
-        <div className="mt-4 w-full flex flex-col gap2 my-8 px-8">
-          {currentBreeds.map((breed, index) => (
-            <div
-              key={index}
-              className="flex w-full items-center p-4 gap-4 rounded-xl 
-              transition-all cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-800 
-              animate-ease-in-out animate-jump animate-once animate-duration-700 relative"
-            >
-              <div className="w-32 h-16 flex items-center justify-center">
-                <img
-                  src={breed.image_link}
-                  alt={`Selected ${index + 1}`}
-                  className="max-w-32 max-h-16 rounded-md"
-                />
-              </div>
-              <div className="dark:text-neutral-100 truncate mr-auto">{breed.name}</div>
-            </div>
-          ))}
-          
-          <div className="flex justify-center my-4">
-                      <Pagination
-                        count={Math.ceil(filteredBreeds.length / breedsPerPage)}
-                        page={currentPage}
-                        onChange={handlePageChange}
-                      />
+              {filteredBreeds.length > 0 && (
+                <div className="mt-8 w-full flex flex-col my-8">
+                  {currentBreeds.map((breed, index) => (
+                    <div
+                      key={index}
+                      className="flex w-full items-center p-4 gap-4 rounded-xl 
+                      transition-all cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-800 
+                      animate-ease-in-out animate-jump animate-once animate-duration-700 relative"
+                      onClick={() => handleModalClick(index)}
+                    >
+                      <div className="w-32 h-16 flex items-center justify-center">
+                        <img
+                          src={breed.image_link}
+                          alt={`Selected ${index + 1}`}
+                          className="max-w-32 max-h-16 rounded-md"
+                        />
+                      </div>
+                      <div className="dark:text-neutral-100 truncate mr-auto">{breed.name}</div>
                     </div>
-
+                  ))}
+          
+                  <div className="flex justify-center mt-8">
+                    <Pagination
+                      count={Math.ceil(filteredBreeds.length / breedsPerPage)}
+                      page={currentPage}
+                      onChange={handlePageChange}
+                    />
                   </div>
 
+                  </div>
                 )}
+                <Modal2
+                  showModal={showModal}
+                  handleModalClose={handleModalClose}
+                  selectedIndex={selectedIndex}
+                  breeds={breeds}
+                  breedInfo={breedInfo}
+                  // images={images}
+                
+                />
               </div>
             </div>
           </div>
