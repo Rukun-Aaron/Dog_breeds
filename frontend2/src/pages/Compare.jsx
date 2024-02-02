@@ -92,6 +92,10 @@ const Compare = () => {
   const indexOfFirstBreed = indexOfLastBreed - breedsPerPage;
   const currentBreeds = filteredBreeds.slice(indexOfFirstBreed, indexOfLastBreed);
 
+  const [itemsPerPage, setItemsPerPage] = useState(5);
+  const totalPages = Math.ceil(filteredBreeds.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
   const handlePageChange = (event, value) => {
     setCurrentPage(value);
   };
@@ -145,7 +149,7 @@ const Compare = () => {
                     value={selectedTags} // Connect to state for selected tags
                     onChange={(event, newSelectedTags) => setSelectedTags(newSelectedTags)} // Update state on change
                     renderInput={(params) => (
-                      <TextField {...params} label="Tags" placeholder="Select tags"/>
+                      <TextField {...params} label="Tags" placeholder="Select tags" />
                     )}
                   />
                   <input
@@ -160,45 +164,128 @@ const Compare = () => {
                 </div>
               </div>
               <div className='w-full'>
-              {filteredBreeds.length > 0 && (
-                <div className="mt-8 w-full flex flex-col my-8">
-                  {currentBreeds.map((breed, index) => (
-                    <div
-                      key={index}
-                      className="flex w-full items-center p-4 gap-4 rounded-xl 
+                <table className="table">
+                  {/* head */}
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th>Name</th>
+                      <th>Job</th>
+                      <th>Favorite Color</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {/* row 1 */}
+                    <tr className="bg-base-200">
+                      <th>1</th>
+                      <td>Cy Ganderton</td>
+                      <td>Quality Control Specialist</td>
+                      <td>Blue</td>
+                    </tr>
+                    {/* row 2 */}
+                    <tr>
+                      <th>2</th>
+                      <td>Hart Hagerty</td>
+                      <td>Desktop Support Technician</td>
+                      <td>Purple</td>
+                    </tr>
+                    {/* row 3 */}
+                    <tr>
+                      <th>3</th>
+                      <td>Brice Swyre</td>
+                      <td>Tax Accountant</td>
+                      <td>Red</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <table className="table  dark:text-neutral-100">
+                  {/* <thread>
+                    <tr>
+                      <th className="p-2 dark:text-neutral-100">Image</th>
+                      <th className="p-2 dark:text-neutral-100">Breed </th>
+                      <th className="p-2 hidden md:table-cell dark:text-neutral-100">Tags</th>
+                      <th className="p-2 dark:text-neutral-100">Tags</th>
+                    </tr>
+                  </thread> */}
+                   <thead>
+                    <tr>
+                      
+                    <th className="p-2 dark:text-neutral-100">Image</th>
+                    <th className="p-2 dark:text-neutral-100">Breed </th>
+                    <th className="p-2 dark:text-neutral-100">Tags</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  
+                    {filteredBreeds.length > 0 && filteredBreeds.slice(startIndex, endIndex).map((breed, index) => (
+                      <tr
+                        key={index}
+                        className="hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-all ease-in-out duration-300 cursor-pointer"
+                        onClick={() => handleModalClick(index)}
+                      // onClick={(e) => {
+                      //   openModal(e, getOriginalIndex(prediction));
+                      // }}
+                      >
+                        <td className="p-2">
+                          <div className="flex gap-4">
+                            {breed.image_link ? (
+                              <div className="w-32 h-16 flex items-center justify-center">
+                                <img className="max-w-32 max-h-16 rounded-md" src={breed.image_link} alt={breed.name} />
+                              </div>
+                            ) : (
+                              <p>Loading image...</p>
+                            )}
+
+                            <span className="hidden truncate lg:flex items-center">
+                              {breed.name}
+                            </span>
+                          </div>
+                        </td>
+                        <td>Quality Control Specialist</td>
+                      <td>Blue</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+                {/* {filteredBreeds.length > 0 && (
+                  <div className="mt-8 w-full flex flex-col my-8">
+                    {currentBreeds.map((breed, index) => (
+                      <div
+                        key={index}
+                        className="flex w-full items-center p-4 gap-4 rounded-xl 
                       transition-all cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-800 
                       animate-ease-in-out animate-jump animate-once animate-duration-700 relative"
-                      onClick={() => handleModalClick(index)}
-                    >
-                      <div className="w-32 h-16 flex items-center justify-center">
-                        <img
-                          src={breed.image_link}
-                          alt={`Selected ${index + 1}`}
-                          className="max-w-32 max-h-16 rounded-md"
-                        />
+                        onClick={() => handleModalClick(index)}
+                      >
+                        <div className="w-32 h-16 flex items-center justify-center">
+                          <img
+                            src={breed.image_link}
+                            alt={`Selected ${index + 1}`}
+                            className="max-w-32 max-h-16 rounded-md"
+                          />
+                        </div>
+                        <div className="dark:text-neutral-100 truncate mr-auto">{breed.name}</div>
                       </div>
-                      <div className="dark:text-neutral-100 truncate mr-auto">{breed.name}</div>
+                    ))}
+
+                    <div className="flex justify-center mt-8">
+                      <Pagination
+                        count={Math.ceil(filteredBreeds.length / breedsPerPage)}
+                        page={currentPage}
+                        onChange={handlePageChange}
+                      />
                     </div>
-                  ))}
-          
-                  <div className="flex justify-center mt-8">
-                    <Pagination
-                      count={Math.ceil(filteredBreeds.length / breedsPerPage)}
-                      page={currentPage}
-                      onChange={handlePageChange}
-                    />
-                  </div>
 
                   </div>
-                )}
+                )} */}
                 <Modal2
                   showModal={showModal}
                   handleModalClose={handleModalClose}
                   selectedIndex={selectedIndex}
                   breeds={breeds}
                   breedInfo={breedInfo}
-                  // images={images}
-                
+                // images={images}
+
                 />
               </div>
             </div>
