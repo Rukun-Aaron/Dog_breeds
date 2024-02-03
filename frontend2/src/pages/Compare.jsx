@@ -207,16 +207,17 @@ const Compare = () => {
                       <th className="p-2 dark:text-neutral-100">Tags</th>
                     </tr>
                   </thread> */}
-                   <thead>
+                  <thead>
                     <tr>
-                      
-                    <th className="p-2 dark:text-neutral-100">Image</th>
-                    <th className="p-2 dark:text-neutral-100">Breed </th>
-                    <th className="p-2 dark:text-neutral-100">Tags</th>
+
+                      <th className="p-2 dark:text-neutral-100">Image</th>
+                      <th className="p-2 dark:text-neutral-100">Breed </th>
+                      <th className="p-2 dark:text-neutral-100">Tags</th>
+
                     </tr>
                   </thead>
                   <tbody>
-                  
+
                     {filteredBreeds.length > 0 && filteredBreeds.slice(startIndex, endIndex).map((breed, index) => (
                       <tr
                         key={index}
@@ -226,8 +227,8 @@ const Compare = () => {
                       //   openModal(e, getOriginalIndex(prediction));
                       // }}
                       >
-                        <td className="p-2">
-                          <div className="flex gap-4">
+                        <td className="p-2  w-6 ">
+                          <div className="flex flex-row items-center">
                             {breed.image_link ? (
                               <div className="w-32 h-16 flex items-center justify-center">
                                 <img className="max-w-32 max-h-16 rounded-md" src={breed.image_link} alt={breed.name} />
@@ -236,13 +237,27 @@ const Compare = () => {
                               <p>Loading image...</p>
                             )}
 
-                            <span className="hidden truncate lg:flex items-center">
-                              {breed.name}
-                            </span>
                           </div>
                         </td>
-                        <td>Quality Control Specialist</td>
-                      <td>Blue</td>
+                        <td className='w-96'>
+                          <div className="flex flex-row items-center">
+                            {breed.name}
+                          </div>
+                        </td>
+                        <td>
+
+                          <div className="flex flex-col">
+                            <div className="text-[#694DDB] text-center rounded-2xl border border-[#694DDB] px-2  hover:bg-[#694DDB] hover:text-white hover:border-[#694DDB] w-max">
+                              Trainable
+                            </div>
+                            <div className="text-[#694DDB] text-center rounded-2xl border border-[#694DDB] px-2  w-max">
+                              Good width Children
+                            </div>
+                            <div className="text-[#694DDB] text-center rounded-2xl border border-[#694DDB] px-2  w-max">
+                              Trainable
+                            </div>
+                          </div>
+                        </td>
                       </tr>
                     ))}
                   </tbody>
