@@ -15,7 +15,10 @@ import ListItemText from '@mui/material/ListItemText';
 import Select from '@mui/material/Select';
 import Pagination from '@mui/material/Pagination';
 import Modal2 from '../components/Modal2';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faArrowRight, faArrowLeft, faTrash, faFileCsv, faFileExcel, faXmark,
+} from '@fortawesome/free-solid-svg-icons';
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
@@ -64,11 +67,12 @@ const Compare = () => {
   const [filter, setFilter] = useState('');
   const [selectedTags, setSelectedTags] = React.useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const breedsPerPage = 6;
+  const breedsPerPage = 10;
   const [breedInfo, setBreedInfo] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(null);
 
+  console.log(currentPage + 1 )
   const handleChange = (event) => {
     const {
       target: { value },
@@ -88,15 +92,16 @@ const Compare = () => {
     });
   });
 
-  const indexOfLastBreed = currentPage * breedsPerPage;
-  const indexOfFirstBreed = indexOfLastBreed - breedsPerPage;
-  const currentBreeds = filteredBreeds.slice(indexOfFirstBreed, indexOfLastBreed);
+  // const indexOfLastBreed = currentPage * breedsPerPage;
+  // const indexOfFirstBreed = indexOfLastBreed - breedsPerPage;
+  // const currentBreeds = filteredBreeds.slice(indexOfFirstBreed, indexOfLastBreed);
 
-  const [itemsPerPage, setItemsPerPage] = useState(7);
+  const [itemsPerPage, setItemsPerPage] = useState(5);
   const totalPages = Math.ceil(filteredBreeds.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const handlePageChange = (event, value) => {
+  const handlePageChange = ( value) => {
+    console.log(value);
     setCurrentPage(value);
   };
 
@@ -116,7 +121,7 @@ const Compare = () => {
 
   const handleModalClick = (index) => {
     setShowModal(true);
-    setSelectedIndex((currentPage - 1) * breedsPerPage + index);
+    setSelectedIndex((currentPage - 1) * itemsPerPage + index);
   };
 
   const handleModalClose = () => {
@@ -197,7 +202,7 @@ const Compare = () => {
 
                           </div>
                         </td>
-                        <td className='w-96'>
+                        <td className=''>
                           <div className="flex flex-row items-center">
                             {breed.name}
                           </div>
@@ -231,7 +236,7 @@ const Compare = () => {
                               </div>
                             )}
                           </div>
-                          <div className="flex flex-row gap-x-2  pb-2 flex-wrap">
+                          <div className="flex flex-row gap-x-2 gap-2  flex-wrap">
                             {/* Second row */}
                             {breed.good_with_children > 2 && (
                               <div className="text-[#57cc99] text-center rounded-2xl border border-[#57cc99] px-2 hover:bg-[#57cc99] hover:text-white hover:border-[#57cc99] w-max">
@@ -315,6 +320,56 @@ const Compare = () => {
                 // images={images}
 
                 />
+              </div>
+              <div className="flex justify-end sm:justify-start xl:justify-end px-2 pt-4">
+                <div className="join items-center">
+                  <div className="tooltip" data-tip="item per page">
+                    <select
+                      className="select dark:bg-neutral-900 dark:text-neutral-100 dark:border-white select-bordered join-item rounded-lg !rounded-l-lg"
+                      onChange={(e) => {
+                        setItemsPerPage(Number(e.target.value));
+                        setCurrentPage(1);
+                      }}
+                      value={itemsPerPage}
+                    >
+                      <option value={5}>5</option>
+                      <option value={10}>10</option>
+                      <option value={25}>25</option>
+                      <option value={50}>50</option>
+                      <option value={100}>100</option>
+                    </select>
+                  </div>
+                  <button
+                    type="button"
+                    className={`join-item btn dark:disabled:bg-neutral-800 ${currentPage === 1 ? 'cursor-not-allowed ' : 'dark:bg-neutral-900'}`}
+                    onClick={() => handlePageChange(currentPage - 1)}
+                    disabled={currentPage === 1}
+                  >
+                    <div className="dark:text-neutral-100">
+                      <FontAwesomeIcon icon={faArrowLeft} />
+                    </div>
+
+                  </button>
+                  <select className="dark:bg-neutral-900 dark:text-neutral-100 dark:border-white select select-bordered join-item" onChange={(e) => setCurrentPage(Number(e.target.value))} value={currentPage}>
+                    {Array.from({ length: totalPages }, (_, i) => (
+                      <option key={i} value={i + 1}>
+                        Page
+                        {' '}
+                        {i + 1}
+                      </option>
+                    ))}
+                  </select>
+                  <button
+                    type="button"
+                    className={`join-item btn dark:disabled:bg-neutral-800 ${currentPage === totalPages ? 'cursor-not-allowed' : 'dark:bg-neutral-900'}`}
+                    onClick={() => handlePageChange(currentPage + 1)}
+                    disabled={currentPage === totalPages}
+                  >
+                    <div className="dark:text-neutral-100">
+                      <FontAwesomeIcon icon={faArrowRight} />
+                    </div>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
