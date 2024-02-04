@@ -239,37 +239,37 @@ const Compare = () => {
                           <div className="flex flex-row gap-x-2 gap-2  flex-wrap">
                             {/* Second row */}
                             {breed.good_with_children > 2 && (
-                              <div className="text-[#57cc99] text-center rounded-2xl border border-[#57cc99] px-2 hover:bg-[#57cc99] hover:text-white hover:border-[#57cc99] w-max">
+                              <div className="text-[#FF9330] text-center rounded-2xl border border-[#FF9330] px-2 hover:bg-[#FF9330] hover:text-white hover:border-[#FF9330] w-max">
                                 Good with Kids
                               </div>
                             )}
                             {breed.good_with_other_dogs > 2 && (
-                              <div className="text-[#57cc99] text-center rounded-2xl border border-[#57cc99] px-2 hover:bg-[#57cc99] hover:text-white hover:border-[#57cc99] w-max">
+                              <div className="text-[#65BBDF] text-center rounded-2xl border border-[#65BBDF] px-2 hover:bg-[#65BBDF] hover:text-white hover:border-[#65BBDF] w-max">
                                 Good with Other Dogs
                               </div>
                             )}
                             {breed.shedding < 3 && (
-                              <div className="text-[#57cc99] text-center rounded-2xl border border-[#57cc99] px-2 hover:bg-[#57cc99] hover:text-white hover:border-[#57cc99] w-max">
+                              <div className="text-[#F24545] text-center rounded-2xl border border-[#F24545] px-2 hover:bg-[#F24545] hover:text-white hover:border-[#F24545] w-max">
                                 Less Tendency to Shed
                               </div>
                             )}
                             {breed.grooming < 3 && (
-                              <div className="text-[#57cc99] text-center rounded-2xl border border-[#57cc99] px-2 hover:bg-[#57cc99] hover:text-white hover:border-[#57cc99] w-max">
+                              <div className="text-[#BBF245] text-center rounded-2xl border border-[#BBF245] px-2 hover:bg-[#BBF245] hover:text-white hover:border-[#BBF245] w-max">
                                 Little Grooming Needs
                               </div>
                             )}
                             {breed.drooling < 3 && (
-                              <div className="text-[#57cc99] text-center rounded-2xl border border-[#57cc99] px-2 hover:bg-[#57cc99] hover:text-white hover:border-[#57cc99] w-max">
+                              <div className="text-[#3BCD17] text-center rounded-2xl border border-[#3BCD17] px-2 hover:bg-[#3BCD17] hover:text-white hover:border-[#3BCD17] w-max">
                                 Less Tendency to Drool
                               </div>
                             )}
                             {breed.playfulness > 2 && (
-                              <div className="text-[#57cc99] text-center rounded-2xl border border-[#57cc99] px-2 hover:bg-[#57cc99] hover:text-white hover:border-[#57cc99] w-max">
+                              <div className="text-[#EFE606] text-center rounded-2xl border border-[#EFE606] px-2 hover:bg-[#EFE606] hover:text-white hover:border-[#EFE606] w-max">
                                 Playful
                               </div>
                             )}
                             {breed.protectiveness > 2 && (
-                              <div className="text-[#57cc99] text-center rounded-2xl border border-[#57cc99] px-2 hover:bg-[#57cc99] hover:text-white hover:border-[#57cc99] w-max">
+                              <div className="text-[#B334E0] text-center rounded-2xl border border-[#B334E0] px-2 hover:bg-[#B334E0] hover:text-white hover:border-[#B334E0] w-max">
                                 Protective
                               </div>
                             )}
