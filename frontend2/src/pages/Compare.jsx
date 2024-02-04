@@ -92,7 +92,7 @@ const Compare = () => {
   const indexOfFirstBreed = indexOfLastBreed - breedsPerPage;
   const currentBreeds = filteredBreeds.slice(indexOfFirstBreed, indexOfLastBreed);
 
-  const [itemsPerPage, setItemsPerPage] = useState(5);
+  const [itemsPerPage, setItemsPerPage] = useState(7);
   const totalPages = Math.ceil(filteredBreeds.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
@@ -130,7 +130,7 @@ const Compare = () => {
 
         <div className='h-full dark:bg-neutral-900 scrollbar overflow-y-auto'>
           <div className='flex justify-center overflow-x-hidden pt-24 h-fit'>
-            <div className='w-11/12 max-w-5xl xl:max-w-6xl'>
+            <div className='w-11/12 max-w-6xl xl:max-w-7xl '>
               <div className='flex items-center justify-between'>
                 <div className='join'>
                   <Autocomplete
@@ -164,49 +164,7 @@ const Compare = () => {
                 </div>
               </div>
               <div className='w-full'>
-                <table className="table">
-                  {/* head */}
-                  <thead>
-                    <tr>
-                      <th></th>
-                      <th>Name</th>
-                      <th>Job</th>
-                      <th>Favorite Color</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {/* row 1 */}
-                    <tr className="bg-base-200">
-                      <th>1</th>
-                      <td>Cy Ganderton</td>
-                      <td>Quality Control Specialist</td>
-                      <td>Blue</td>
-                    </tr>
-                    {/* row 2 */}
-                    <tr>
-                      <th>2</th>
-                      <td>Hart Hagerty</td>
-                      <td>Desktop Support Technician</td>
-                      <td>Purple</td>
-                    </tr>
-                    {/* row 3 */}
-                    <tr>
-                      <th>3</th>
-                      <td>Brice Swyre</td>
-                      <td>Tax Accountant</td>
-                      <td>Red</td>
-                    </tr>
-                  </tbody>
-                </table>
-                <table className="table  dark:text-neutral-100">
-                  {/* <thread>
-                    <tr>
-                      <th className="p-2 dark:text-neutral-100">Image</th>
-                      <th className="p-2 dark:text-neutral-100">Breed </th>
-                      <th className="p-2 hidden md:table-cell dark:text-neutral-100">Tags</th>
-                      <th className="p-2 dark:text-neutral-100">Tags</th>
-                    </tr>
-                  </thread> */}
+                <table className="table dark:text-neutral-100">
                   <thead>
                     <tr>
 
@@ -244,20 +202,75 @@ const Compare = () => {
                             {breed.name}
                           </div>
                         </td>
-                        <td>
-
-                          <div className="flex flex-col">
-                            <div className="text-[#694DDB] text-center rounded-2xl border border-[#694DDB] px-2  hover:bg-[#694DDB] hover:text-white hover:border-[#694DDB] w-max">
-                              Trainable
-                            </div>
-                            <div className="text-[#694DDB] text-center rounded-2xl border border-[#694DDB] px-2  w-max">
-                              Good width Children
-                            </div>
-                            <div className="text-[#694DDB] text-center rounded-2xl border border-[#694DDB] px-2  w-max">
-                              Trainable
-                            </div>
+                        <td className="">
+                          <div className="flex flex-row gap-x-2 pb-2 flex-wrap">
+                            {/* First row */}
+                            {breed.trainability > 2 && (
+                              <div className="text-[#694DDB] text-center rounded-2xl border border-[#694DDB] px-2 hover:bg-[#694DDB] hover:text-white hover:border-[#694DDB] w-max">
+                                Trainable
+                              </div>
+                            )}
+                            {breed.good_with_children > 2 && (
+                              <div className="text-[#DE6FEC] text-center rounded-2xl border border-[#DE6FEC] px-2 hover:bg-[#DE6FEC] hover:text-white hover:border-[#DE6FEC] w-max">
+                                Good with Children
+                              </div>
+                            )}
+                            {breed.energy > 2 && (
+                              <div className="text-[#d1105a] text-center rounded-2xl border border-[#d1105a] px-2 hover:bg-[#d1105a] hover:text-white hover:border-[#d1105a] w-max">
+                                Energetic
+                              </div>
+                            )}
+                            {breed.barking < 3 && (
+                              <div className="text-[#57cc99] text-center rounded-2xl border border-[#57cc99] px-2 hover:bg-[#57cc99] hover:text-white hover:border-[#57cc99] w-max">
+                                Less Tendency to Bark
+                              </div>
+                            )}
+                            {breed.good_with_strangers > 2 && (
+                              <div className="text-[#ffb57d] text-center rounded-2xl border border-[#ffb57d] px-2 hover:bg-[#ffb57d] hover:text-white hover:border-[#ffb57d] w-max">
+                                Good with Strangers
+                              </div>
+                            )}
+                          </div>
+                          <div className="flex flex-row gap-x-2  pb-2 flex-wrap">
+                            {/* Second row */}
+                            {breed.good_with_children > 2 && (
+                              <div className="text-[#57cc99] text-center rounded-2xl border border-[#57cc99] px-2 hover:bg-[#57cc99] hover:text-white hover:border-[#57cc99] w-max">
+                                Good with Kids
+                              </div>
+                            )}
+                            {breed.good_with_other_dogs > 2 && (
+                              <div className="text-[#57cc99] text-center rounded-2xl border border-[#57cc99] px-2 hover:bg-[#57cc99] hover:text-white hover:border-[#57cc99] w-max">
+                                Good with Other Dogs
+                              </div>
+                            )}
+                            {breed.shedding < 3 && (
+                              <div className="text-[#57cc99] text-center rounded-2xl border border-[#57cc99] px-2 hover:bg-[#57cc99] hover:text-white hover:border-[#57cc99] w-max">
+                                Less Tendency to Shed
+                              </div>
+                            )}
+                            {breed.grooming < 3 && (
+                              <div className="text-[#57cc99] text-center rounded-2xl border border-[#57cc99] px-2 hover:bg-[#57cc99] hover:text-white hover:border-[#57cc99] w-max">
+                                Little Grooming Needs
+                              </div>
+                            )}
+                            {breed.drooling < 3 && (
+                              <div className="text-[#57cc99] text-center rounded-2xl border border-[#57cc99] px-2 hover:bg-[#57cc99] hover:text-white hover:border-[#57cc99] w-max">
+                                Less Tendency to Drool
+                              </div>
+                            )}
+                            {breed.playfulness > 2 && (
+                              <div className="text-[#57cc99] text-center rounded-2xl border border-[#57cc99] px-2 hover:bg-[#57cc99] hover:text-white hover:border-[#57cc99] w-max">
+                                Playful
+                              </div>
+                            )}
+                            {breed.protectiveness > 2 && (
+                              <div className="text-[#57cc99] text-center rounded-2xl border border-[#57cc99] px-2 hover:bg-[#57cc99] hover:text-white hover:border-[#57cc99] w-max">
+                                Protective
+                              </div>
+                            )}
                           </div>
                         </td>
+
                       </tr>
                     ))}
                   </tbody>

@@ -228,7 +228,7 @@ return (
                                                 'Barking',
                                                 'Good with Strangers',],
                                             datasets: [{
-                                                label: selectedBreed2 ? `${breeds[selectedIndex].name}: Score out of 5` : `${selectedBreed2}: Score out of 5`,
+                                                label: !selectedBreed2 ? `${breeds[selectedIndex].name}: Score out of 5` : `${selectedBreed2}: Score out of 5`,
                                                 data: selectedBreedInfo2.length > 0
                                                     ? [
                                                         selectedBreedInfo2[0].good_with_children,
