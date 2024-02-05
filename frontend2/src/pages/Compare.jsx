@@ -92,9 +92,6 @@ const Compare = () => {
     });
   });
 
-  // const indexOfLastBreed = currentPage * breedsPerPage;
-  // const indexOfFirstBreed = indexOfLastBreed - breedsPerPage;
-  // const currentBreeds = filteredBreeds.slice(indexOfFirstBreed, indexOfLastBreed);
 
   const [itemsPerPage, setItemsPerPage] = useState(5);
   const totalPages = Math.ceil(filteredBreeds.length / itemsPerPage);
@@ -315,6 +312,7 @@ const Compare = () => {
                   showModal={showModal}
                   handleModalClose={handleModalClose}
                   selectedIndex={selectedIndex}
+                  filteredBreeds={filteredBreeds}
                   breeds={breeds}
                   breedInfo={breedInfo}
                 // images={images}
