@@ -72,7 +72,7 @@ const Compare = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(null);
 
-  console.log(currentPage + 1 )
+  console.log(currentPage + 1)
   const handleChange = (event) => {
     const {
       target: { value },
@@ -97,8 +97,7 @@ const Compare = () => {
   const totalPages = Math.ceil(filteredBreeds.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const handlePageChange = ( value) => {
-    console.log(value);
+  const handlePageChange = (value) => {
     setCurrentPage(value);
   };
 
@@ -149,7 +148,10 @@ const Compare = () => {
                     )}
                     style={{ width: 420 }}
                     value={selectedTags} // Connect to state for selected tags
-                    onChange={(event, newSelectedTags) => setSelectedTags(newSelectedTags)} // Update state on change
+                    onChange={(event, newSelectedTags) => {
+                      handlePageChange(1);
+                      setSelectedTags(newSelectedTags)
+                    }}// Update state on change
                     renderInput={(params) => (
                       <TextField {...params} label="Tags" placeholder="Select tags" />
                     )}
@@ -277,37 +279,6 @@ const Compare = () => {
                     ))}
                   </tbody>
                 </table>
-                {/* {filteredBreeds.length > 0 && (
-                  <div className="mt-8 w-full flex flex-col my-8">
-                    {currentBreeds.map((breed, index) => (
-                      <div
-                        key={index}
-                        className="flex w-full items-center p-4 gap-4 rounded-xl 
-                      transition-all cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-800 
-                      animate-ease-in-out animate-jump animate-once animate-duration-700 relative"
-                        onClick={() => handleModalClick(index)}
-                      >
-                        <div className="w-32 h-16 flex items-center justify-center">
-                          <img
-                            src={breed.image_link}
-                            alt={`Selected ${index + 1}`}
-                            className="max-w-32 max-h-16 rounded-md"
-                          />
-                        </div>
-                        <div className="dark:text-neutral-100 truncate mr-auto">{breed.name}</div>
-                      </div>
-                    ))}
-
-                    <div className="flex justify-center mt-8">
-                      <Pagination
-                        count={Math.ceil(filteredBreeds.length / breedsPerPage)}
-                        page={currentPage}
-                        onChange={handlePageChange}
-                      />
-                    </div>
-
-                  </div>
-                )} */}
                 <Modal2
                   showModal={showModal}
                   handleModalClose={handleModalClose}
@@ -315,8 +286,6 @@ const Compare = () => {
                   filteredBreeds={filteredBreeds}
                   breeds={breeds}
                   breedInfo={breedInfo}
-                // images={images}
-
                 />
               </div>
               <div className="flex justify-end sm:justify-start xl:justify-end px-2 pt-4">
@@ -372,7 +341,6 @@ const Compare = () => {
             </div>
           </div>
         </div>
-
       </div>
     </div>
 
