@@ -4,7 +4,7 @@ import { faCloudArrowUp, faXmark } from '@fortawesome/free-solid-svg-icons';
 import Modal from '../components/Modal';
 import Navbar from '../components/NavBar';
 import {
-  getPredictions, getBreedInfo, getAllBreedInfo
+  getPredictions, getBreedInfo, getAllBreedNames
 } from '../services/apiService';
 
 
@@ -21,13 +21,14 @@ const ImageUploadNew = () => {
   const [selectedPredictionIndex, setSelectedPredictionIndex] = useState(null);
   const [breeds, setBreeds] = useState([]);
 
+  console.log(breedInfo)
 
 
   useEffect(() => {
     // Fetch breed data when the component mounts
     const fetchData = async () => {
       try {
-        const response = await getAllBreedInfo();
+        const response = await getAllBreedNames();
         const data = await response.json();
         const formattedData = data.map((item, index) => ({
           value: `value${index}`, // You can adjust the value as needed
@@ -255,7 +256,7 @@ const ImageUploadNew = () => {
                 {predictions.length > 0 && predictions[index] && (
                   <div className="text-[#694DDB] rounded-2xl border border-[#694DDB] pl-1 pr-1">
                     {predictions[index].label} {(predictions[index].score * 100).toFixed(2)}%
-                  </div>
+                  </div> 
                 )}
                 <div className="text-gray-500">
                   {formatFileSize(uploadedImage.size)}

@@ -8,10 +8,19 @@ import {
 import Navbar from './components/NavBar';
 import ImageUploadNew from './pages/ImageUploadNew';
 import Homepage from './components/Homepage';
+import Compare from './pages/Compare';
 import './styles/scrollbar.css';
-
-function App() {
+import { createTheme,ThemeProvider} from '@mui/material/styles';function App() {
+  const theme=createTheme({
+    typography: {
+      fontFamily: [
+        'Outfit',
+        'sans-serif'
+      ].join(','),
+    }
+  })
   return (
+    <ThemeProvider theme={theme}>
     <Router>
       <div className="w-full h-screen drawer drawer-end">
         {/* <Navbar /> */}
@@ -19,10 +28,12 @@ function App() {
           <Routes>
             <Route path="/" element={<Homepage />} />
             <Route path="/detection" element={<ImageUploadNew />} />
+            <Route path="/compare" element={<Compare />} />
           </Routes>
         </div>
       </div>
     </Router>
+    </ThemeProvider>
   );
 }
 

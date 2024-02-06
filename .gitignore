@@ -8,6 +8,7 @@ fine_tuned_vit_model_40(2)
 fine_tuned_vit_model_45
 frontend2/node_modules/.cache
 frontend2\node_modules\.cache
+frontend2\node_modules
 *.h5
 *.jpeg
 *.jpg
