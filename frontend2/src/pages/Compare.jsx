@@ -72,13 +72,6 @@ const Compare = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(null);
 
-  console.log(currentPage + 1 )
-  const handleChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setSelectedTags(typeof value === 'string' ? value.split(',') : value);
-  };
 
   const filteredBreeds = breeds.filter((breed) => {
     const filterByName = breed.name.toLowerCase().includes(filter.toLowerCase());
@@ -92,16 +85,12 @@ const Compare = () => {
     });
   });
 
-  // const indexOfLastBreed = currentPage * breedsPerPage;
-  // const indexOfFirstBreed = indexOfLastBreed - breedsPerPage;
-  // const currentBreeds = filteredBreeds.slice(indexOfFirstBreed, indexOfLastBreed);
-
+  const [isLoading, setIsLoading] = useState(true)
   const [itemsPerPage, setItemsPerPage] = useState(5);
   const totalPages = Math.ceil(filteredBreeds.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const handlePageChange = ( value) => {
-    console.log(value);
+  const handlePageChange = (value) => {
     setCurrentPage(value);
   };
 
@@ -129,6 +118,20 @@ const Compare = () => {
     setSelectedIndex(null);
   }
 
+  const [personName, setPersonName] = React.useState([]);
+  
+  const handleChange = (event) => {
+
+    const {
+      target: { value },
+    } = event;
+    setSelectedTags(
+      // On autofill we get a stringified value.
+      // typeof value === 'string' ? value.split(',') : value,
+      value
+    );
+  };
+  // console.log(selectedTags)
   return (
     <div className='w-full h-screen drawer drawer-end' >
       <div className="pt-4"><Navbar />
@@ -145,18 +148,41 @@ const Compare = () => {
                     disableCloseOnSelect
                     getOptionLabel={(tag) => tag.value}
                     renderOption={(props, tag, { selected }) => (
-                      <MenuItem {...props} sx={{ padding: '20px 0' }}>
+                      <MenuItem {...props} style={{ padding: '10px 0' }}>
                         {selected ? checkedIcon : icon}
                         {tag.value}
                       </MenuItem>
                     )}
-                    style={{ width: 420 }}
-                    value={selectedTags} // Connect to state for selected tags
-                    onChange={(event, newSelectedTags) => setSelectedTags(newSelectedTags)} // Update state on change
+                    style={{ width: 620 }}
+                    value={selectedTags} 
+                    onChange={(event, newSelectedTags) => {
+                      handlePageChange(1);
+                      setSelectedTags(newSelectedTags)
+                    }}
                     renderInput={(params) => (
                       <TextField {...params} label="Tags" placeholder="Select tags" />
                     )}
                   />
+                  {/* <FormControl sx={{ width: 620 }}>
+                    <InputLabel id="demo-multiple-checkbox-label">Tag</InputLabel>
+                    <Select
+                      labelId="demo-multiple-checkbox-label"
+                      id="demo-multiple-checkbox"
+                      multiple
+                      value={selectedTags}
+                      onChange={handleChange}
+                      input={<OutlinedInput label="Tag" />}
+                      renderValue={(selected) => selected.join(', ')}
+                      MenuProps={MenuProps}
+                    >
+                      {tags.map((name) => (
+                        <MenuItem key={name.title} value={name.value}>
+                          <Checkbox checked={selectedTags.indexOf(name.value) > -1} />
+                          <ListItemText primary={name.value} />
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl> */}
                   <input
                     placeholder="Search"
                     className="dark:bg-neutral-900 dark:text-neutral-100 dark:border-white 
@@ -186,13 +212,12 @@ const Compare = () => {
                         key={index}
                         className="hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-all ease-in-out duration-300 cursor-pointer"
                         onClick={() => handleModalClick(index)}
-                      // onClick={(e) => {
-                      //   openModal(e, getOriginalIndex(prediction));
-                      // }}
                       >
                         <td className="p-2  w-6 ">
                           <div className="flex flex-row items-center">
+
                             {breed.image_link ? (
+
                               <div className="w-32 h-16 flex items-center justify-center">
                                 <img className="max-w-32 max-h-16 rounded-md" src={breed.image_link} alt={breed.name} />
                               </div>
@@ -280,45 +305,13 @@ const Compare = () => {
                     ))}
                   </tbody>
                 </table>
-                {/* {filteredBreeds.length > 0 && (
-                  <div className="mt-8 w-full flex flex-col my-8">
-                    {currentBreeds.map((breed, index) => (
-                      <div
-                        key={index}
-                        className="flex w-full items-center p-4 gap-4 rounded-xl 
-                      transition-all cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-800 
-                      animate-ease-in-out animate-jump animate-once animate-duration-700 relative"
-                        onClick={() => handleModalClick(index)}
-                      >
-                        <div className="w-32 h-16 flex items-center justify-center">
-                          <img
-                            src={breed.image_link}
-                            alt={`Selected ${index + 1}`}
-                            className="max-w-32 max-h-16 rounded-md"
-                          />
-                        </div>
-                        <div className="dark:text-neutral-100 truncate mr-auto">{breed.name}</div>
-                      </div>
-                    ))}
-
-                    <div className="flex justify-center mt-8">
-                      <Pagination
-                        count={Math.ceil(filteredBreeds.length / breedsPerPage)}
-                        page={currentPage}
-                        onChange={handlePageChange}
-                      />
-                    </div>
-
-                  </div>
-                )} */}
                 <Modal2
                   showModal={showModal}
                   handleModalClose={handleModalClose}
                   selectedIndex={selectedIndex}
+                  filteredBreeds={filteredBreeds}
                   breeds={breeds}
                   breedInfo={breedInfo}
-                // images={images}
-
                 />
               </div>
               <div className="flex justify-end sm:justify-start xl:justify-end px-2 pt-4">
@@ -374,7 +367,6 @@ const Compare = () => {
             </div>
           </div>
         </div>
-
       </div>
     </div>
 

@@ -33,7 +33,7 @@ ChartJS.register(
     ...registerables
 )
 
-const Modal2 = ({ showModal, handleModalClose, selectedIndex, breeds, breedInfo }) => {
+const Modal2 = ({ showModal, handleModalClose, selectedIndex, filteredBreeds, breeds, breedInfo }) => {
 
     const [selectedBreed, setSelectedBreed] = useState(null);
     const [selectedBreedInfo, setSelectedBreedInfo] = useState([]);
@@ -161,7 +161,7 @@ return (
             <div className="z-50 fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center  items-center font-outfit">
                 <div className="relative  bg-white p-10 m-2 rounded-2xl h-[80%] min-w-[320px] aspect-9/16 sm sm:aspect-auto  md:h-[80%] lg:aspect-video  lg:h-[40rem] xl:h-[44rem]  text-center overflow-y-auto">
                     <div className='flex flex-row justify-center'>
-                        <span className="text-3xl font-bold mb-4 text-center">What is it like owning a <span className="text-[#694DDB]"> {breeds[selectedIndex].name} </span></span>
+                        <span className="text-3xl font-bold mb-4 text-center">What is it like owning a <span className="text-[#694DDB]"> {filteredBreeds[selectedIndex].name} </span></span>
                         <button
                             onClick={handleClose}
                             type="button"
@@ -179,12 +179,12 @@ return (
                                     id="combo-box-demo"
                                     onChange={(e, v) => handleBreedSelect2(v)}
                                     options={breeds.map(breed => breed.name)}
-                                    defaultValue={breeds[selectedIndex].name}
+                                    defaultValue={filteredBreeds[selectedIndex].name}
                                     renderInput={(params) => <TextField {...params} InputProps={{ ...params.InputProps, type: 'search', style: { fontFamily: "Outfit" } }} margin="normal" label="Dogs" />}
                                 />
                             </div>
                             <div className='flex justify-center pt-4 sm:col-span-2 sm:mt-3 col-start-1 lg:col-span-1 lg:col-start-2'>
-                                <p className='text-lg'>{breeds[selectedIndex].name}  Characteristics</p>
+                                <p className='text-lg'>{filteredBreeds[selectedIndex].name}  Characteristics</p>
                             </div>
                             <div className=" flex justify-center px-5 py-4 row-start-4 col-start-1 sm:row-start-1 sm:col-start-2  lg:row-start-1 lg:col-start-3">
                                 <Autocomplete
@@ -200,7 +200,7 @@ return (
                             <div className='flex justify-center px-5 py-4 col-start-1 row-start-2'>
 
                                 <img
-                                    src={selectedBreedInfo2.length > 0 ? selectedBreedInfo2[0].image_link : breeds[selectedIndex].image_link}
+                                    src={selectedBreedInfo2.length > 0 ? selectedBreedInfo2[0].image_link : filteredBreeds[selectedIndex].image_link}
                                     alt={`Selected ${selectedIndex + 1}`}
                                     className="h-56 w-56 lg:w-64 lg:h-64 rounded-full drop-shadow-xl "
                                 />
@@ -228,7 +228,7 @@ return (
                                                 'Barking',
                                                 'Good with Strangers',],
                                             datasets: [{
-                                                label: !selectedBreed2 ? `${breeds[selectedIndex].name}: Score out of 5` : `${selectedBreed2}: Score out of 5`,
+                                                label: !selectedBreed2 ? `${filteredBreeds[selectedIndex].name}: Score out of 5` : `${selectedBreed2}: Score out of 5`,
                                                 data: selectedBreedInfo2.length > 0
                                                     ? [
                                                         selectedBreedInfo2[0].good_with_children,
@@ -245,18 +245,18 @@ return (
                                                         selectedBreedInfo2[0].good_with_strangers,
                                                     ]
                                                     : [
-                                                        breeds[selectedIndex].good_with_children,
-                                                        breeds[selectedIndex].good_with_other_dogs,
-                                                        breeds[selectedIndex].shedding,
-                                                        breeds[selectedIndex].grooming,
-                                                        breeds[selectedIndex].drooling,
-                                                        breeds[selectedIndex].coat_length,
-                                                        breeds[selectedIndex].playfulness,
-                                                        breeds[selectedIndex].protectiveness,
-                                                        breeds[selectedIndex].trainability,
-                                                        breeds[selectedIndex].energy,
-                                                        breeds[selectedIndex].barking,
-                                                        breeds[selectedIndex].good_with_strangers,
+                                                        filteredBreeds[selectedIndex].good_with_children,
+                                                        filteredBreeds[selectedIndex].good_with_other_dogs,
+                                                        filteredBreeds[selectedIndex].shedding,
+                                                        filteredBreeds[selectedIndex].grooming,
+                                                        filteredBreeds[selectedIndex].drooling,
+                                                        filteredBreeds[selectedIndex].coat_length,
+                                                        filteredBreeds[selectedIndex].playfulness,
+                                                        filteredBreeds[selectedIndex].protectiveness,
+                                                        filteredBreeds[selectedIndex].trainability,
+                                                        filteredBreeds[selectedIndex].energy,
+                                                        filteredBreeds[selectedIndex].barking,
+                                                        filteredBreeds[selectedIndex].good_with_strangers,
                                                     ],
                                                 backgroundColor: 'rgba(103, 97, 168, 0.3)',
                                                 borderColor: 'black',
@@ -331,16 +331,16 @@ return (
                             ) : 
                                 (
                                     <div className='flex flex-col py-4 row-start-3 col-start-1 lg:col-start-1 justify-center '>
-                                        <p>Life expectancy: {breeds[selectedIndex].min_life_expectancy} to {" "}
-                                        {breeds[selectedIndex].max_life_expectancy} Years</p>
-                                        <p>Height in Males: {breeds[selectedIndex].min_height_male} to {" "}
-                                        {breeds[selectedIndex].max_height_male} Inches</p>
-                                        <p>Height in Females: {breeds[selectedIndex].min_height_female} to {" "}
-                                        {breeds[selectedIndex].max_height_female} Inches</p>
-                                        <p>Weight in Males: {breeds[selectedIndex].min_weight_male} to {" "}
-                                        {breeds[selectedIndex].max_weight_male} Lbs</p>
-                                        <p>Weight in Females: {breeds[selectedIndex].min_weight_female} to {" "}
-                                        {breeds[selectedIndex].max_weight_female} Lbs</p>
+                                        <p>Life expectancy: {filteredBreeds[selectedIndex].min_life_expectancy} to {" "}
+                                        {filteredBreeds[selectedIndex].max_life_expectancy} Years</p>
+                                        <p>Height in Males: {filteredBreeds[selectedIndex].min_height_male} to {" "}
+                                        {filteredBreeds[selectedIndex].max_height_male} Inches</p>
+                                        <p>Height in Females: {filteredBreeds[selectedIndex].min_height_female} to {" "}
+                                        {filteredBreeds[selectedIndex].max_height_female} Inches</p>
+                                        <p>Weight in Males: {filteredBreeds[selectedIndex].min_weight_male} to {" "}
+                                        {filteredBreeds[selectedIndex].max_weight_male} Lbs</p>
+                                        <p>Weight in Females: {filteredBreeds[selectedIndex].min_weight_female} to {" "}
+                                        {filteredBreeds[selectedIndex].max_weight_female} Lbs</p>
                                     </div>
                                 )
                             }
