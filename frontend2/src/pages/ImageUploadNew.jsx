@@ -201,10 +201,10 @@ const ImageUploadNew = () => {
           accept="image/png, image/jpeg, image/webp"
         />
         <div
-          className={`bg-[#F5F1FF] h-full mb-12 dark:border-neutral-100 transition-all cursor-pointer card w-10/12 border-2 border-dashed rounded-3xl border-[#694DDB] ${images.length > 0
+          className={`bg-[#E4D9FF] h-full mb-12 dark:border-neutral-100 transition-all cursor-pointer card w-10/12 border-2 border-dashed rounded-3xl border-[#694DDB] ${images.length > 0
             ? 'flex flex-col sm:flex-row justify-around items-center p-4'
             : 'aspect-video flex items-center justify-center p-4'
-            } ${isDraggingOver ? 'bg-[#E4D9FF] dark:bg-green-800' : 'bg-transparent'}`}
+            } ${isDraggingOver ? 'bg-[#E4D9FF]' : 'bg-[#F5F1FF]'}`}
           onClick={handleClick}
           onDragOver={handleDragOver}
           onDragEnter={handleDragEnter}
