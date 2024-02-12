@@ -20,7 +20,7 @@ function Homepage() {
         >
           <div className="pt-4"><Navbar/></div>
           <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between relative">
-            <div className="md:w-3/5 mt-20 md:mt-40 text-center md:text-left">
+            <div className="md:w-3/5 mt-20 md:mt-40 text-center md:text-left px-8 md:px-0">
               <h1 className="text-4xl md:text-5xl font-bold mb-4 leading-tight">
                 Identify <span className="text-[#694DDB]">Dog Breeds</span> From Photos With AI
               </h1>
