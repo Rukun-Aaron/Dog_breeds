@@ -219,7 +219,7 @@ const ImageUploadNew = () => {
             />
             <div className="flex flex-col items-center justify-center">
               <h2
-                className={`dark:text-neutral-100 text-lg ${images.length === 0 && 'mt-8'} text-center`}
+                className={`dark:text-neutral-100 md:text-lg ${images.length === 0 && 'mt-8'} text-center`}
               >
                 Select a file or drag and drop here
               </h2>

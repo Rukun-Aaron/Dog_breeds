@@ -21,10 +21,10 @@ function Homepage() {
           <div className="pt-4"><Navbar/></div>
           <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between relative">
             <div className="md:w-3/5 mt-20 md:mt-40 text-center md:text-left px-8 md:px-0">
-              <h1 className="text-4xl md:text-5xl font-bold mb-4 leading-tight">
+              <h1 className="text-3xl md:text-5xl font-bold mb-4 leading-tight">
                 Identify <span className="text-[#694DDB]">Dog Breeds</span> From Photos With AI
               </h1>
-              <p className="text-base md:text-lg mb-6">
+              <p className="text-base text-sm md:text-lg mb-6">
                 Your ultimate guide to choosing the perfect dog breed for you. Identify and weigh the pros and cons of various breeds with our detection and comparison tools.
               </p>
               <button
@@ -49,10 +49,10 @@ function Homepage() {
 
       {/* Section 2: Details */}
       <div className="w-full min-h-screen bg-[#F7F8FF] flex flex-col items-center">
-        <h1 className="text-4xl md:text-4xl font-bold mb-2 text-center mt-24">
+        <h1 className="text-3xl md:text-4xl font-bold mb-2 text-center mt-24">
           Can’t Decide On A New <span className="text-[#694DDB]">Furry Friend?</span>
         </h1>
-        <h2 className="text-lg md:text-xl mb-8 text-center md:w-2/3">
+        <h2 className="text-md md:text-xl mb-8 text-center md:w-2/3">
           Our dog breed identification interface helps users decide on a new breed personalized to
           their preferences.
         </h2>
@@ -77,7 +77,7 @@ function Homepage() {
 
 
           {/* Right side */}
-          <div className="w-full md:w-1/2 p-4 md:p-8">
+          <div className="w-full md:w-1/2 p-4 pl-8 md:p-8">
             <h2 className="text-2xl md:text-3xl mb-8">How to identify a dog's breed?</h2>
             <div className="flex flex-col space-y-6">
               <div className="flex items-center">

@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHouse, faMagnifyingGlass, faDiagramProject } from '@fortawesome/free-solid-svg-icons';
 
-function Navbar({ isHomepage }) {
+function Navbar() {
   const [isHomePage, setIsHomePage] = useState(false);
-
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -11,10 +13,27 @@ function Navbar({ isHomepage }) {
     setIsHomePage(location.pathname === '/');
   }, [location]);
 
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth <= 600);
+    };
+
+    handleResize(); // Call once to set initial state
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  const handleNavigation = (path) => {
+    navigate(path);
+  };
+
   return (
     <div className={`navbar z-[1] left-1/2 -translate-x-1/2 w-11/12 max-w-4xl xl:max-w-5xl shadow dark:shadow-xl dark:bg-neutral-800 rounded-full ${isHomePage ? 'relative bg-transparent' : 'fixed bg-white'}`}>
-        <div className="flex-1 flex gap-2">
-        <div className="cursor-pointer flex items-center justify-center" onClick={() => navigate('/')}>
+      <div className="flex-1 flex gap-2">
+        <div className="cursor-pointer flex items-center justify-center" onClick={() => handleNavigation('/')}>
           <div className="pl-4 pr-3">
             <img
               alt="logo"
@@ -22,45 +41,22 @@ function Navbar({ isHomepage }) {
               className="h-12 w-12"
             />
           </div>
-          <p className="text-xl  font-varela  font-semibold text-black">
-            DogIO
-          </p>
+          {!isSmallScreen && <p className="text-xl font-varela font-semibold text-black">DogIO</p>}
         </div>
       </div>
       <div className="gap-3 pr-2">
-        <button onClick={() => navigate('/')} className="btn btn-ghost rounded-full px-8 py-2  font-varela text-black">
-          Home
+        <button onClick={() => handleNavigation('/')} className="btn btn-ghost rounded-full px-8 py-2 font-varela text-black">
+          {isSmallScreen ? <FontAwesomeIcon icon={faHouse} size="2x"/> : 'Home'}
         </button>
-        {/* CHANGE LATER TO :6B5BBF */}
-        <button className="bg-[#694DDB] px-8 rounded-full btn btn-ghost text-[#F5F1FF]  font-varela" onClick={() => navigate('/detection')}>
-          Detect
+        <button className="bg-[#694DDB] px-8 rounded-full btn btn-ghost text-[#F5F1FF] font-varela" onClick={() => handleNavigation('/detection')}>
+          {isSmallScreen ? <FontAwesomeIcon icon={faMagnifyingGlass} size="2x" /> : 'Detect'}
         </button>
-        <button className="bg-[#DE6FEC] px-8 rounded-full btn btn-ghost text-[#F5F1FF]  font-varela" onClick={() => navigate('/compare')}>
-          Compare
+        <button className="bg-[#DE6FEC] px-8 rounded-full btn btn-ghost text-[#F5F1FF] font-varela" onClick={() => handleNavigation('/compare')}>
+          {isSmallScreen ? <FontAwesomeIcon icon={faDiagramProject} size="2x" /> : 'Compare'}
         </button>
       </div>
-    </div>)};
-
-
-//   return (
-//     <div className={`navbar z-10 left-1/2 -translate-x-1/2 w-11/12 max-w-4xl xl:max-w-5xl top-4 shadow dark:shadow-xl dark:bg-neutral-800 backdrop-blur-sm rounded-xl  ${isHomePage ? 'absolute' : 'fixed '}`}>
-//       <div className="flex-1 flex gap-2">
-//         <div className="cursor-pointer" onClick={() => navigate('/')}>
-//           <p className="font-varela text-2xl font-bold dark:text-neutral-100">
-//             Logo, Name
-//           </p>
-//         </div>
-//       </div>
-//       <div className="md:flex gap-2 hidden">
-//         <button onClick={() => navigate('/')}>
-//           Home
-//         </button>
-//         <button onClick={() => navigate('/detection')}>
-//           Detect
-//         </button>
-//       </div>
-//     </div>
-//   );
-// }
+    </div>
+  );
+}
 
 export default Navbar;
