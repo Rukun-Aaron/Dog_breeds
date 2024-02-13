@@ -137,8 +137,8 @@ const Compare = () => {
       <div className="pt-4"><Navbar />
 
         <div className='h-full dark:bg-neutral-900 scrollbar overflow-y-auto'>
-          <div className='flex justify-center overflow-x-hidden pt-24 h-fit'>
-            <div className='w-11/12 max-w-6xl xl:max-w-7xl '>
+          <div className='flex justify-center pt-24 h-fit'>
+            <div className='w-4/5 md:w-11/12 max-w-xl xl:max-w-7xl'>
               <div className='flex items-center justify-between'>
                 <div className='join'>
                   <Autocomplete
@@ -153,7 +153,10 @@ const Compare = () => {
                         {tag.value}
                       </MenuItem>
                     )}
-                    style={{ width: 620 }}
+                    style={{ 
+                      width: '620px',
+                    }}
+                    className='max-w-xs md:max-w-xl'
                     value={selectedTags} 
                     onChange={(event, newSelectedTags) => {
                       handlePageChange(1);
@@ -213,7 +216,7 @@ const Compare = () => {
                         className="hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-all ease-in-out duration-300 cursor-pointer"
                         onClick={() => handleModalClick(index)}
                       >
-                        <td className="p-2  w-6 ">
+                        <td className="p-0 md:p-2 w-6">
                           <div className="flex flex-row items-center">
 
                             {breed.image_link ? (
@@ -233,7 +236,7 @@ const Compare = () => {
                           </div>
                         </td>
                         <td className="">
-                          <div className="flex flex-row gap-x-2 pb-2 flex-wrap">
+                          <div className="flex text-xs md:text-sm flex-row gap-x-2 gap-y-2 pb-2 flex-wrap">
                             {/* First row */}
                             {breed.trainability > 2 && (
                               <div className="text-[#694DDB] text-center rounded-2xl border border-[#694DDB] px-2 hover:bg-[#694DDB] hover:text-white hover:border-[#694DDB] w-max">
@@ -261,7 +264,7 @@ const Compare = () => {
                               </div>
                             )}
                           </div>
-                          <div className="flex flex-row gap-x-2 gap-2  flex-wrap">
+                          <div className="flex flex-row text-xs md:text-sm gap-x-2 gap-y-2 gap-2 flex-wrap">
                             {/* Second row */}
                             {breed.good_with_children > 2 && (
                               <div className="text-[#FF9330] text-center rounded-2xl border border-[#FF9330] px-2 hover:bg-[#FF9330] hover:text-white hover:border-[#FF9330] w-max">
