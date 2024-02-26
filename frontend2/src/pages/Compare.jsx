@@ -136,7 +136,7 @@ const Compare = () => {
     <div className='w-full h-screen drawer drawer-end' >
       <div className="pt-4"><Navbar />
 
-        <div className='h-full dark:bg-neutral-900 scrollbar overflow-y-auto'>
+        <div className='h-full scrollbar overflow-y-auto'>
           <div className='flex justify-center pt-24 h-fit'>
             <div className='w-4/5 md:w-11/12 max-w-xl xl:max-w-7xl'>
               <div className='flex items-center justify-between'>
