@@ -133,7 +133,7 @@ const Compare = () => {
   };
   // console.log(selectedTags)
   return (
-    <div className='w-full h-screen drawer drawer-end' >
+    <div className='w-full h-screen bg-white drawer drawer-end' >
       <div className="pt-4"><Navbar />
 
         <div className='h-full scrollbar overflow-y-auto'>
