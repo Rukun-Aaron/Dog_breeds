@@ -183,8 +183,8 @@ const ImageUploadNew = () => {
     >
       <Navbar/>
       <div className="bg-white max-w-4xl xl:max-w-5xl w-11/12 flex flex-col items-center h-full gap-1 rounded-3xl mt-20 shadow dark:shadow-xl">
-        <h1 className="text-2xl font-bold pt-10">Classify Your Dog</h1>
-        <h1 className="text-xl text-center dark:text-neutral-100">
+        <h1 className="text-md md:text-2xl font-bold pt-10">Classify Your Dog</h1>
+        <h1 className="text-sm md:text-xl text-center dark:text-neutral-100">
           Drag and Drop or Browse to Upload Image
         </h1>
         <p className="text-gray-500 text-center dark:text-neutral-400 pb-4">
@@ -211,19 +211,19 @@ const ImageUploadNew = () => {
           onDragLeave={handleDragLeave}
           onDrop={handleDrop}
         >
-          <div className={images.length > 0 ? 'flex flex-row' : 'md:flex flex-col hidden'}>
+          <div className={images.length > 0 ? 'flex flex-row' : 'md:items-center flex flex-col'}>
             <FontAwesomeIcon
-              className={images.length > 0 ? 'text-[#694DDB] p-4' : 'text-[#694DDB]'}
+              className={images.length > 0 ? 'text-[#694DDB] p-4' : 'text-[#694DDB] text-6xl md:text-8xl'}
               icon={faCloudArrowUp}
               size={images.length > 0 ? '3x' : '5x'}
             />
             <div className="flex flex-col items-center justify-center">
               <h2
-                className={`dark:text-neutral-100 md:text-lg ${images.length === 0 && 'mt-8'} text-center`}
+                className={`dark:text-neutral-100 md:text-lg text-md ${images.length === 0 && 'mt-8'} text-center`}
               >
                 Select a file or drag and drop here
               </h2>
-              <p className="text-gray-500 mt-2 text-center dark:text-neutral-400">
+              <p className="text-gray-500 mt-2 text-center text-xs md:text-sm dark:text-neutral-400">
                 JPG, PNG, file size no more than 10MB
               </p>
             </div>
